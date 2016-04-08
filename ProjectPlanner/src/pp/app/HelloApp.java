@@ -1,6 +1,6 @@
-package pp_app;
+package pp.app;
 
-public class Hello {
+public class HelloApp {
 	public static void main(String[] args) {
 		System.out.println("Hello ProjectPlanner!");
 		System.out.println("Hello again!");
