@@ -36,9 +36,25 @@ public class TestUsers {
 			ppApp.registerUser(u);
 			fail("Expected RegistrationException");
 		}
-		catch(RegistationException e) {
+		catch(RegistrationException e) {
 			assertEquals("UserId already in use", e.getMessage());
 			assertEquals("Register user", e.getOperation());
+		}
+	}
+	
+	@Test
+	public void invalidUserDeregistation_UserDoesNotExist() throws Exception {
+		
+		//ppApp.registerUser(u);
+		User u1 = new User("john");
+		
+		try {
+			ppApp.deregisterUser(u1);
+			fail("Expected RegistrationException");
+		}
+		catch(RegistrationException e) {
+			assertEquals("UserId does not exist", e.getMessage());
+			assertEquals("Deregister user", e.getOperation());
 		}
 	}
 	

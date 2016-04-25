@@ -15,10 +15,10 @@ public class PpApp {
 		return isLoggedIn;
 	}
 
-	public void registerUser(User u) throws RegistationException {
+	public void registerUser(User u) throws RegistrationException {
 		for (User user : users) {
 			if(u.getUserId().equals(user.getUserId())){
-				throw new RegistationException("UserId already in use", "Register user");
+				throw new RegistrationException("UserId already in use", "Register user");
 			}
 		}
 		
@@ -29,8 +29,12 @@ public class PpApp {
 		return users;
 	}
 
-	public void deregisterUser(User u) {
-		users.remove(u);
+	public void deregisterUser(User u) throws RegistrationException {		
+		if(users.contains(u)) {			
+			users.remove(u);
+		} else {
+			throw new RegistrationException("UserId does not exist", "Deregister user");
+		}
 	}
 
 }
