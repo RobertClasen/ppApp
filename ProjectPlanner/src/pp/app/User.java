@@ -4,11 +4,13 @@ public class User {
 	private String firstname;
 	private String lastname;
 	private String userId;	
+	
 	public User(String firstname, String lastname){
 		
 		this.firstname = firstname;
 		this.lastname = lastname;
 	}
+	
 	public String getFirstname() {
 		return firstname;
 	}

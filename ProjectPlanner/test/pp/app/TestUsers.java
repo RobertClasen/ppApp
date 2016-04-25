@@ -6,9 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestUsers {
-	
-	PpApp ppApp;
-	User user1; 
+	private PpApp ppApp;
+	private User user1; 
 	
 	@Before
 	public void setUp() {
@@ -24,23 +23,23 @@ public class TestUsers {
 	
 	@Test
 	public void registerUsers_checkNames() throws Exception {
-		assertEquals(user1.getFirstname(), "John");
-		assertEquals(user1.getLastname(), "Nielsen");
+		assertEquals("John", user1.getFirstname());
+		assertEquals("Nielsen", user1.getLastname());
 	}
 	
 	@Test
 	public void registerUsers_checkUserId() throws Exception {
 		ppApp.registerUser(user1);
-		assertEquals(user1.getUserId(), "joni");
+		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
 	}
 	
 	@Test
 	public void registerUsers_checkUserId_DuplicateIds() throws Exception {
 		ppApp.registerUser(user1);
-		User user2 = new User("Jonni", "Nissen");
+		User user2 = new User("Jones", "Nissen");
 		ppApp.registerUser(user2);
-		assertEquals(user1.getUserId(), "joni");
-		assertEquals(user2.getUserId(), "jois");
+		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
+		assertEquals("jois", ppApp.getUsers().get(1).getUserId());
 	}
 
 	@Test
