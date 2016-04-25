@@ -16,11 +16,15 @@ public class PpApp {
 	}
 
 	public void registerUser(User u) {
-		//users.add(u);
+		users.add(u);
 	}
 
 	public List<User> getUsers() {
 		return users;
+	}
+
+	public void deregisterUser(User u) {
+		users.remove(u);
 	}
 
 }
