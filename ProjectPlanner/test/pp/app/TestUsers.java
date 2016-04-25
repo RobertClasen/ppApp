@@ -13,13 +13,20 @@ public class TestUsers {
 	@Before
 	public void setUp() {
 		ppApp = new PpApp();
-		u = new User("krra");
+		u = new User("Andreas", "Ustrup");
 	}
 	
 	@Test
 	public void registerUsers() throws Exception {
 		ppApp.registerUser(u);
 		assertEquals(1, ppApp.getUsers().size());
+	}
+	
+	@Test
+	public void registerUsers_checkNames() throws Exception {
+		ppApp.registerUser(u);
+		assertEquals(u.getFirstname(), "Andreas");
+		assertEquals(u.getLastname(), "Ustrup");
 	}
 
 	@Test
@@ -46,7 +53,7 @@ public class TestUsers {
 	public void invalidUserDeregistation_UserDoesNotExist() throws Exception {
 		
 		//ppApp.registerUser(u);
-		User u1 = new User("john");
+		User u1 = new User("Andreas", "Ustrup");
 		
 		try {
 			ppApp.deregisterUser(u1);

@@ -16,6 +16,7 @@ public class PpApp {
 	}
 
 	public void registerUser(User u) throws RegistrationException {
+		
 		for (User user : users) {
 			if(u.getUserId().equals(user.getUserId())){
 				throw new RegistrationException("UserId already in use", "Register user");
