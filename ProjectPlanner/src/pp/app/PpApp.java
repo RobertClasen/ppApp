@@ -15,7 +15,13 @@ public class PpApp {
 		return isLoggedIn;
 	}
 
-	public void registerUser(User u) {
+	public void registerUser(User u) throws RegistationException {
+		for (User user : users) {
+			if(u.getUserId().equals(user.getUserId())){
+				throw new RegistationException("UserId already in use", "Register user");
+			}
+		}
+		
 		users.add(u);
 	}
 

@@ -1,8 +1,16 @@
 package pp.app;
 
 public class User {
-	private String userID;
-	public User(String userID){
-		this.userID = userID;
+	private String userId;
+	public User(String userId){
+		this.userId = userId;
 	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
+	
 }
