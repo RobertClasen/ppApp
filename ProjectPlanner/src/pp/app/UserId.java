@@ -21,6 +21,7 @@ public class UserId {
 	private String secondHalf;
 	private String userId;
 	private int a; // alteration counter 
+	private int b;
 	
 	public UserId(PpApp ppApp, User user) {
 		this.user = user;
@@ -28,17 +29,18 @@ public class UserId {
 		
 		makeInitialUserId();
 		checkForDuplicates();
-		makeFinalUserId();
+		makeUserId();
 	}
 
 	private void makeInitialUserId() {
 		firstHalf = user.getFirstname().substring(0, 2).toLowerCase();
 		secondHalf = user.getLastname().substring(0, 2).toLowerCase();
+		makeUserId();
 	}
 	
 	private void checkForDuplicates() {
 		for (User otherUser : listOfUsers) {
-			if (otherUser.getLastname().substring(0, 2).toLowerCase().equals(secondHalf)) {
+			if (otherUser.getUserId().equals(userId)) {
 				alterSecondHalf();
 				checkForDuplicates();
 			}
@@ -46,11 +48,28 @@ public class UserId {
 	}
 	
 	private void alterSecondHalf() {
-		a++;
-		secondHalf = user.getLastname().substring(0+a, 2+a).toLowerCase();
+		if(a < user.getLastname().length()-2){
+			a++;
+			secondHalf = user.getLastname().substring(0+a, 2+a).toLowerCase();
+			makeUserId();
+		} else {
+			alterFirstHalf();
+		}
 	}
 	
-	private void makeFinalUserId() {
+	private void alterFirstHalf() {
+		if(b < user.getFirstname().length()-2){
+		String firstLetter = user.getFirstname().substring(0, 1).toLowerCase();
+		String secondLetter = user.getFirstname().substring(2+b, 3+b).toLowerCase();
+		firstHalf = firstLetter + secondLetter;
+		makeUserId();
+		b++;
+		} else {
+			System.out.println("Error - Implementer i UI");
+		}
+	}
+
+	private void makeUserId() {
 		userId = firstHalf + secondHalf;
 	}
 	

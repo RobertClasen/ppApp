@@ -41,6 +41,36 @@ public class TestUsers {
 		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
 		assertEquals("jois", ppApp.getUsers().get(1).getUserId());
 	}
+	
+	@Test
+	public void registerUsers_DuplicateIds_ShortLastname1() throws Exception {
+		ppApp.registerUser(user1);
+		User user3 = new User("Joan", "Ni");
+		ppApp.registerUser(user3);
+		assertEquals("joni",ppApp.getUsers().get(0).getUserId());
+		assertEquals("jani",ppApp.getUsers().get(1).getUserId());
+	}
+	
+	@Test 
+	public void registerUsers_DuplicateIds_ShortLastname2() throws Exception {
+		User user2 = new User("Johnny", "Ni");
+		User user3 = new User("Johnny", "Ni");
+		ppApp.registerUser(user1);
+		ppApp.registerUser(user2);
+		ppApp.registerUser(user3);
+		assertEquals("joni",ppApp.getUsers().get(0).getUserId());
+		assertEquals("jhni",ppApp.getUsers().get(1).getUserId());
+		assertEquals("jnni",ppApp.getUsers().get(2).getUserId());
+	}
+	
+//	@Test
+//	public void registerUsers_DuplicateIds_ShortFirstname() throws Exception {
+//		ppApp.registerUser(user1);
+//		User user4 = new User("Jo", "Ni");
+//		ppApp.registerUser(user4);
+//		assertEquals("joni",ppApp.getUsers().get(0).getUserId());
+//		assertEquals("jeni",ppApp.getUsers().get(1).getUserId());
+//	}
 
 	@Test
 	public void deregisterUser() throws Exception {
