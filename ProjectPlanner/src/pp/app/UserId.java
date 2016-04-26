@@ -2,6 +2,18 @@ package pp.app;
 
 import java.util.List;
 
+
+/**
+ * 
+ * A user id is a four-letter code unique to each user.
+ * It is automatically generated and assigned to the user when she is registered to the system.
+ * It is a concatenation of the first pairs of letters of the user's first and last name.
+ * 
+ * If the initially generated user id is a duplicate, i.e. it is already assigned to an existing user,
+ * then the second part of the new user id is altered such that instead of letters 0 and 1,
+ * letters 1 and 2 is used. This procedure goes on recursively until the new user id is unique. 
+ * 
+ */
 public class UserId {
 	private User user;
 	private List<User> listOfUsers;
