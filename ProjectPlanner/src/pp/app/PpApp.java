@@ -16,19 +16,11 @@ public class PpApp {
 	}
 
 	public void registerUser(User u) throws RegistrationException {
-		for (User user : users) {
-			if(u.getUserId().equals(user.getUserId())){
-				throw new RegistrationException("UserId already in use", "Register user");
-			}
-		}
-		
+		UserId userId = new UserId(this, u);
+		u.setUserId(userId.toString());
 		users.add(u);
 	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
+	
 	public void deregisterUser(User u) throws RegistrationException {		
 		if(users.contains(u)) {			
 			users.remove(u);
@@ -37,4 +29,7 @@ public class PpApp {
 		}
 	}
 
+	public List<User> getUsers() {
+		return users;
+	}
 }
