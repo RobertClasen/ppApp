@@ -3,18 +3,89 @@ package pp.app;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
-public class TestUsers {
+public class TestUserRegistration {
 	private PpApp ppApp;
 	private User user1; 
 	
+	@Rule
+	public final ExpectedException thrown = ExpectedException.none();
+	
 	@Before
-	public void setUp() {
+	public void setUp() throws RegistrationException {
 		ppApp = new PpApp();
 		user1 = new User("John", "Nielsen");
+		
 	}
 	
+//	@Test
+//	public void registerUsers_tooLongFirstName() throws RegistrationException {
+//		User user2 = new User("Jooooooooooooohn", "Nielsen");
+//		
+//		System.out.println("foo bar");
+//		
+//		thrown.expect(RegistrationException.class);
+//		thrown.expectMessage("Invalid name length");
+//		
+//		
+//		ppApp.registerUser(user2);
+//		
+////		try {
+////			fail("Expected RegistrationException");
+////		}
+////		catch(RegistrationException e) {
+////			System.out.println("foo bar");
+////			assertEquals("Invalid name length", e.getMessage());
+////			assertEquals("User registration", e.getOperation());
+////			
+////		}
+//	}
+//	
+//	@Test(expected = RegistrationException.class)
+//	public void registerUsers_tooLongLastName() throws RegistrationException {
+//		User user2 = new User("John", "Niiiiiiiiiielsen");
+//		try {
+//			ppApp.registerUser(user2);
+//			fail("Expected RegistrationException");
+//		}
+//		catch(RegistrationException e) {
+//			assertEquals("Invalid name length", e.getMessage());
+//			assertEquals("User registration", e.getOperation());
+//			
+//		}
+//	}
+//	
+//	@Test(expected = RegistrationException.class)
+//	public void registerUsers_tooShortFirstName() throws RegistrationException {
+//		User user2 = new User("J", "Nielsen");
+//		try {
+//			ppApp.registerUser(user2);
+//			fail("Expected RegistrationException");
+//		}
+//		catch(RegistrationException e) {
+//			assertEquals("Invalid name length", e.getMessage());
+//			assertEquals("User registration", e.getOperation());
+//			
+//		}
+//	}
+//	
+//	@Test
+//	public void registerUsers_tooShortLastName() throws RegistrationException {
+//		User user2 = new User("John", "N");
+//		try {
+//			ppApp.registerUser(user2);
+//			fail("Expected RegistrationException");
+//		}
+//		catch(RegistrationException e) {
+//			assertEquals("Invalid name length", e.getMessage());
+//			assertEquals("User registration", e.getOperation());
+//			
+//		}
+//	}
+//	
 	@Test
 	public void registerUsers() throws Exception {
 		ppApp.registerUser(user1);

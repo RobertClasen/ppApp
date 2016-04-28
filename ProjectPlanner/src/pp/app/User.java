@@ -4,13 +4,23 @@ public class User {
 	private String firstname;
 	private String lastname;
 	private String userId;	
+	private final int NAME_MAX_LENGTH = 15;
 	
-	public User(String firstname, String lastname){
-		
-		this.firstname = firstname;
-		this.lastname = lastname;
+	public User(String firstname, String lastname) throws RegistrationException {		
+		validateNames(firstname, lastname);
 	}
 	
+	private void validateNames(String firstname, String lastname) throws RegistrationException {
+		
+		if(firstname.length() <= NAME_MAX_LENGTH && lastname.length() <= NAME_MAX_LENGTH) {
+			this.firstname = firstname;
+			this.lastname = lastname;
+		} else {
+			throw new RegistrationException("Invalid name length","User registration");
+		}
+		
+	}
+
 	public String getFirstname() {
 		return firstname;
 	}
