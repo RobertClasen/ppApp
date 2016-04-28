@@ -6,6 +6,7 @@ import java.util.List;
 public class PpApp {
 	private boolean isLoggedIn;
 	private List<User> users = new ArrayList<>();
+	private List<Project> projects = new ArrayList<>();
 
 	public boolean logIn(String userId) {
 		userId = userId.toLowerCase();
@@ -32,4 +33,14 @@ public class PpApp {
 	public List<User> getUsers() {
 		return users;
 	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void addProject(Project p) {
+		projects.add(p);
+	}
+	
+	
 }
