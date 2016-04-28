@@ -26,7 +26,6 @@ public class TestProject {
 	public void project_setTitle() throws Exception {
 		project1.setTitle("Rejsekortet");
 		assertEquals("Rejsekortet", project1.getTitle());
-		
 	}
 	
 	@Test
@@ -37,7 +36,6 @@ public class TestProject {
 		assertEquals("Lorem ipsum dolor sit amet, aliquam fringilla, vivamus justo suspendisse, "
 				+ "morbi mattis et, donec proin platea in mus. Pharetra nonummy per aliquam fusce vitae, "
 				+ "eleifend duis cras dolores vestibulum, sollicitudin sit aenean sollicitudin eu ligula orci.", project1.getDescription());
-		
 	}
 	
 //	@Test

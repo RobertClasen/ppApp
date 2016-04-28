@@ -11,81 +11,48 @@ public class TestUserRegistration {
 	private PpApp ppApp;
 	private User user1; 
 	
-	@Rule
-	public final ExpectedException thrown = ExpectedException.none();
-	
 	@Before
 	public void setUp() throws RegistrationException {
 		ppApp = new PpApp();
 		user1 = new User("John", "Nielsen");
-		
 	}
 	
-//	@Test
-//	public void registerUsers_tooLongFirstName() throws RegistrationException {
-//		User user2 = new User("Jooooooooooooohn", "Nielsen");
-//		
-//		System.out.println("foo bar");
-//		
-//		thrown.expect(RegistrationException.class);
-//		thrown.expectMessage("Invalid name length");
-//		
-//		
-//		ppApp.registerUser(user2);
-//		
-////		try {
-////			fail("Expected RegistrationException");
-////		}
-////		catch(RegistrationException e) {
-////			System.out.println("foo bar");
-////			assertEquals("Invalid name length", e.getMessage());
-////			assertEquals("User registration", e.getOperation());
-////			
-////		}
-//	}
-//	
-//	@Test(expected = RegistrationException.class)
-//	public void registerUsers_tooLongLastName() throws RegistrationException {
-//		User user2 = new User("John", "Niiiiiiiiiielsen");
-//		try {
-//			ppApp.registerUser(user2);
-//			fail("Expected RegistrationException");
-//		}
-//		catch(RegistrationException e) {
-//			assertEquals("Invalid name length", e.getMessage());
-//			assertEquals("User registration", e.getOperation());
-//			
-//		}
-//	}
-//	
-//	@Test(expected = RegistrationException.class)
-//	public void registerUsers_tooShortFirstName() throws RegistrationException {
-//		User user2 = new User("J", "Nielsen");
-//		try {
-//			ppApp.registerUser(user2);
-//			fail("Expected RegistrationException");
-//		}
-//		catch(RegistrationException e) {
-//			assertEquals("Invalid name length", e.getMessage());
-//			assertEquals("User registration", e.getOperation());
-//			
-//		}
-//	}
-//	
-//	@Test
-//	public void registerUsers_tooShortLastName() throws RegistrationException {
-//		User user2 = new User("John", "N");
-//		try {
-//			ppApp.registerUser(user2);
-//			fail("Expected RegistrationException");
-//		}
-//		catch(RegistrationException e) {
-//			assertEquals("Invalid name length", e.getMessage());
-//			assertEquals("User registration", e.getOperation());
-//			
-//		}
-//	}
-//	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
+	@Test
+	public void registerUsers_tooLongFirstName() throws RegistrationException {
+		thrown.expect(RegistrationException.class);
+		thrown.expectMessage("Invalid name length");
+		User user2 = new User("Jooooooooooooohn", "Nielsen");
+		ppApp.registerUser(user2);
+	}
+	
+	@Test
+	public void registerUsers_tooLongLastName() throws RegistrationException {
+		thrown.expect(RegistrationException.class);
+		thrown.expectMessage("Invalid name length");
+		User user2 = new User("John", "Niiiiiiiiiielsen");
+		ppApp.registerUser(user2);
+	}
+	
+	@Test
+	public void registerUsers_tooShortFirstName() throws RegistrationException {
+		thrown.expect(RegistrationException.class);
+		thrown.expectMessage("Invalid name length");
+		User user2 = new User("J", "Nielsen");
+		ppApp.registerUser(user2);
+	}
+		
+	@Test
+	public void registerUsers_tooShortLastName() throws RegistrationException {
+		thrown.expect(RegistrationException.class);
+		thrown.expectMessage("Invalid name length");
+		
+		User user2 = new User("John", "N");
+		ppApp.registerUser(user2);
+	}
+	
 	@Test
 	public void registerUsers() throws Exception {
 		ppApp.registerUser(user1);
@@ -166,7 +133,6 @@ public class TestUserRegistration {
 	@Test
 	public void invalidUserDeregistation_UserDoesNotExist() throws Exception {
 		
-		//ppApp.registerUser(u);
 		User u1 = new User("Andreas", "Ustrup");
 		
 		try {
@@ -174,8 +140,8 @@ public class TestUserRegistration {
 			fail("Expected RegistrationException");
 		}
 		catch(RegistrationException e) {
-			assertEquals("UserId does not exist", e.getMessage());
-			assertEquals("Deregister user", e.getOperation());
+			assertEquals("Registration operation not allowed. " + "UserId does not exist.", e.getMessage());
+//			assertEquals("Deregister user", e.getOperation());
 		}
 	}
 	

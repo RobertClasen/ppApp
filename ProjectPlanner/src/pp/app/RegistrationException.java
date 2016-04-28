@@ -1,12 +1,16 @@
 package pp.app;
 
 @SuppressWarnings("serial")
-public class RegistrationException extends Exception{
+public class RegistrationException extends Exception {
 
 	private String operation;
 	
-	public RegistrationException(String errorMsg, String operation){
-		super(errorMsg);
+	public RegistrationException(String operation){
+		super("Registration operation not allowed. " + operation);
+		this.operation = operation;
+	}
+
+	public void setOperation(String operation) {
 		this.operation = operation;
 	}
 	

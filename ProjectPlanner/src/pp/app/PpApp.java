@@ -26,7 +26,7 @@ public class PpApp {
 		if(users.contains(u)) {			
 			users.remove(u);
 		} else {
-			throw new RegistrationException("UserId does not exist", "Deregister user");
+			throw new RegistrationException("UserId does not exist.");
 		}
 	}
 

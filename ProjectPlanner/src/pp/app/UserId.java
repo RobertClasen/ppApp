@@ -33,7 +33,7 @@ public class UserId {
 	}
 
 	private void makeInitialUserId() {
-		System.out.println(user.getFirstname() + " " + user.getLastname());
+//		System.out.println(user.getFirstname() + " " + user.getLastname());
 		firstHalf = user.getFirstname().substring(0, 2).toLowerCase();
 		secondHalf = user.getLastname().substring(0, 2).toLowerCase();
 		makeUserId();
