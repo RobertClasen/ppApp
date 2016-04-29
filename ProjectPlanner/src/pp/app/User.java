@@ -7,20 +7,33 @@ public class User {
 	private final static int NAME_MAX_LENGTH = 15;
 	private final static int NAME_MIN_LENGTH = 2;
 	
-	public User(String firstname, String lastname) throws RegistrationException {		
+	public User(String firstname, String lastname) throws RegistrationException {
 		validateNames(firstname, lastname);
 	}
 	
 	private void validateNames(String firstname, String lastname) throws RegistrationException {
 		
-		if(firstname.length() > NAME_MAX_LENGTH || lastname.length() > NAME_MAX_LENGTH) {
-			throw new RegistrationException("Invalid name length.");
-		}
-		if(firstname.length() < NAME_MIN_LENGTH || lastname.length() < NAME_MIN_LENGTH) {
-			throw new RegistrationException("Invalid name length.");
-		}
+		checkForLength(firstname, lastname);
+		checkForIllegalCharacters(firstname, lastname);
+		
 		this.firstname = firstname;
 		this.lastname = lastname;
+	}
+	
+	private void checkForLength(String firstname, String lastname) throws RegistrationException {
+		if (firstname.length() > NAME_MAX_LENGTH || lastname.length() > NAME_MAX_LENGTH ||
+				firstname.length() < NAME_MIN_LENGTH || lastname.length() < NAME_MIN_LENGTH) {
+				throw new RegistrationException("Invalid name length.");
+			}
+	}
+	
+	private void checkForIllegalCharacters(String firstname, String lastname) throws RegistrationException {
+		String name = firstname + lastname;
+		for (int i = 0; i < name.length(); i++) {
+			if (!Character.isLetter(name.charAt(i))) {
+				throw new RegistrationException("Name contains illegal character(s).");
+			}
+		}
 	}
 
 	public String getFirstname() {

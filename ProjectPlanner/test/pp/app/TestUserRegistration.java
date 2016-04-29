@@ -20,6 +20,10 @@ public class TestUserRegistration {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
+	
+	/**
+	 * Tests for valid name lengths.
+	 */
 	@Test
 	public void registerUsers_tooLongFirstName() throws RegistrationException {
 		thrown.expect(RegistrationException.class);
@@ -52,6 +56,20 @@ public class TestUserRegistration {
 		User user2 = new User("John", "N");
 		ppApp.registerUser(user2);
 	}
+
+	
+	/**
+	 * Tests for illegal characters.
+	 */
+	@Test
+	public void registerUsers_firstNameIsNotLettersOnly() throws Exception {
+		thrown.expect(RegistrationException.class);
+		thrown.expectMessage("Name contains illegal character(s).");
+		
+		User user2 = new User("John5", "Nielsen");
+		ppApp.registerUser(user2);
+	}
+	
 	
 	@Test
 	public void registerUsers() throws Exception {
