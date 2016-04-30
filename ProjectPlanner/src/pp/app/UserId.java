@@ -20,26 +20,25 @@ public class UserId {
 	private String firstHalf;
 	private String secondHalf;
 	private String userId;
-	private int a; // alteration counter 
-	private int b;
+	private int a; // alteration counter for secondHalf.
+	private int b; // alteration counter for firstHalf.
 	
-	public UserId(PpApp ppApp, User user) {
+	public UserId(PpApp ppApp, User user) throws RegistrationException {
 		this.user = user;
 		listOfUsers = ppApp.getUsers();
 		
 		makeInitialUserId();
 		checkForDuplicates();
-		makeUserId();
+		assignUserId();
 	}
 
 	private void makeInitialUserId() {
-//		System.out.println(user.getFirstname() + " " + user.getLastname());
 		firstHalf = user.getFirstname().substring(0, 2).toLowerCase();
 		secondHalf = user.getLastname().substring(0, 2).toLowerCase();
-		makeUserId();
+		assignUserId();
 	}
 	
-	private void checkForDuplicates() {
+	private void checkForDuplicates() throws RegistrationException {
 		for (User otherUser : listOfUsers) {
 			if (otherUser.getUserId().equals(userId)) {
 				alterSecondHalf();
@@ -48,29 +47,29 @@ public class UserId {
 		}
 	}
 	
-	private void alterSecondHalf() {
-		if(a < user.getLastname().length()-2){
+	private void alterSecondHalf() throws RegistrationException {
+		if(a < user.getLastname().length()-2) {
 			a++;
 			secondHalf = user.getLastname().substring(0+a, 2+a).toLowerCase();
-			makeUserId();
+			assignUserId();
 		} else {
 			alterFirstHalf();
 		}
 	}
 	
-	private void alterFirstHalf() {
-		if(b < user.getFirstname().length()-2){
-		String firstLetter = user.getFirstname().substring(0, 1).toLowerCase();
-		String secondLetter = user.getFirstname().substring(2+b, 3+b).toLowerCase();
-		firstHalf = firstLetter + secondLetter;
-		makeUserId();
-		b++;
+	private void alterFirstHalf() throws RegistrationException {
+		if(b < user.getFirstname().length()-2) {
+			String firstLetter = user.getFirstname().substring(0, 1).toLowerCase();
+			String secondLetter = user.getFirstname().substring(2+b, 3+b).toLowerCase();
+			firstHalf = firstLetter + secondLetter;
+			assignUserId();
+			b++;
 		} else {
-			System.out.println("Error - Implementer i UI");
+			throw new RegistrationException("Enter user ID manually.");
 		}
 	}
 
-	private void makeUserId() {
+	private void assignUserId() {
 		userId = firstHalf + secondHalf;
 	}
 	

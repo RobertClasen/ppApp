@@ -30,6 +30,7 @@ public class User {
 	}
 	/**
 	 * Only letters are allowed.
+	 * TODO: Test for two-part names? 
 	 */
 	private void checkForIllegalCharacters(String firstname, String lastname) throws RegistrationException {
 		String name = firstname + lastname;

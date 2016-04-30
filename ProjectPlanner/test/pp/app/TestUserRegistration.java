@@ -79,43 +79,44 @@ public class TestUserRegistration {
 	 * Other tests.
 	 */
 	@Test
-	public void registerUsers() throws Exception {
+	public void registerUsers() throws RegistrationException {
 		ppApp.registerUser(user1);
 		assertEquals(1, ppApp.getUsers().size());
 	}
 	
 	@Test
-	public void registerUsers_checkNames() throws Exception {
+	public void registerUsers_checkNames() throws RegistrationException {
 		assertEquals("John", user1.getFirstname());
 		assertEquals("Nielsen", user1.getLastname());
 	}
 	
+	
+	/**
+	 * Tests for the generating of user ID's.
+	 */
 	@Test
 	public void registerUsers_checkUserId() throws Exception {
 		ppApp.registerUser(user1);
 		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
 	}
-	
 	@Test
-	public void registerUsers_checkUserId_DuplicateIds() throws Exception {
+	public void registerUsers_checkUserId_DuplicateIds() throws RegistrationException {
 		ppApp.registerUser(user1);
 		User user2 = new User("Jones", "Nissen");
 		ppApp.registerUser(user2);
 		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
 		assertEquals("jois", ppApp.getUsers().get(1).getUserId());
 	}
-	
 	@Test
-	public void registerUsers_DuplicateIds_ShortLastname1() throws Exception {
+	public void registerUsers_DuplicateIds_ShortLastname1() throws RegistrationException {
 		ppApp.registerUser(user1);
-		User user3 = new User("Joan", "Ni");
-		ppApp.registerUser(user3);
+		User user2 = new User("Joan", "Ni");
+		ppApp.registerUser(user2);
 		assertEquals("joni",ppApp.getUsers().get(0).getUserId());
 		assertEquals("jani",ppApp.getUsers().get(1).getUserId());
 	}
-	
 	@Test 
-	public void registerUsers_DuplicateIds_ShortLastname2() throws Exception {
+	public void registerUsers_DuplicateIds_ShortLastname2() throws RegistrationException {
 		User user2 = new User("Johnny", "Ni");
 		User user3 = new User("Johnny", "Ni");
 		ppApp.registerUser(user1);
@@ -126,23 +127,18 @@ public class TestUserRegistration {
 		assertEquals("jnni",ppApp.getUsers().get(2).getUserId());
 	}
 	
-//	@Test
-//	public void registerUsers_DuplicateIds_ShortFirstname() throws Exception {
-//		ppApp.registerUser(user1);
-//		User user4 = new User("Jo", "Ni");
-//		ppApp.registerUser(user4);
-//		assertEquals("joni",ppApp.getUsers().get(0).getUserId());
-//		assertEquals("jeni",ppApp.getUsers().get(1).getUserId());
-//	}
-
 	@Test
-	public void deregisterUser() throws Exception {
+	public void registerUsers_DuplicateIds_BothNamesShort() throws RegistrationException {
+		thrown.expect(RegistrationException.class);
+		thrown.expectMessage("Enter user ID manually.");
+		
 		ppApp.registerUser(user1);
-		ppApp.deregisterUser(user1);
-		assertEquals(0, ppApp.getUsers().size());
+		User user2 = new User("Jo", "Ni");
+		ppApp.registerUser(user2);
 	}
+
 	
-//	@Test
+//	@Test //TODO
 //	public void invalidUserRegistation_UserExists() throws Exception {
 //		ppApp.registerUser(user1);
 //		try {
@@ -154,7 +150,16 @@ public class TestUserRegistration {
 //			assertEquals("Register user", e.getOperation());
 //		}
 //	}
-	
+
+	/**
+	 * Tests for the deregistration of users. 
+	 */
+	@Test
+	public void deregisterUser() throws RegistrationException {
+		ppApp.registerUser(user1);
+		ppApp.deregisterUser(user1);
+		assertEquals(0, ppApp.getUsers().size());
+	}
 	@Test
 	public void invalidUserDeregistation_UserDoesNotExist() throws Exception {
 		
