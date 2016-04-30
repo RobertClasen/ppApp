@@ -31,7 +31,6 @@ public class TestUserRegistration {
 		User user2 = new User("Jooooooooooooohn", "Nielsen");
 		ppApp.registerUser(user2);
 	}
-	
 	@Test
 	public void registerUsers_tooLongLastName() throws RegistrationException {
 		thrown.expect(RegistrationException.class);
@@ -39,7 +38,6 @@ public class TestUserRegistration {
 		User user2 = new User("John", "Niiiiiiiiiielsen");
 		ppApp.registerUser(user2);
 	}
-	
 	@Test
 	public void registerUsers_tooShortFirstName() throws RegistrationException {
 		thrown.expect(RegistrationException.class);
@@ -47,7 +45,6 @@ public class TestUserRegistration {
 		User user2 = new User("J", "Nielsen");
 		ppApp.registerUser(user2);
 	}
-		
 	@Test
 	public void registerUsers_tooShortLastName() throws RegistrationException {
 		thrown.expect(RegistrationException.class);
@@ -56,21 +53,31 @@ public class TestUserRegistration {
 		User user2 = new User("John", "N");
 		ppApp.registerUser(user2);
 	}
-
 	
 	/**
 	 * Tests for illegal characters.
 	 */
 	@Test
-	public void registerUsers_firstNameIsNotLettersOnly() throws Exception {
+	public void registerUsers_firstNameIsNotLettersOnly() throws RegistrationException {
 		thrown.expect(RegistrationException.class);
 		thrown.expectMessage("Name contains illegal character(s).");
 		
 		User user2 = new User("John5", "Nielsen");
 		ppApp.registerUser(user2);
 	}
+	@Test
+	public void registerUsers_lastNameIsNotLettersOnly() throws RegistrationException {
+		thrown.expect(RegistrationException.class);
+		thrown.expectMessage("Name contains illegal character(s).");
+		
+		User user2 = new User("John", "Nielsen?");
+		ppApp.registerUser(user2);
+	}
 	
 	
+	/**
+	 * Other tests.
+	 */
 	@Test
 	public void registerUsers() throws Exception {
 		ppApp.registerUser(user1);
