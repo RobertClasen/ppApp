@@ -30,7 +30,6 @@ public class User {
 	}
 	/**
 	 * Only letters are allowed.
-	 * TODO: Test for two-part names? 
 	 */
 	private void checkForIllegalCharacters(String firstname, String lastname) throws RegistrationException {
 		String name = firstname + lastname;
@@ -49,7 +48,7 @@ public class User {
 	}
 	
 	/**
-	 * Getters and setter 
+	 * Getters and setters
 	 */
 	public String getFirstname() { return firstname; }
 	public void setFirstname(String firstname) { this.firstname = firstname; }

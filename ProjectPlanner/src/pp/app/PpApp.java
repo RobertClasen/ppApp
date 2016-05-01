@@ -23,24 +23,20 @@ public class PpApp {
 	}
 	
 	public void deregisterUser(User u) throws RegistrationException {		
-		if(users.contains(u)) {			
-			users.remove(u);
-		} else {
-			throw new RegistrationException("UserId does not exist.");
+		if(!users.contains(u)) {
+			throw new RegistrationException("User ID does not exist.");
 		}
-	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public List<Project> getProjects() {
-		return projects;
+		users.remove(u);
 	}
 
 	public void addProject(Project p) {
 		projects.add(p);
 	}
 	
+	/**
+	 * Getters and setters. 
+	 */
+	public List<User> getUsers() { return users; }
+	public List<Project> getProjects() { return projects; }
 	
 }
