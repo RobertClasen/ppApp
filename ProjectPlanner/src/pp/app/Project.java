@@ -1,9 +1,12 @@
 package pp.app;
 
+import java.time.LocalDate;
+
 public class Project {
 	
 	private String title;
 	private String description;
+	private LocalDate expectedStartDate;
 
 	public void setTitle(String title) {
 		this.title = title;

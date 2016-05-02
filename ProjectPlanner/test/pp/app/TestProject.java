@@ -2,8 +2,13 @@ package pp.app;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class TestProject {
 	private PpApp ppApp;
@@ -15,6 +20,9 @@ public class TestProject {
 		project1 = new Project();
 		
 	}
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none(); 
 
 	@Test
 	public void createProject() throws Exception {
@@ -37,6 +45,33 @@ public class TestProject {
 				+ "morbi mattis et, donec proin platea in mus. Pharetra nonummy per aliquam fusce vitae, "
 				+ "eleifend duis cras dolores vestibulum, sollicitudin sit aenean sollicitudin eu ligula orci.", project1.getDescription());
 	}
+	
+	@Test
+	public void project_tooShortTitle() throws Exception {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
+		
+		ppApp.getInputValidation().stringLength("R",2,25);
+	}
+	
+	@Test
+	public void project_tooLongTitle() throws Exception {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
+		
+		ppApp.getInputValidation().stringLength("Rejsekortttttttttttttttttt",2,25);
+		
+	}
+	
+	@Test
+	public void project_startDateInPast() throws Exception {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Date is in the past.");
+		
+		ppApp.getInputValidation().dateIsNotInPast(LocalDate.of(2016, Month.JANUARY, 1));
+		
+	}
+	
 	
 //	@Test
 //	public void project_setExpectedStartTime() throws Exception {
