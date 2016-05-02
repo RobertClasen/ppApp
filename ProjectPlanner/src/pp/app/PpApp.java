@@ -8,7 +8,6 @@ public class PpApp {
 	private boolean isLoggedIn;
 	private List<User> users = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
-	private InputValidation inputValidation = new InputValidation();
 
 	public boolean logIn(String userId) {
 		userId = userId.toLowerCase();
