@@ -23,7 +23,7 @@ public class UserId {
 	private int a; // alteration counter for secondHalf.
 	private int b; // alteration counter for firstHalf.
 	
-	public UserId(PpApp ppApp, User user) throws RegistrationException {
+	public UserId(PpApp ppApp, User user) {
 		this.user = user;
 		listOfUsers = ppApp.getUsers();
 		
@@ -38,7 +38,7 @@ public class UserId {
 		assignUserId();
 	}
 	
-	private void checkForDuplicates() throws RegistrationException {
+	private void checkForDuplicates() {
 		for (User otherUser : listOfUsers) {
 			if (otherUser.getUserId().equals(userId)) {
 				alterSecondHalf();
@@ -47,7 +47,7 @@ public class UserId {
 		}
 	}
 	
-	private void alterSecondHalf() throws RegistrationException {
+	private void alterSecondHalf() {
 		if(a < user.getLastname().length()-2) {
 			a++;
 			secondHalf = user.getLastname().substring(0+a, 2+a).toLowerCase();
@@ -57,7 +57,7 @@ public class UserId {
 		}
 	}
 	
-	private void alterFirstHalf() throws RegistrationException {
+	private void alterFirstHalf() {
 		if(b < user.getFirstname().length()-2) {
 			String firstLetter = user.getFirstname().substring(0, 1).toLowerCase();
 			String secondLetter = user.getFirstname().substring(2+b, 3+b).toLowerCase();
@@ -65,7 +65,7 @@ public class UserId {
 			assignUserId();
 			b++;
 		} else {
-			throw new RegistrationException("Enter user ID manually.");
+			throw new RegistrationException("Names are too short to generate a new user ID.");
 		}
 	}
 

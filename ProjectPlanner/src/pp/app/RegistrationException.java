@@ -1,7 +1,7 @@
 package pp.app;
 
 @SuppressWarnings("serial")
-public class RegistrationException extends Exception {
+public class RegistrationException extends RuntimeException {
 
 	private String operation;
 	

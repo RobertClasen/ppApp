@@ -10,6 +10,15 @@ public class InputValidation {
 		}
 		return true;
 	}
+	
+	public boolean legalCharacters(String s) {
+		for (int i = 0; i < s.length(); i++) {
+			if (!Character.isLetter(s.charAt(i))) {
+				throw new InputException("Name contains illegal character(s).");
+			}
+		}
+		return true;
+	}
 
 	public boolean dateIsNotInPast(LocalDate startDate) {
 		if (!startDate.isAfter(LocalDate.now())) {

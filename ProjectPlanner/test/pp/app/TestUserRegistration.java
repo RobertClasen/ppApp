@@ -14,7 +14,9 @@ public class TestUserRegistration {
 	@Before
 	public void setUp() throws RegistrationException {
 		ppApp = new PpApp();
-		user1 = new User("John", "Nielsen");
+		user1 = new User(ppApp);
+		user1.setFirstName("John");
+		user1.setLastName("Nielsen");
 	}
 	
 	@Rule
@@ -22,91 +24,116 @@ public class TestUserRegistration {
 	
 	
 	/**
-	 * Tests for valid name lengths.
+	 * Tests for validity of name lengths.
 	 */
 	@Test
-	public void registerUsers_tooLongFirstName() throws RegistrationException {
-		thrown.expect(RegistrationException.class);
-		thrown.expectMessage("Invalid name length");
+	public void newUser_tooLongFirstName() {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
 		
-		User user2 = new User("Jooooooooooooohn", "Nielsen");
-		ppApp.registerUser(user2);
+		User user2 = new User(ppApp);
+		user2.setFirstName("Jooooooooooooohn");
 	}
+	
 	@Test
-	public void registerUsers_tooLongLastName() throws RegistrationException {
-		thrown.expect(RegistrationException.class);
-		thrown.expectMessage("Invalid name length");
+	public void newUser_tooLongLastName() {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
 		
-		User user2 = new User("John", "Niiiiiiiiiielsen");
-		ppApp.registerUser(user2);
+		User user2 = new User(ppApp);
+		user2.setLastName("Niiiiiiiiiielsen");
 	}
+	
 	@Test
-	public void registerUsers_tooShortFirstName() throws RegistrationException {
-		thrown.expect(RegistrationException.class);
-		thrown.expectMessage("Invalid name length");
+	public void newUser_tooShortFirstName() {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
 		
-		User user2 = new User("J", "Nielsen");
-		ppApp.registerUser(user2);
+		User user2 = new User(ppApp);
+		user2.setFirstName("J");
 	}
+	
 	@Test
-	public void registerUsers_tooShortLastName() throws RegistrationException {
-		thrown.expect(RegistrationException.class);
-		thrown.expectMessage("Invalid name length");
-		
-		User user2 = new User("John", "N");
-		ppApp.registerUser(user2);
+	public void newUser_tooShortLastName() {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
+
+		User user2 = new User(ppApp);
+		user2.setLastName("N");
 	}
 	
 	/**
 	 * Tests for illegal characters.
 	 */
 	@Test
-	public void registerUsers_firstNameIsNotLettersOnly() throws RegistrationException {
-		thrown.expect(RegistrationException.class);
+	public void newUser_firstNameIsNotLettersOnly() {
+		thrown.expect(InputException.class);
 		thrown.expectMessage("Name contains illegal character(s).");
 		
-		User user2 = new User("John5", "Nielsen");
-		ppApp.registerUser(user2);
+		User user2 = new User(ppApp);
+		user2.setFirstName("John9");
 	}
+	
 	@Test
-	public void registerUsers_lastNameIsNotLettersOnly() throws RegistrationException {
-		thrown.expect(RegistrationException.class);
+	public void newUser_lastNameIsNotLettersOnly() {
+		thrown.expect(InputException.class);
 		thrown.expectMessage("Name contains illegal character(s).");
 		
-		User user2 = new User("John", "Nielsen?");
-		ppApp.registerUser(user2);
+		User user2 = new User(ppApp);
+		user2.setLastName("9elsen");
 	}
+	
 	@Test
-	public void registerUsers_firstNameConsistsOfTwoNames() throws RegistrationException {
-		thrown.expect(RegistrationException.class);
+	public void newUser_firstNameConsistsOfTwoNames() {
+		thrown.expect(InputException.class);
 		thrown.expectMessage("Name contains illegal character(s).");
 		
-		User user2 = new User("Ole Bent", "Hansen");
-		ppApp.registerUser(user2);
+		User user2 = new User(ppApp);
+		user2.setFirstName("Ulla Brit");
 	}
+	
 	@Test
-	public void registerUsers_lastNameConsistsOfTwoNames() throws RegistrationException {
-		thrown.expect(RegistrationException.class);
+	public void newUser_lastNameConsistsOfTwoNames() {
+		thrown.expect(InputException.class);
 		thrown.expectMessage("Name contains illegal character(s).");
 		
-		User user2 = new User("Ole", "Bent Hansen");
-		ppApp.registerUser(user2);
+		User user2 = new User(ppApp);
+		user2.setLastName("Brit Hansen");
 	}
 	
 	
 	/**
-	 * Other tests.
+	 * Tests for the (de)registration of users. 
 	 */
 	@Test
-	public void registerUsers() throws RegistrationException {
+	public void registerUser_validNames() {
 		ppApp.registerUser(user1);
 		assertEquals(1, ppApp.getUsers().size());
 	}
 	
 	@Test
-	public void registerUsers_checkNames() throws RegistrationException {
-		assertEquals("John", user1.getFirstname());
-		assertEquals("Nielsen", user1.getLastname());
+	public void registerUser_validNames_getNames() {
+		ppApp.registerUser(user1);
+		assertEquals("John", ppApp.getUsers().get(0).getFirstname());
+		assertEquals("Nielsen", ppApp.getUsers().get(0).getLastname());
+	}
+	
+	@Test
+	public void deregisterUser_userIsRegistered() {
+		ppApp.registerUser(user1);
+		ppApp.deregisterUser(user1);
+		assertEquals(0, ppApp.getUsers().size());
+	}
+	
+	@Test
+	public void deregisterUser_UserIsNotRegistered() {
+		thrown.expect(RegistrationException.class);
+		thrown.expectMessage("User is not registered.");
+		
+		User user2 = new User(ppApp);
+		user2.setFirstName("Andreas");
+		user2.setLastName("Ustrup");
+		ppApp.deregisterUser(user2);
 	}
 	
 	
@@ -114,30 +141,41 @@ public class TestUserRegistration {
 	 * Tests for the generating of user ID's.
 	 */
 	@Test
-	public void registerUsers_checkUserId() throws Exception {
+	public void registerUser_validNames_getUserId() {
 		ppApp.registerUser(user1);
 		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
 	}
+	
 	@Test
-	public void registerUsers_checkUserId_DuplicateIds() throws RegistrationException {
+	public void registerUsers_DuplicateIds() {
 		ppApp.registerUser(user1);
-		User user2 = new User("Jones", "Nissen");
+		User user2 = new User(ppApp);
+		user2.setFirstName("Jones");
+		user2.setLastName("Nissen");
 		ppApp.registerUser(user2);
 		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
 		assertEquals("jois", ppApp.getUsers().get(1).getUserId());
 	}
+	
 	@Test
-	public void registerUsers_DuplicateIds_ShortLastname1() throws RegistrationException {
+	public void registerUsers_DuplicateIds_ShortLastname1() {
 		ppApp.registerUser(user1);
-		User user2 = new User("Joan", "Ni");
+		User user2 = new User(ppApp);
+		user2.setFirstName("Joan");
+		user2.setLastName("Ni");
 		ppApp.registerUser(user2);
 		assertEquals("joni",ppApp.getUsers().get(0).getUserId());
 		assertEquals("jani",ppApp.getUsers().get(1).getUserId());
 	}
+	
 	@Test 
-	public void registerUsers_DuplicateIds_ShortLastname2() throws RegistrationException {
-		User user2 = new User("Johnny", "Ni");
-		User user3 = new User("Johnny", "Ni");
+	public void registerUsers_DuplicateIds_ShortLastname2() {
+		User user2 = new User(ppApp);
+		user2.setFirstName("Johnny");
+		user2.setLastName("Ni");
+		User user3 = new User(ppApp);
+		user3.setFirstName("Johnny");
+		user3.setLastName("Ni");
 		ppApp.registerUser(user1);
 		ppApp.registerUser(user2);
 		ppApp.registerUser(user3);
@@ -147,46 +185,15 @@ public class TestUserRegistration {
 	}
 	
 	@Test
-	public void registerUsers_DuplicateIds_BothNamesShort() throws RegistrationException {
+	public void registerUsers_DuplicateIds_BothNamesShort() {
 		thrown.expect(RegistrationException.class);
-		thrown.expectMessage("Enter user ID manually.");
+		thrown.expectMessage("Names are too short to generate a new user ID.");
 		
 		ppApp.registerUser(user1);
-		User user2 = new User("Jo", "Ni");
+		User user2 = new User(ppApp);
+		user2.setFirstName("Jo");
+		user2.setLastName("Ni");
 		ppApp.registerUser(user2);
 	}
-
-	
-//	@Test //TODO Is this necessary?
-//	public void invalidUserRegistation_UserExists() throws Exception {
-//		ppApp.registerUser(user1);
-//		try {
-//			ppApp.registerUser(user1);
-//			fail("Expected RegistrationException");
-//		}
-//		catch(RegistrationException e) {
-//			assertEquals("UserId already in use", e.getMessage());
-//			assertEquals("Register user", e.getOperation());
-//		}
-//	}
-
-	/**
-	 * Tests for deregistration of users.
-	 */
-	@Test
-	public void deregisterUsers() throws RegistrationException {
-		ppApp.registerUser(user1);
-		ppApp.deregisterUser(user1);
-		assertEquals(0, ppApp.getUsers().size());
-	}
-	@Test
-	public void invalidUserDeregistation_UserDoesNotExist() throws RegistrationException {
-		thrown.expect(RegistrationException.class);
-		thrown.expectMessage("User ID does not exist.");
-		
-		User user2 = new User("Andreas", "Ustrup");
-		ppApp.deregisterUser(user2);
-	}
-	
 	
 }

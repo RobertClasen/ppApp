@@ -1,6 +1,5 @@
 package pp.app;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +17,15 @@ public class PpApp {
 		return isLoggedIn;
 	}
 
-	public void registerUser(User u) throws RegistrationException {
+	public void registerUser(User u) {
 		UserId userId = new UserId(this, u);
 		u.setUserId(userId.toString());
 		users.add(u);
 	}
 	
-	public void deregisterUser(User u) throws RegistrationException {		
+	public void deregisterUser(User u) {		
 		if(!users.contains(u)) {
-			throw new RegistrationException("User ID does not exist.");
+			throw new RegistrationException("User is not registered.");
 		}
 		users.remove(u);
 	}
