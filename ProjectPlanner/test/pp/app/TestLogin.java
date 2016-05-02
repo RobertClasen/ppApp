@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestLogin {
-	private static final String VALID_ID = "kris";
-	private static final String VALID_ID_MIXED_CASE = "Kris";
-	private static final String INVALID_ID_UNKNOWN = "john";
+	private static final String VALID_ID = "joni";
+	private static final String VALID_ID_MIXED_CASE = "Joni";
+	private static final String INVALID_ID_UNKNOWN = "jona";
 	
 	PpApp ppApp;	
 

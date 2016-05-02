@@ -7,10 +7,11 @@ public class PpApp {
 	private boolean isLoggedIn;
 	private List<User> users = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
+	private InputValidation inputValidation = new InputValidation();
 
 	public boolean logIn(String userId) {
 		userId = userId.toLowerCase();
-		if ("kris".equals(userId)) {
+		if ("joni".equals(userId)) {
 			isLoggedIn = true;
 		}
 		return isLoggedIn;
@@ -38,5 +39,6 @@ public class PpApp {
 	 */
 	public List<User> getUsers() { return users; }
 	public List<Project> getProjects() { return projects; }
+	public InputValidation getInputValidation() { return inputValidation; }
 	
 }
