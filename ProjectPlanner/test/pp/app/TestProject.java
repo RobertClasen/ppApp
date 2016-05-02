@@ -12,79 +12,76 @@ import org.junit.rules.ExpectedException;
 
 public class TestProject {
 	private PpApp ppApp;
-	private Project project1; 
+	private Project project1;
+	
+	private final static String VALID_TITLE = "Newton";
+	private final static String INVALID_TITLE_TOO_SHORT = "N";
+	private final static String INVALID_TITLE_TOO_LONG = "Neeeeeeeeeeeeeeeeeeeeeeton"; // 26 chars
+	
+	private final static String VALID_DESCRIPTION = "The apple doesn't fall far from the tree";
+	private final static String INVALID_DESCRIPTION_TOO_SHORT = "T";
+	private final static String INVALID_DESCRIPTION_TOO_LONG = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
+			+ "Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis "
+			+ "dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, "
+			+ "pellentesque eu, pretium quis, s"; // 257 chars
+	
+	private final static LocalDate VALID_START_DATE = LocalDate.of(2016, Month.DECEMBER, 24);
+	private final static LocalDate INVALID_START_DATE = LocalDate.of(2015, Month.DECEMBER, 24);
 	
 	@Before
 	public void setUp() throws RegistrationException {
 		ppApp = new PpApp();
-		project1 = new Project();
-		
+		project1 = new Project(ppApp);
 	}
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none(); 
 
 	@Test
-	public void createProject() throws Exception {
-		ppApp.addProject(project1);
-		assertEquals(1, ppApp.getProjects().size());
-	}
-	
-	@Test
-	public void project_setTitle() throws Exception {
-		project1.setTitle("Rejsekortet");
-		assertEquals("Rejsekortet", project1.getTitle());
-	}
-	
-	@Test
-	public void project_setDescription() throws Exception {
-		project1.setDescription("Lorem ipsum dolor sit amet, aliquam fringilla, vivamus justo suspendisse, "
-				+ "morbi mattis et, donec proin platea in mus. Pharetra nonummy per aliquam fusce vitae, "
-				+ "eleifend duis cras dolores vestibulum, sollicitudin sit aenean sollicitudin eu ligula orci.");
-		assertEquals("Lorem ipsum dolor sit amet, aliquam fringilla, vivamus justo suspendisse, "
-				+ "morbi mattis et, donec proin platea in mus. Pharetra nonummy per aliquam fusce vitae, "
-				+ "eleifend duis cras dolores vestibulum, sollicitudin sit aenean sollicitudin eu ligula orci.", project1.getDescription());
-	}
-	
-	@Test
-	public void project_tooShortTitle() throws Exception {
+	public void newProject_titleTooShort() {
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Invalid length.");
 		
-		ppApp.getInputValidation().stringLength("R",2,25);
+		project1.setTitle(INVALID_TITLE_TOO_SHORT);
 	}
-	
 	@Test
-	public void project_tooLongTitle() throws Exception {
+	public void newProject_titleTooLong() {
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Invalid length.");
 		
-		ppApp.getInputValidation().stringLength("Rejsekortttttttttttttttttt",2,25);
-		
+		project1.setTitle(INVALID_TITLE_TOO_LONG);
 	}
-	
+	@Test
+	public void newProject_descriptionTooShort() {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
+
+		project1.setDescription(INVALID_DESCRIPTION_TOO_SHORT);
+	}
+	@Test
+	public void newProject_descriptionTooLong() {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
+		
+		project1.setDescription(INVALID_DESCRIPTION_TOO_LONG);
+	}
+
 	@Test
 	public void project_startDateInPast() throws Exception {
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Date is in the past.");
 		
-		ppApp.getInputValidation().dateIsNotInPast(LocalDate.of(2016, Month.JANUARY, 1));
-
+		project1.setStartDate(INVALID_START_DATE);
 	}
-	
+
 	@Test
 	public void newProject_allInputsValid() {
-		Project project2 = new Project("Newton", "The apple doesn't fall far from the tree", LocalDate.of(2016, Month.DECEMBER, 24));
-		ppApp.addProject(project2);
+		project1.setTitle(VALID_TITLE);
+		project1.setDescription(VALID_DESCRIPTION);
+		project1.setStartDate(VALID_START_DATE);
+		
+		ppApp.addProject(project1);
 		assertEquals(1, ppApp.getProjects().size());
-		
-	}
-	
-
-	@Test
-	public void newProject_titleInvalid() {
-		Project project2 = new Project("N", "The apple doesn't fall far from the tree", LocalDate.of(2016, Month.DECEMBER, 24));
-		
 	}
 	
 }

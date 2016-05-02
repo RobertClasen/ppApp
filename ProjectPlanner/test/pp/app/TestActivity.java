@@ -11,6 +11,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class TestActivity {
+	private PpApp ppApp;
+	private Project project1;
+	private Activity activity1;
 	
 	private static final String VALID_TITLE = "Design";
 	private static final String VALID_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
@@ -30,8 +33,8 @@ public class TestActivity {
 	@Before
 	public void setUp() throws RegistrationException {
 		ppApp = new PpApp();
-		project1 = new Project();
-		activity1 = new Activity();
+		project1 = new Project(ppApp);
+		activity1 = new Activity(ppApp);
 	}
 	
 	@Rule
