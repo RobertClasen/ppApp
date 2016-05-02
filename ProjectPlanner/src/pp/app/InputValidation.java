@@ -13,8 +13,10 @@ public class InputValidation {
 	}
 
 	public void dateIsNotInPast(LocalDate startDate) {
-	
-		System.out.println("Foo bar");
+		if (!startDate.isAfter(LocalDate.now())) {
+			throw new InputException("Date is in the past.");
+		}
+		
 	}
 	
 	

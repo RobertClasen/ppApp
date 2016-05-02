@@ -69,14 +69,22 @@ public class TestProject {
 		thrown.expectMessage("Date is in the past.");
 		
 		ppApp.getInputValidation().dateIsNotInPast(LocalDate.of(2016, Month.JANUARY, 1));
+
+	}
+	
+	@Test
+	public void newProject_allInputsValid() {
+		Project project2 = new Project("Newton", "The apple doesn't fall far from the tree", LocalDate.of(2016, Month.DECEMBER, 24));
+		ppApp.addProject(project2);
+		assertEquals(1, ppApp.getProjects().size());
 		
 	}
 	
-	
-//	@Test
-//	public void project_setExpectedStartTime() throws Exception {
-//		project1.setExpectedStartTime()
-//		
-//	}
+
+	@Test
+	public void newProject_titleInvalid() {
+		Project project2 = new Project("N", "The apple doesn't fall far from the tree", LocalDate.of(2016, Month.DECEMBER, 24));
+		
+	}
 	
 }
