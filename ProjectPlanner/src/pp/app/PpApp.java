@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PpApp {
+	private InputValidation inputValidation = new InputValidation();
 	private boolean isLoggedIn;
 	private List<User> users = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
@@ -33,6 +34,7 @@ public class PpApp {
 	public void addProject(Project p) {
 		projects.add(p);
 	}
+	
 	
 	/**
 	 * Getters and setters. 
