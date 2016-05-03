@@ -84,4 +84,14 @@ public class TestProject {
 		assertEquals(1, ppApp.getProjects().size());
 	}
 	
+	@Test
+	public void newProject_getRunningNumber() throws Exception {
+		project1.setTitle(VALID_TITLE);
+		project1.setDescription(VALID_DESCRIPTION);
+		project1.setStartDate(VALID_START_DATE);
+		ppApp.addProject(project1);
+		
+		assertEquals("00012016", project1.getRunningNumber());
+	}
+	
 }

@@ -31,6 +31,7 @@ public class PpApp {
 	}
 
 	public void addProject(Project p) {
+		p.setRunningNumber();
 		projects.add(p);
 	}
 	

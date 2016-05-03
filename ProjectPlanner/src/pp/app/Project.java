@@ -10,6 +10,7 @@ public class Project {
 	private String title;
 	private String description;
 	private LocalDate startDate;
+	private String runningNumber;
 	private List<Activity> activities = new ArrayList<>();
 
 	public Project(PpApp ppApp) {
@@ -30,6 +31,21 @@ public class Project {
 		if (ppApp.getInputValidation().dateIsNotInPast(startDate))
 			this.startDate = startDate;
 	}
+	
+	public void setRunningNumber() {
+		System.out.println(ppApp.getProjects().size());
+		String numberOfProjects = "" + (ppApp.getProjects().size() + 1);
+		String year = "" + LocalDate.now().getYear();
+
+		String projectNumber = "";
+		for (int i = 0; i < 4 - numberOfProjects.length(); i++) {
+			projectNumber += "0";
+		}
+		projectNumber += numberOfProjects;
+		
+		this.runningNumber = projectNumber + year;
+	}
+	
 	public void setActivities(List<Activity> activities){
 		this.activities = activities;
 	}
@@ -38,6 +54,7 @@ public class Project {
 	public String getTitle() {	return title; }
 	public String getDescription() { return description; }
 	public LocalDate getStartDate() { return startDate; }
+	public String getRunningNumber() { return runningNumber; }
 	public List<Activity> getActivities() {return this.activities;}
 
 	public void addActivity(Activity a) {
