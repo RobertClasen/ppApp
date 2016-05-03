@@ -76,6 +76,8 @@ public class TestProject {
 
 	@Test
 	public void newProject_allInputsValid() {
+		
+		
 		project1.setTitle(VALID_TITLE);
 		project1.setDescription(VALID_DESCRIPTION);
 		project1.setStartDate(VALID_START_DATE);
@@ -92,6 +94,19 @@ public class TestProject {
 		ppApp.addProject(project1);
 		
 		assertEquals("00012016", project1.getRunningNumber());
+	}
+	
+	/**
+	 * Helper method
+	 * Creates a new project, and sets the fields "title", "description" and "startDate" as the given arguments, dictated by the tests tables.
+	 */
+	
+	private Project makeProject(String title, String description, LocalDate startDate) {
+		Project project = new Project(ppApp);
+		project.setTitle(title);
+		project.setDescription(description);
+		project.setStartDate(startDate);
+		return project;
 	}
 	
 }
