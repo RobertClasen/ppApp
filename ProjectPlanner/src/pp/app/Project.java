@@ -11,6 +11,7 @@ public class Project {
 	private String description;
 	private LocalDate startDate;
 	private String runningNumber;
+	private User projectLeader;
 	private List<Activity> activities = new ArrayList<>();
 
 	public Project(PpApp ppApp) {
@@ -44,20 +45,23 @@ public class Project {
 		
 		this.runningNumber = projectNumber + year;
 	}
+
+	public void setProjectLeader() {
+		projectLeader = ppApp.getProjectLeaderQueue().dequeue();
+	}
 	
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
 	}
-	public void setProjects(List<Project> projects) {
-		ppApp.setProjects(projects);
-	}
-
 
 	public String getTitle() {	return title; }
 	public String getDescription() { return description; }
 	public LocalDate getStartDate() { return startDate; }
 	public String getRunningNumber() { return runningNumber; }
+	public User getProjectLeader() { return projectLeader; } 
+	
 	public List<Activity> getActivities() {return this.activities;}
+	
 
 	public void addActivity(Activity a) {
 		this.activities.add(a);

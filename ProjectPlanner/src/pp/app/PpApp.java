@@ -8,6 +8,7 @@ public class PpApp {
 	private boolean isLoggedIn;
 	private List<User> users = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
+	private ProjectLeaderQueue projectLeaderQueue = new ProjectLeaderQueue();
 
 	public boolean logIn(String userId) {
 		userId = userId.toLowerCase();
@@ -21,6 +22,7 @@ public class PpApp {
 		UserId userId = new UserId(this, u);
 		u.setUserId(userId.toString());
 		users.add(u);
+		projectLeaderQueue.enqueue(u);
 	}
 	
 	public void deregisterUser(User u) {		
@@ -35,6 +37,7 @@ public class PpApp {
 			throw new ProjectException("Number of projects reached upper limit.");
 		
 		p.setRunningNumber();
+		p.setProjectLeader();
 		projects.add(p);
 	}
 	
@@ -44,7 +47,7 @@ public class PpApp {
 	 */
 	public List<User> getUsers() { return users; }
 	public List<Project> getProjects() { return projects; }
+	public ProjectLeaderQueue getProjectLeaderQueue() { return projectLeaderQueue; }
 	public void setProjects(List<Project> projects) { this.projects = projects; }
 	public InputValidation getInputValidation() { return inputValidation; }
-	
 }

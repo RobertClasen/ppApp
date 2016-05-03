@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Before;
@@ -96,9 +95,19 @@ public class TestProject {
 		
 		assertEquals("00012016", project1.getRunningNumber());
 	}
+
+	@Test
+	public void addProject_getProjectLeader() {
+		User user = new User(ppApp);
+		user.setFirstName("John");
+		user.setLastName("Nielsen");
+		ppApp.registerUser(user);
+		ppApp.addProject((project1));
+		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
+	}
 	
 	@Test
-	public void newProject_maxLimitReached() {
+	public void addProject_maxLimitReached() {
 		thrown.expect(ProjectException.class);
 		thrown.expectMessage("Number of projects reached upper limit.");
 		
