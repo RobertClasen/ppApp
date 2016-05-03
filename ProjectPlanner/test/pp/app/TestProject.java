@@ -16,7 +16,7 @@ public class TestProject {
 	
 	private final static String VALID_TITLE = "Newton";
 	private final static String INVALID_TITLE_TOO_SHORT = "N";
-	private final static String INVALID_TITLE_TOO_LONG = "Neeeeeeeeeeeeeeeeeeeeeeton"; // 26 chars
+	private final static String INVALID_TITLE_TOO_LONG = "Neeeeeeeeeeeeeeeeeeeeewton"; // 26 chars
 	
 	private final static String VALID_DESCRIPTION = "The apple doesn't fall far from the tree";
 	private final static String INVALID_DESCRIPTION_TOO_SHORT = "T";
