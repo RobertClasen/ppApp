@@ -130,9 +130,7 @@ public class TestUserRegistration {
 		thrown.expect(RegistrationException.class);
 		thrown.expectMessage("User is not registered.");
 		
-		User user2 = new User(ppApp);
-		user2.setFirstName("Andreas");
-		user2.setLastName("Ustrup");
+		User user2 = makeUser("Andreas", "Ustrup");
 		ppApp.deregisterUser(user2);
 	}
 	
@@ -149,9 +147,7 @@ public class TestUserRegistration {
 	@Test
 	public void registerUsers_DuplicateIds() {
 		ppApp.registerUser(user1);
-		User user2 = new User(ppApp);
-		user2.setFirstName("Jones");
-		user2.setLastName("Nissen");
+		User user2 = makeUser("Jones", "Nissen");
 		ppApp.registerUser(user2);
 		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
 		assertEquals("jois", ppApp.getUsers().get(1).getUserId());
@@ -160,9 +156,7 @@ public class TestUserRegistration {
 	@Test
 	public void registerUsers_DuplicateIds_ShortLastname1() {
 		ppApp.registerUser(user1);
-		User user2 = new User(ppApp);
-		user2.setFirstName("Joan");
-		user2.setLastName("Ni");
+		User user2 = makeUser("Joan", "Ni");
 		ppApp.registerUser(user2);
 		assertEquals("joni",ppApp.getUsers().get(0).getUserId());
 		assertEquals("jani",ppApp.getUsers().get(1).getUserId());
@@ -170,12 +164,8 @@ public class TestUserRegistration {
 	
 	@Test 
 	public void registerUsers_DuplicateIds_ShortLastname2() {
-		User user2 = new User(ppApp);
-		user2.setFirstName("Johnny");
-		user2.setLastName("Ni");
-		User user3 = new User(ppApp);
-		user3.setFirstName("Johnny");
-		user3.setLastName("Ni");
+		User user2 = makeUser("Johnny", "Ni");
+		User user3 = makeUser("Johnny", "Ni");
 		ppApp.registerUser(user1);
 		ppApp.registerUser(user2);
 		ppApp.registerUser(user3);
@@ -190,10 +180,19 @@ public class TestUserRegistration {
 		thrown.expectMessage("Names are too short to generate a new user ID.");
 		
 		ppApp.registerUser(user1);
-		User user2 = new User(ppApp);
-		user2.setFirstName("Jo");
-		user2.setLastName("Ni");
+		User user2 = makeUser("Jo", "Ni");
 		ppApp.registerUser(user2);
 	}
 	
+	/**
+	 *  Helper method.
+	 *  Creates a new User object. Sets the firstName and lastName fields as dictated
+	 *  by the functional test tables. 
+	 */
+	private User makeUser(String firstName, String lastName) {
+		User user = new User(ppApp);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		return user;
+	}
 }
