@@ -87,15 +87,22 @@ public class TestActivity {
 	}
 	
 	@Test
-	public void activity_EST_TIME_isZero() throws Exception{
+	public void activity_ValidDate() throws Exception {
+		activity1.setStartDate(VALID_DATE);
+		assertEquals(VALID_DATE,activity1.getStartDate());
+	}
+	
+	@Test
+	public void activity_Valid_EstimatedTime() throws Exception {
+		activity1.setEstimatedTime(VALID_EST_TIME);
+		assertEquals(VALID_EST_TIME, activity1.getEstimatedTime());
+	}
+	
+	@Test
+	public void activity_isZero_EstimatedTime() throws Exception{
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Input is not equal to or higher than zero.");
 		activity1.setEstimatedTime(INVALID_EST_TIME);
-	}
-	@Test
-	public void validActivityInput() {
-		
-		fail("Not yet implemented");
 	}
 
 }
