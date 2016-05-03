@@ -45,8 +45,11 @@ public class Project {
 		this.runningNumber = projectNumber + year;
 	}
 	
-	public void setActivities(List<Activity> activities){
+	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
+	}
+	public void setProjects(List<Project> projects) {
+		ppApp.setProjects(projects);
 	}
 
 

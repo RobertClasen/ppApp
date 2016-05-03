@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -76,8 +79,6 @@ public class TestProject {
 
 	@Test
 	public void newProject_allInputsValid() {
-		
-		
 		project1.setTitle(VALID_TITLE);
 		project1.setDescription(VALID_DESCRIPTION);
 		project1.setStartDate(VALID_START_DATE);
@@ -87,7 +88,7 @@ public class TestProject {
 	}
 	
 	@Test
-	public void newProject_getRunningNumber() throws Exception {
+	public void newProject_getRunningNumber() {
 		project1.setTitle(VALID_TITLE);
 		project1.setDescription(VALID_DESCRIPTION);
 		project1.setStartDate(VALID_START_DATE);
@@ -96,17 +97,39 @@ public class TestProject {
 		assertEquals("00012016", project1.getRunningNumber());
 	}
 	
-	/**
-	 * Helper method
-	 * Creates a new project, and sets the fields "title", "description" and "startDate" as the given arguments, dictated by the tests tables.
-	 */
+	@Test
+	public void newProject_maxLimitReached() {
+		thrown.expect(ProjectException.class);
+		thrown.expectMessage("Number of projects reached upper limit.");
+		
+		ppApp.setProjects(makeProjects(50));
+		ppApp.addProject(new Project(ppApp));
+	}
+
 	
+	/**
+	 *  Helper method.
+	 *  Creates a new project, and sets the fields "title", "description" and "startDate"
+	 *  as the given arguments, dictated by the tests tables.
+	 */
 	private Project makeProject(String title, String description, LocalDate startDate) {
 		Project project = new Project(ppApp);
 		project.setTitle(title);
 		project.setDescription(description);
 		project.setStartDate(startDate);
 		return project;
+	}
+	
+	/**
+	 *  Helper method.
+	 *  Creates and returns a list of i projects.
+	 */
+	private List<Project> makeProjects(int i) {
+		List<Project> projects = new ArrayList<>();
+		for (int j = 0; j < i; j++) {
+			projects.add(new Project(ppApp));
+		}
+		return projects;
 	}
 	
 }

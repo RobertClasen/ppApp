@@ -31,6 +31,9 @@ public class PpApp {
 	}
 
 	public void addProject(Project p) {
+		if (projects.size() >= 50)
+			throw new ProjectException("Number of projects reached upper limit.");
+		
 		p.setRunningNumber();
 		projects.add(p);
 	}
@@ -41,6 +44,7 @@ public class PpApp {
 	 */
 	public List<User> getUsers() { return users; }
 	public List<Project> getProjects() { return projects; }
+	public void setProjects(List<Project> projects) { this.projects = projects; }
 	public InputValidation getInputValidation() { return inputValidation; }
 	
 }
