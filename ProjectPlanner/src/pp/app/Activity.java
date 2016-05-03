@@ -1,6 +1,8 @@
 package pp.app;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Activity {
 	private PpApp ppApp;
@@ -8,6 +10,7 @@ public class Activity {
 	private String description;
 	private LocalDate startDate;
 	private int estimatedTime;
+	protected List<User> assignedUsers= new ArrayList<>();
 	
 	public Activity(PpApp ppApp){
 		this.ppApp = ppApp;
@@ -40,5 +43,18 @@ public class Activity {
 	public String getDescription() {return description;}
 	public LocalDate getStartDate() {return startDate;}
 	public int getEstimatedTime(){return this.estimatedTime;}
-	
+
+	public List<User> getUsers() {
+		return assignedUsers;
+	}
+
+	public User searchUser(String UserId) throws ActivityException {
+		
+		for (User user : assignedUsers) {
+			if (user.getUserId().equals(UserId)) {
+				return user;
+			} 
+		}
+		throw new ActivityException("Activity operation not allowed." + "User not assigned to activity"); 
+	}
 }

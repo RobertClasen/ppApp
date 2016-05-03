@@ -105,6 +105,7 @@ public class TestActivity {
 		activity1.setEstimatedTime(INVALID_EST_TIME);
 	}
 	
+	
 	/**
 	 * Following tests are the functional test as documented in the tables in the report
 	 */

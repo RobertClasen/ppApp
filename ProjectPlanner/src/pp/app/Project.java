@@ -67,4 +67,8 @@ public class Project {
 		this.activities.add(a);
 	}
 
+	public void assignUserToActivity(User user, Activity activity) {
+		activity.assignedUsers.add(user);
+	}
+
 }
