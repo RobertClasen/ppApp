@@ -18,7 +18,7 @@ public class TestActivity {
 	private static final String VALID_TITLE = "Design";
 	private static final String VALID_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
 			+ "Aenean commodo ligula eget dolor. Aenean m";
-	private static final LocalDate VALID_DATE = LocalDate.of(2020, Month.JANUARY, 1);
+	private static final LocalDate VALID_START_DATE = LocalDate.of(2020, Month.JANUARY, 1);
 	private static final int VALID_EST_TIME = 20;
 	
 	private static final String INVALID_TITLE_TOO_SHORT = "D";
@@ -27,7 +27,7 @@ public class TestActivity {
 			+ "Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient "
 			+ "montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. "
 			+ "Nulla consequat massa quis enim. Donec.";
-	private static final LocalDate INVALID_DATE = LocalDate.of(2006, Month.JANUARY, 1);
+	private static final LocalDate INVALID_START_DATE = LocalDate.of(2006, Month.JANUARY, 1);
 	private static final int INVALID_EST_TIME = 0;
 	
 	@Before
@@ -83,13 +83,13 @@ public class TestActivity {
 	public void activity_DateInThePast() throws Exception{
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Date is in the past.");
-		activity1.setStartDate(INVALID_DATE);
+		activity1.setStartDate(INVALID_START_DATE);
 	}
 	
 	@Test
 	public void activity_ValidDate() throws Exception {
-		activity1.setStartDate(VALID_DATE);
-		assertEquals(VALID_DATE,activity1.getStartDate());
+		activity1.setStartDate(VALID_START_DATE);
+		assertEquals(VALID_START_DATE,activity1.getStartDate());
 	}
 	
 	@Test
@@ -104,5 +104,46 @@ public class TestActivity {
 		thrown.expectMessage("Input is not equal to or higher than zero.");
 		activity1.setEstimatedTime(INVALID_EST_TIME);
 	}
+	
+	/**
+	 * Following tests are the functional test as documented in the tables in the report
+	 */
+	
+	//Input data set: A
+	@Test
+	public void activityCreation_validInputs() throws Exception {
+		Activity activity1 = makeActivity(VALID_TITLE, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME);
+		project1.addActivity(activity1);
+		assertEquals(1,project1.getActivities().size());
+	}
+	
+	//Input data set: B
+	@Test
+	public void activityCreation_onlyInvalidInputs() throws Exception {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
+		Activity activity1 = makeActivity(INVALID_TITLE_TOO_SHORT, INVALID_DESCRIPTION_TOO_LONG, INVALID_START_DATE, INVALID_EST_TIME);
+	}
+	
+	//Input data set: C
+	@Test
+	public void activityCreation_invalidInput() throws Exception {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid length.");
+		Activity activity1 = makeActivity(INVALID_TITLE_TOO_SHORT, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME);
+	}
+	
+	/**
+	 * Helper method
+	 */
+	private Activity makeActivity(String title, String description, LocalDate startDate, int estimatedTime) {
+		Activity activity = new Activity(ppApp);
+		activity.setTitle(title);
+		activity.setDescription(description);
+		activity.setStartDate(startDate);
+		activity.setEstimatedTime(estimatedTime);
+		return activity;
+	}
+	
 
 }
