@@ -97,13 +97,21 @@ public class TestProject {
 	}
 
 	@Test
-	public void addProject_getProjectLeader() {
-		User user = new User(ppApp);
-		user.setFirstName("John");
-		user.setLastName("Nielsen");
-		ppApp.registerUser(user);
-		ppApp.addProject((project1));
+	public void addProject_oneUserOneProject_getProjectLeader() {
+		makeAndRegisterUser("John", "Nielsen");
+		ppApp.addProject(project1);
 		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
+	}
+	
+	@Test
+	public void addProject_threeUsersTwoProjects_getProjectLeaders() {
+		makeAndRegisterUser("John", "Nielsen");
+		makeAndRegisterUser("Andreas", "Ustrup");
+		makeAndRegisterUser("Ulla", "Brit");
+		ppApp.addProject(project1);
+		ppApp.addProject(new Project(ppApp));
+		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
+		assertEquals("anus", ppApp.getProjects().get(1).getProjectLeader().getUserId());
 	}
 	
 	@Test
@@ -139,6 +147,17 @@ public class TestProject {
 			projects.add(new Project(ppApp));
 		}
 		return projects;
+	}
+	
+	/**
+	 *  Helper method.
+	 *  Creates a new User object. Sets the firstName and lastName and then registers the user.
+	 */
+	private void makeAndRegisterUser(String firstName, String lastName) {
+		User user = new User(ppApp);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		ppApp.registerUser(user);		
 	}
 	
 }
