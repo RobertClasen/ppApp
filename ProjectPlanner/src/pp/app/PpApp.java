@@ -7,8 +7,7 @@ public class PpApp {
 	private InputValidation inputValidation = new InputValidation();
 	private boolean isLoggedIn;
 	private List<User> users = new ArrayList<>();
-	private List<Project> activeProjects = new ArrayList<>();
-	private List<Project> inactiveProjects = new ArrayList<>();
+	private List<Project> projects = new ArrayList<>();
 	private ProjectLeaderQueue projectLeaderQueue = new ProjectLeaderQueue();
 
 	public boolean logIn(String userId) {
@@ -34,18 +33,17 @@ public class PpApp {
 	}
 
 	public void addProject(Project p) {
-		if (activeProjects.size() >= 50)
+		if (projects.size() >= 50)
 			throw new ProjectException("Number of projects reached upper limit.");
 		
 		p.setRunningNumber();
 		p.setProjectLeader();
-		activeProjects.add(p);
+		projects.add(p);
 	}
 	
 	public void endProject(Project p) {
 		projectLeaderQueue.enqueue(p.getProjectLeader());
-		activeProjects.remove(p);
-		inactiveProjects.add(p);
+		projects.remove(p);
 	}
 	
 	
@@ -53,9 +51,8 @@ public class PpApp {
 	 * Getters and setters. 
 	 */
 	public List<User> getUsers() { return users; }
-	public List<Project> getActiveProjects() { return activeProjects; }
-	public List<Project> getInactiveProjects() { return inactiveProjects; }
+	public List<Project> getProjects() { return projects; }
 	public ProjectLeaderQueue getProjectLeaderQueue() { return projectLeaderQueue; }
-	public void setProjects(List<Project> projects) { this.activeProjects = projects; }
+	public void setProjects(List<Project> projects) { this.projects = projects; }
 	public InputValidation getInputValidation() { return inputValidation; }
 }

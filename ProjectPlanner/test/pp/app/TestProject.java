@@ -83,7 +83,7 @@ public class TestProject {
 		project1.setStartDate(VALID_START_DATE);
 		
 		ppApp.addProject(project1);
-		assertEquals(1, ppApp.getActiveProjects().size());
+		assertEquals(1, ppApp.getProjects().size());
 	}
 	
 	@Test
@@ -104,7 +104,7 @@ public class TestProject {
 	public void addProject_oneUserOneProject_getProjectLeader() {
 		makeAndRegisterUser("John", "Nielsen");
 		ppApp.addProject(project1);
-		assertEquals("joni", ppApp.getActiveProjects().get(0).getProjectLeader().getUserId());
+		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
 	}
 	
 	@Test
@@ -114,8 +114,8 @@ public class TestProject {
 		makeAndRegisterUser("Ulla", "Brit");
 		ppApp.addProject(project1);
 		ppApp.addProject(new Project(ppApp));
-		assertEquals("joni", ppApp.getActiveProjects().get(0).getProjectLeader().getUserId());
-		assertEquals("anus", ppApp.getActiveProjects().get(1).getProjectLeader().getUserId());
+		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
+		assertEquals("anus", ppApp.getProjects().get(1).getProjectLeader().getUserId());
 	}
 	
 	@Test
@@ -123,22 +123,20 @@ public class TestProject {
 		makeAndRegisterUser("John", "Nielsen");
 		
 		ppApp.addProject(project1);
-		assertEquals(1, ppApp.getActiveProjects().size());
-		assertEquals(0, ppApp.getInactiveProjects().size());
+		assertEquals(1, ppApp.getProjects().size());
 		
 		ppApp.endProject(project1);
-		assertEquals(0, ppApp.getActiveProjects().size());
-		assertEquals(1, ppApp.getInactiveProjects().size());
+		assertEquals(0, ppApp.getProjects().size());
 	}
 	
 	@Test
 	public void endProject_projectLeaderIsEnqueuedAgian() {
 		makeAndRegisterUser("John", "Nielsen");
 		ppApp.addProject(project1);
-		assertEquals("joni", ppApp.getActiveProjects().get(0).getProjectLeader().getUserId());
+		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
 		ppApp.endProject(project1);
 		ppApp.addProject(new Project(ppApp));
-		assertEquals("joni", ppApp.getActiveProjects().get(0).getProjectLeader().getUserId());
+		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
 		
 	}
 	
