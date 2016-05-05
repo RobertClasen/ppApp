@@ -1,6 +1,7 @@
 package pp.app;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,8 @@ public class PpApp {
 	private List<User> users = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
 	private ProjectLeaderQueue projectLeaderQueue = new ProjectLeaderQueue();
-	private DateServer dateServer = new DateServer();
+//	private DateServer dateServer = new DateServer();
+	private DateServer dateServer;
 
 	public boolean logIn(String userId) {
 		userId = userId.toLowerCase();
@@ -59,9 +61,14 @@ public class PpApp {
 	public void setProjects(List<Project> projects) { this.projects = projects; }
 	public InputValidation getInputValidation() { return inputValidation; }
 
-	public LocalDate getDate() {
-		return this.dateServer.getDate();
+	public void setDateServer(DateServer dateServer) { this.dateServer = dateServer; }
+	public DateServer getDateServer() {
+		return this.dateServer;
 	}
+//	public LocalDate getDate() { return dateServer.getDate(); }
+//	public LocalTime getTime() {
+//		return this.dateServer.getTime();
+//	}
 
 	public List<User> availableUsers(LocalDate date) throws ActivityException {
 		List<User> avUsers = new ArrayList<>();

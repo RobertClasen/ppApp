@@ -3,12 +3,15 @@ package pp.app;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TestStatusReport {
 	private PpApp ppApp;
@@ -53,6 +56,20 @@ public class TestStatusReport {
 	public void generateStatusReport_workProgress() throws Exception {
 		ppApp.addProject(project1);
 		project1.addActivity(makeActivity("Gravity", "Is it real?", LocalDate.of(2017, Month.JANUARY, 1), 10));
+
+		DateServer dateServer = mock(DateServer.class);
+		ppApp.setDateServer(dateServer);
+		project1.getActivities().get(0).startWork();
+		
+		System.out.println(project1.getActivities().size());
+//		System.out.println(LocalTime.now());
+		System.out.println(ppApp.getDateServer().getTime());
+		System.out.println(project1.getActivities().get(0).getStartTime());
+		
+		LocalTime newTime = dateServer.getTime().plusMinutes(479);
+		when(dateServer.getTime()).thenReturn(project1.getActivities().get(0).getStartTime().plusMinutes(479));
+
+		project1.getActivities().get(0).endWork();		
 		
 		String expected = "List of activities" + "\n" + "\t" + "Gravity - (8/10)" + "\n";
 		assertEquals(expected, statusReport.listOfActivities(project1.getActivities()));

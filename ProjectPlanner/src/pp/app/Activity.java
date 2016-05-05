@@ -45,21 +45,22 @@ public class Activity {
 	}
 
 	public void startWork() {
-		startTime = LocalTime.now();		
+		startTime = ppApp.getDateServer().getTime();
 	}
 	
 	public void endWork() {
-		int workedMinutes = LocalTime.now().getMinute() - startTime.getMinute();
+		int workedMinutes = ppApp.getDateServer().getTime().getMinute() - startTime.getMinute();
 		if (workedMinutes > 15) {
 			clockedTime += workedMinutes; 
 		}
 	}
 	
 	public String getTitle() {return title;}
-	public String getDescription() {return description;}
-	public LocalDate getStartDate() {return startDate;}
-	public int getEstimatedTime(){return this.estimatedTime;}
-	public int getClockedTime(){return this.clockedTime;}
+	public String getDescription() { return description; }
+	public LocalDate getStartDate() { return startDate; }
+	public int getEstimatedTime(){ return this.estimatedTime; }
+	public int getClockedTime(){ return this.clockedTime; }
+	public LocalTime getStartTime() { return this.startTime; }
 	public Project getProject() { return this.project; }
 
 	public List<User> getUsers() {

@@ -24,7 +24,7 @@ public class TestDateServer {
 	@Test
 	public void ppAppGetDate(){
 		LocalDate date = LocalDate.now();
-		assertEquals(date, ppApp.getDate());
+		assertEquals(date, ppApp.getDateServer().getDate());
 	}
 
 }
