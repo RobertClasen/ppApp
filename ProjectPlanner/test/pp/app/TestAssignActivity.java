@@ -50,8 +50,9 @@ public class TestAssignActivity extends UsersForTesting {
 	}
 	
 	@Test
-	public void availableUsers() throws Exception {
-		assertEquals(50, ppApp.availableUsers(LocalDate.now()).size());
+	public void allUsersAvailable() throws Exception {
+		LocalDate now = LocalDate.now();
+		assertEquals(50, ppApp.availableUsers(now).size());
 	}
 	
 	
