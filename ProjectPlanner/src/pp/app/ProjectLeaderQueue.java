@@ -38,6 +38,7 @@ public class ProjectLeaderQueue {
 				} else {
 					tail = n;
 				}
+				size--;
 				return nodeToDelete.u;
 			}
 			n = n.next;

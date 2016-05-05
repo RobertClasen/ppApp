@@ -135,10 +135,11 @@ public class TestUserRegistration {
 	}
 	
 	@Test
-	public void deregisterUser_userIsDequeued() throws Exception {
-		ppApp.registerUser(user1);
+	public void deregisterUser_userIsDeleted() throws Exception {
+		User user1 = makeUser("John", "Nielsen");		
 		User user2 = makeUser("Andreas", "Ustrup");
 		User user3 = makeUser("Ulla", "Brit");
+		ppApp.registerUser(user1);
 		ppApp.registerUser(user2);
 		ppApp.registerUser(user3);
 		

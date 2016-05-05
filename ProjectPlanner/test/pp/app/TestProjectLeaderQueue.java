@@ -9,14 +9,10 @@ import org.junit.rules.ExpectedException;
 
 public class TestProjectLeaderQueue {
 	private PpApp ppApp;
-	private User user1; 
 	
 	@Before
 	public void setUp() throws RegistrationException {
 		ppApp = new PpApp();
-		user1 = new User(ppApp);
-		user1.setFirstName("John");
-		user1.setLastName("Nielsen");
 	}
 	
 	@Rule
@@ -24,14 +20,28 @@ public class TestProjectLeaderQueue {
 	
 	@Test
 	public void registerUsers_usersEnqueued_printQueue() {
-		ppApp.registerUser(user1);
+		User user1 = makeUser("John", "Nielsen");		
 		User user2 = makeUser("Andreas", "Ustrup");
 		User user3 = makeUser("Ulla", "Brit");
+		ppApp.registerUser(user1);
 		ppApp.registerUser(user2);
 		ppApp.registerUser(user3);
 
 		assertEquals("joni, anus, ulbr, ", ppApp.getProjectLeaderQueue().toString());
-		
+	}
+	
+	@Test
+	public void deregisterUser_userDenqueued_printQueue() {
+		User user1 = makeUser("John", "Nielsen");		
+		User user2 = makeUser("Andreas", "Ustrup");
+		User user3 = makeUser("Ulla", "Brit");
+		ppApp.registerUser(user1);
+		ppApp.registerUser(user2);
+		ppApp.registerUser(user3);
+
+		ppApp.deregisterUser(user2);
+
+		assertEquals("joni, ulbr, ", ppApp.getProjectLeaderQueue().toString());
 	}
 
 	/**
