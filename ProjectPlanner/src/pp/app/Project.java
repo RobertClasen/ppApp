@@ -73,7 +73,10 @@ public class Project {
 		user.activities.add(activity);
 	}
 	
-	public void generateStatusReport() {
+	public void generateStatusReport(User u) {
+		if (!u.equals(projectLeader))
+			throw new ProjectException("User is not project leader.");
+			
 		statusReport = new StatusReport(this);
 	}
 
