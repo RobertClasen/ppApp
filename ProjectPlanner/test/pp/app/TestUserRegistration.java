@@ -147,6 +147,7 @@ public class TestUserRegistration {
 		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
 
 		ppApp.deregisterUser(user2);
+		
 		ppApp.addProject(new Project(ppApp));
 		assertEquals("ulbr", ppApp.getProjects().get(1).getProjectLeader().getUserId());
 	}

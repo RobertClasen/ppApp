@@ -29,6 +29,15 @@ public class ProjectLeaderQueue {
 	}
 	
 	public User delete(User u) {
+		if (head.u.equals(u)) {
+			Node nodeToDelete = head;
+			head = head.next;
+//			head.next = head;
+			size--;
+			return nodeToDelete.u;
+		}
+		
+		
 		Node n = head;
 		for (int i = 0; i < size-1; i++) {
 			if (n.next.u.equals(u)) {
