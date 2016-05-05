@@ -13,6 +13,7 @@ public class Project {
 	private String runningNumber;
 	private User projectLeader;
 	private List<Activity> activities = new ArrayList<>();
+	private StatusReport statusReport;
 
 	public Project(PpApp ppApp) {
 		this.ppApp = ppApp;
@@ -69,6 +70,10 @@ public class Project {
 
 	public void assignUserToActivity(User user, Activity activity) {
 		activity.assignedUsers.add(user);
+	}
+	
+	public void generateStatusReport() {
+		statusReport = new StatusReport(this);
 	}
 
 }
