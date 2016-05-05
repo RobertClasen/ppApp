@@ -34,37 +34,31 @@ public class TestAssignActivity extends UsersForTesting {
 	}
 	
 	//Input data set: B
-		@Test
-		public void assignFiveUserToActivity() throws Exception {
-			assignUsers(testUsers, activity1, 5);
-			assertEquals(5, activity1.getUsers().size());
-		}
+	@Test
+	public void assignFiveUsersToActivity() throws Exception {
+		assignUsers(testUsers, activity1, 5);
+		assertEquals(5, activity1.getUsers().size());
+	}
 	
-		
-		
+	//Input data set: C
+	@Test
+	public void assignAllUsersToActivity() throws Exception {
+		assignUsers(testUsers, activity1, testUsers.size());
+		assertEquals(50, activity1.getUsers().size());
+	}
+	
+	
+	/**
+	 *  Helper method.
+	 *  Assigns a requested number of users ('fictional' users from the class UsersForTesting) to an activity
+	 */
+	
 	private void assignUsers (List<User> users, Activity activity, int numberOfUsers) {
 		for(int i = 0; i < numberOfUsers; i++){
 			System.out.println(users.get(i));
 			project1.assignUserToActivity(users.get(i), activity1);
 		}
 	}
-	
-	
-	
-	/**
-	 *  Helper method.
-	 *  Creates a new User object. Sets the firstName and lastName fields as dictated
-	 *  by the functional test tables. 
-	 */
-	
-//	private List makeUsers(String firstName, String lastName, int numberOfUsers) {
-//		
-//		for(int i = 0; i<numberOfUsers; i++) {
-//			User user = new User(ppApp);
-//			user.setFirstName(firstName);
-//			user.setLastName(lastName);
-//		}
-//		return users;
-//	}
+
 
 }
