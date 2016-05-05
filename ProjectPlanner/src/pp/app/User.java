@@ -8,7 +8,8 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String userId;
-	protected List<Activity> activities = new ArrayList<>(); 
+	protected List<Activity> activities = new ArrayList<>();
+	protected List<Activity> assistanceActivities = new ArrayList<>(); 
 	
 	private final static int NAME_MAX_LENGTH = 15;
 	private final static int NAME_MIN_LENGTH = 2;
@@ -41,6 +42,10 @@ public class User {
 
 	public List<Activity> getActivities() {
 		return this.activities;
+	}
+
+	public void seekAssistance(User u, Activity a) {
+		u.assistanceActivities .add(a);
 	}
 	
 	
