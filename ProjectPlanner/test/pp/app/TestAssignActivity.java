@@ -16,6 +16,7 @@ public class TestAssignActivity extends UsersForTesting {
 	public void setUp() throws RegistrationException {
 		activity1 = new Activity(ppApp);
 		project1 = new Project(ppApp);
+		ppApp.addProject(project1);
 //		this.ppApp = new PpApp();
 	}
 
@@ -32,18 +33,21 @@ public class TestAssignActivity extends UsersForTesting {
 		assertEquals("joni", activity1.searchUser("joni").getUserId());
 	}
 	
-//	//Input data set: B
-//		@Test
-//		public void assignFiveUserToActivity() throws Exception {
-//			assignUsers(users, activity1, 5);
-//			assertEquals(5, activity1.getUsers().size());
-//		}
-//		
-//	private void assignUsers (List users, Activity activity, int numberOfUsers) {
-//		for(int i = 0; i < numberOfUsers; i++){
-//			project1.assignUserToActivity(users.get(i), activity1);
-//		}
-//	}
+	//Input data set: B
+		@Test
+		public void assignFiveUserToActivity() throws Exception {
+			assignUsers(testUsers, activity1, 5);
+			assertEquals(5, activity1.getUsers().size());
+		}
+	
+		
+		
+	private void assignUsers (List<User> users, Activity activity, int numberOfUsers) {
+		for(int i = 0; i < numberOfUsers; i++){
+			System.out.println(users.get(i));
+			project1.assignUserToActivity(users.get(i), activity1);
+		}
+	}
 	
 	
 	

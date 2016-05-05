@@ -6,7 +6,7 @@ import java.util.List;
 public class UsersForTesting {
 	
 	protected PpApp ppApp = new PpApp();
-	protected List<User> users = new ArrayList<>();
+	protected List<User> testUsers = new ArrayList<>();
 	
 	User user1 = makeAndRegisterUser("John", "Nielsen");
 	User user2 = makeAndRegisterUser("John", "Nielsen");
@@ -69,7 +69,7 @@ public class UsersForTesting {
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		ppApp.registerUser(user);
-		users.add(user);
+		testUsers.add(user);
 		return user;
 	}
 
