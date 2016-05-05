@@ -1,10 +1,14 @@
 package pp.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 	private PpApp ppApp;
 	private String firstName;
 	private String lastName;
 	private String userId;
+	protected List<Activity> activities = new ArrayList<>(); 
 	
 	private final static int NAME_MAX_LENGTH = 15;
 	private final static int NAME_MIN_LENGTH = 2;
@@ -34,6 +38,10 @@ public class User {
 	public String getLastname() { return lastName; }
 	public String getUserId() { return userId; }
 	public void setUserId(String userId) { this.userId = userId; }
+
+	public List<Activity> getActivities() {
+		return this.activities;
+	}
 	
 	
 }

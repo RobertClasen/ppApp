@@ -31,6 +31,7 @@ public class TestAssignActivity extends UsersForTesting {
 	public void assignOneUserToActivity() throws Exception {
 		project1.assignUserToActivity(user1, activity1);
 		assertEquals("joni", activity1.searchUser("joni").getUserId());
+		assertEquals(1, user1.getActivities().size());
 	}
 	
 	//Input data set: B
@@ -55,7 +56,6 @@ public class TestAssignActivity extends UsersForTesting {
 	
 	private void assignUsers (List<User> users, Activity activity, int numberOfUsers) {
 		for(int i = 0; i < numberOfUsers; i++){
-			System.out.println(users.get(i));
 			project1.assignUserToActivity(users.get(i), activity1);
 		}
 	}

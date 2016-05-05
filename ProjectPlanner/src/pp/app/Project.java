@@ -70,6 +70,7 @@ public class Project {
 
 	public void assignUserToActivity(User user, Activity activity) {
 		activity.assignedUsers.add(user);
+		user.activities.add(activity);
 	}
 	
 	public void generateStatusReport() {

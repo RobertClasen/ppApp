@@ -1,5 +1,6 @@
 package pp.app;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class PpApp {
 	private List<User> users = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
 	private ProjectLeaderQueue projectLeaderQueue = new ProjectLeaderQueue();
+	private DateServer dateServer = new DateServer();
 
 	public boolean logIn(String userId) {
 		userId = userId.toLowerCase();
@@ -56,4 +58,8 @@ public class PpApp {
 	public ProjectLeaderQueue getProjectLeaderQueue() { return projectLeaderQueue; }
 	public void setProjects(List<Project> projects) { this.projects = projects; }
 	public InputValidation getInputValidation() { return inputValidation; }
+
+	public LocalDate getDate() {
+		return this.dateServer.getDate();
+	}
 }
