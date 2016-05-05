@@ -11,8 +11,8 @@ public class Activity {
 	private String title;
 	private String description;
 	private LocalDate startDate;
-	private int estimatedTime;
-	private LocalTime clockedTime;
+	private int estimatedTime; // hours
+	private int clockedTime; // minutes
 	private LocalTime startTime;
 	protected List<User> assignedUsers= new ArrayList<>();
 	
@@ -44,22 +44,17 @@ public class Activity {
 		}
 	}
 
-	public void setClockedTime(int i) {
-		clockedTime = 8;
-	}
-
 	public void startWork() {
 		startTime = LocalTime.now();		
 	}
 	
 	public void endWork() {
-		LocalTime workedMinutes = LocalTime.now().getMinute() - startTime.getMinute();
-		
-		clockedTime += 8; 
+		int workedMinutes = LocalTime.now().getMinute() - startTime.getMinute();
+		if (workedMinutes > 15) {
+			clockedTime += workedMinutes; 
+		}
 	}
 	
-	
-
 	public String getTitle() {return title;}
 	public String getDescription() {return description;}
 	public LocalDate getStartDate() {return startDate;}
