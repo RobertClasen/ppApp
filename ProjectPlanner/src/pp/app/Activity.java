@@ -1,19 +1,24 @@
 package pp.app;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Activity {
 	private PpApp ppApp;
+	private Project project;
 	private String title;
 	private String description;
 	private LocalDate startDate;
 	private int estimatedTime;
+	private LocalTime clockedTime;
+	private LocalTime startTime;
 	protected List<User> assignedUsers= new ArrayList<>();
 	
-	public Activity(PpApp ppApp){
+	public Activity(PpApp ppApp, Project project) {
 		this.ppApp = ppApp;
+		this.project = project;
 	}
 
 	public void setTitle(String title) {
@@ -39,10 +44,28 @@ public class Activity {
 		}
 	}
 
+	public void setClockedTime(int i) {
+		clockedTime = 8;
+	}
+
+	public void startWork() {
+		startTime = LocalTime.now();		
+	}
+	
+	public void endWork() {
+		LocalTime workedMinutes = LocalTime.now().getMinute() - startTime.getMinute();
+		
+		clockedTime += 8; 
+	}
+	
+	
+
 	public String getTitle() {return title;}
 	public String getDescription() {return description;}
 	public LocalDate getStartDate() {return startDate;}
 	public int getEstimatedTime(){return this.estimatedTime;}
+	public int getClockedTime(){return this.clockedTime;}
+	public Project getProject() { return this.project; }
 
 	public List<User> getUsers() {
 		return assignedUsers;

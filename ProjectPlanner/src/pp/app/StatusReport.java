@@ -8,7 +8,6 @@ public class StatusReport {
 	private Project project;
 	private List<Activity> activities = new ArrayList<>();
 	private final static String NEWLINE = "\n";
-
 	
 	public StatusReport(Project project) {
 		this.project=project;
@@ -29,9 +28,11 @@ public class StatusReport {
 	}
 	
 	public String listOfActivities(List<Activity> activities) {
+//		String progress = " - (" + clockedTime +  + ")";
 		String s = "List of activities" + NEWLINE;
 		for (Activity a : activities) {
-			s += a.getTitle() + NEWLINE;
+			String progress = " - (" + a.getClockedTime() + "/" + a.getEstimatedTime() + ")";
+			s += "\t" + a.getTitle() + progress + NEWLINE;
 		}
 		return s;
 	}
