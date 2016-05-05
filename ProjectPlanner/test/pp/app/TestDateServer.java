@@ -12,7 +12,7 @@ public class TestDateServer {
 	
 	
 	/*
-	 * succesfull creation of the dateServer and that it hold the current date.
+	 * successful creation of the dateServer and that it hold the current date.
 	 */
 	@Test
 	public void creationOfDateServer() {
@@ -23,8 +23,10 @@ public class TestDateServer {
 	
 	@Test
 	public void ppAppGetDate(){
+		DateServer dateServer = new DateServer();
+		ppApp.setDateServer(dateServer);
 		LocalDate date = LocalDate.now();
-		assertEquals(date, ppApp.getDateServer().getDate());
+		assertEquals(date, ppApp.getDate());
 	}
 
 }

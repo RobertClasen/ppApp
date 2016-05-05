@@ -28,7 +28,6 @@ public class StatusReport {
 	}
 	
 	public String listOfActivities(List<Activity> activities) {
-//		String progress = " - (" + clockedTime +  + ")";
 		String s = "List of activities" + NEWLINE;
 		for (Activity a : activities) {
 			String progress = " - (" + a.getClockedTime()/60 + "/" + a.getEstimatedTime() + ")";

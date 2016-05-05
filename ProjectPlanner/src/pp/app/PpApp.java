@@ -65,10 +65,8 @@ public class PpApp {
 	public DateServer getDateServer() {
 		return this.dateServer;
 	}
-//	public LocalDate getDate() { return dateServer.getDate(); }
-//	public LocalTime getTime() {
-//		return this.dateServer.getTime();
-//	}
+	public LocalDate getDate() { return dateServer.getDate(); }
+	public LocalTime getTime() { return this.dateServer.getTime(); }
 
 	public List<User> availableUsers(LocalDate date) throws ActivityException {
 		List<User> avUsers = new ArrayList<>();

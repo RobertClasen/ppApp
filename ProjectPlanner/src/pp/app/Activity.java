@@ -2,6 +2,9 @@ package pp.app;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.Temporal;
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +14,7 @@ public class Activity {
 	private String title;
 	private String description;
 	private LocalDate startDate;
-	private int estimatedTime; // hours
+	private Long estimatedTime; // hours
 	private int clockedTime; // minutes
 	private LocalTime startTime;
 	protected List<User> assignedUsers= new ArrayList<>();
@@ -19,6 +22,7 @@ public class Activity {
 	public Activity(PpApp ppApp, Project project) {
 		this.ppApp = ppApp;
 		this.project = project;
+		this.clockedTime = 0;
 	}
 
 	public void setTitle(String title) {
@@ -36,29 +40,29 @@ public class Activity {
 			this.startDate = startDate;
 	}
 
-	public void setEstimatedTime(int i) {
-		if (i > 0){			
-			this.estimatedTime = i;
+	public void setEstimatedTime(Long l) {
+		if (l > 0){			
+			this.estimatedTime = l;
 		}else{
 			throw new InputException("Input is not equal to or higher than zero.");
 		}
 	}
 
 	public void startWork() {
-		startTime = ppApp.getDateServer().getTime();
+		startTime = ppApp.getTime();
 	}
 	
 	public void endWork() {
-		int workedMinutes = ppApp.getDateServer().getTime().getMinute() - startTime.getMinute();
-		if (workedMinutes > 15) {
-			clockedTime += workedMinutes; 
+		long minutesWorked = MINUTES.between(startTime, ppApp.getTime());
+		if (minutesWorked > 15L) {
+			clockedTime += minutesWorked; 
 		}
 	}
 	
 	public String getTitle() {return title;}
 	public String getDescription() { return description; }
 	public LocalDate getStartDate() { return startDate; }
-	public int getEstimatedTime(){ return this.estimatedTime; }
+	public Long getEstimatedTime(){ return this.estimatedTime; }
 	public int getClockedTime(){ return this.clockedTime; }
 	public LocalTime getStartTime() { return this.startTime; }
 	public Project getProject() { return this.project; }

@@ -19,7 +19,7 @@ public class TestActivity {
 	private static final String VALID_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
 			+ "Aenean commodo ligula eget dolor. Aenean m";
 	private static final LocalDate VALID_START_DATE = LocalDate.of(2020, Month.JANUARY, 1);
-	private static final int VALID_EST_TIME = 20;
+	private static final Long VALID_EST_TIME = 20L;
 	
 	private static final String INVALID_TITLE_TOO_SHORT = "D";
 	private static final String INVALID_TITLE_TOO_LONG = "Desiiiiiiiiiiiiiiiiiiiiign";
@@ -28,7 +28,7 @@ public class TestActivity {
 			+ "montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. "
 			+ "Nulla consequat massa quis enim. Donec.";
 	private static final LocalDate INVALID_START_DATE = LocalDate.of(2006, Month.JANUARY, 1);
-	private static final int INVALID_EST_TIME = 0;
+	private static final Long INVALID_EST_TIME = 0L;
 	
 	@Before
 	public void setUp() throws RegistrationException {
@@ -137,7 +137,7 @@ public class TestActivity {
 	/**
 	 * Helper method
 	 */
-	private Activity makeActivity(String title, String description, LocalDate startDate, int estimatedTime) {
+	private Activity makeActivity(String title, String description, LocalDate startDate, Long estimatedTime) {
 		Activity activity = new Activity(ppApp, project1);
 		activity.setTitle(title);
 		activity.setDescription(description);

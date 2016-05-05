@@ -1,6 +1,7 @@
 package pp.app;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class DateServer {
@@ -10,13 +11,17 @@ public class DateServer {
 //		date = LocalDate.now();
 //	}
 
-	public LocalDate getDate() { return LocalDate.now(); }
+	public LocalDate getDate() {
+		return LocalDate.now();
+	}
 
 	public LocalTime getTime() {
-		System.out.println("foo");
-		System.out.println(LocalTime.now());
 		return LocalTime.now();
 	}
+
+//	public LocalDateTime getDateTime() {
+//		return LocalDateTime.now();
+//	}
 
 //	public void setDate(LocalDate date) {
 //		this.date = date;
