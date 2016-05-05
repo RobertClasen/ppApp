@@ -3,11 +3,12 @@ package pp.app;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class TestAssignActivity extends UsersForTesting {
 	private Activity activity1;
@@ -18,8 +19,10 @@ public class TestAssignActivity extends UsersForTesting {
 		activity1 = new Activity(ppApp);
 		project1 = new Project(ppApp);
 		ppApp.addProject(project1);
-//		this.ppApp = new PpApp();
 	}
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none(); 
 
 	@Test
 	public void correctName() {
@@ -68,11 +71,25 @@ public class TestAssignActivity extends UsersForTesting {
 			project1.assignUserToActivity(user1, a);
 		}
 		assertEquals(49, ppApp.availableUsers(LocalDate.now()).size());
+		
 	}
-
 	
-	
-	
+	@Test
+	public void noAvailableUsers() throws Exception {
+		thrown.expect(ActivityException.class);
+		thrown.expectMessage("No available users at this date.");
+		
+		LocalDate startDate = LocalDate.now();
+		for (int i = 0; i<10; i++){
+			Activity a = new Activity(ppApp);
+			a.setStartDate(startDate.plusDays(5));
+			for (User user : testUsers) {
+				project1.assignUserToActivity(user, a);
+			} 
+		}
+		ppApp.availableUsers(startDate);
+	}
+		
 	/**
 	 *  Helper method.
 	 *  Assigns a requested number of users ('fictional' users from the class UsersForTesting) to an activity

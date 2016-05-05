@@ -63,7 +63,7 @@ public class PpApp {
 		return this.dateServer.getDate();
 	}
 
-	public List<User> availableUsers(LocalDate date) {
+	public List<User> availableUsers(LocalDate date) throws ActivityException {
 		List<User> avUsers = new ArrayList<>();
 		for (User u : users){
 			int count = 0;
@@ -74,6 +74,11 @@ public class PpApp {
 			}
 			if (count < 10){avUsers.add(u);}
 		}
+		//System.out.println(avUsers.size());
+		if(avUsers.size() == 0){
+			throw new ActivityException("No available users at this date.");
+		}else{
 		return avUsers;
+		}
 	}
 }
