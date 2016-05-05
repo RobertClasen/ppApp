@@ -2,6 +2,7 @@ package pp.app;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,28 @@ public class TestAssignActivity extends UsersForTesting {
 		assignUsers(testUsers, activity1, testUsers.size());
 		assertEquals(50, activity1.getUsers().size());
 	}
+	
+	@Test
+	public void availableUsers() throws Exception {
+		assertEquals(50, ppApp.availableUsers(LocalDate.now()).size());
+	}
+	
+	
+	/*
+	 * Det giver mindre mening at vi tilføjer brugeren til aktiviteten inde i projekterne - genovervej.
+	 */
+	@Test
+	public void oneUnavailableUser() throws Exception {
+		LocalDate startDate = LocalDate.now();
+		for (int i = 0; i<10; i++){
+			Activity a = new Activity(ppApp);
+			a.setStartDate(startDate.plusDays(5));
+			project1.assignUserToActivity(user1, a);
+		}
+		assertEquals(49, ppApp.availableUsers(LocalDate.now()).size());
+	}
+
+	
 	
 	
 	/**

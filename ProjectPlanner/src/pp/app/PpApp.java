@@ -62,4 +62,18 @@ public class PpApp {
 	public LocalDate getDate() {
 		return this.dateServer.getDate();
 	}
+
+	public List<User> availableUsers(LocalDate date) {
+		List<User> avUsers = new ArrayList<>();
+		for (User u : users){
+			int count = 0;
+			for (Activity a : u.activities){
+				if (a.getStartDate().isAfter(date.minusMonths(1)) && a.getStartDate().isBefore(date.plusMonths(1))){
+					count++;
+				}
+			}
+			if (count < 10){avUsers.add(u);}
+		}
+		return avUsers;
+	}
 }
