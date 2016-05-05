@@ -134,6 +134,22 @@ public class TestUserRegistration {
 		ppApp.deregisterUser(user2);
 	}
 	
+	@Test
+	public void deregisterUser_userIsDequeued() throws Exception {
+		ppApp.registerUser(user1);
+		User user2 = makeUser("Andreas", "Ustrup");
+		User user3 = makeUser("Ulla", "Brit");
+		ppApp.registerUser(user2);
+		ppApp.registerUser(user3);
+		
+		ppApp.addProject(new Project(ppApp));
+		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
+
+		ppApp.deregisterUser(user2);
+		ppApp.addProject(new Project(ppApp));
+		assertEquals("ulbr", ppApp.getProjects().get(1).getProjectLeader().getUserId());
+	}
+	
 	
 	/**
 	 * Tests for the generating of user ID's.

@@ -26,9 +26,10 @@ public class PpApp {
 	}
 	
 	public void deregisterUser(User u) {		
-		if(!users.contains(u)) {
+		if(!users.contains(u))
 			throw new RegistrationException("User is not registered.");
-		}
+		
+		projectLeaderQueue.delete(u);
 		users.remove(u);
 	}
 

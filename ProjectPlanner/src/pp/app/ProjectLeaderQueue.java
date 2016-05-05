@@ -3,6 +3,7 @@ package pp.app;
 public class ProjectLeaderQueue {
 	Node head;
 	Node tail;
+	int size;
 	
 	public void enqueue(User u) {
 		Node oldTail = tail;
@@ -14,19 +15,48 @@ public class ProjectLeaderQueue {
 		} else {
 			oldTail.next = tail;
 		}
+		size++;
 	}
 
 	public User dequeue() {
 		if (!isEmpty()) {
 			User userToReturn = head.u;
 			head = head.next;
+			size--;
 			return userToReturn;
+		}
+		return null;
+	}
+	
+	public User delete(User u) {
+		Node n = head;
+		for (int i = 0; i < size-1; i++) {
+			if (n.next.u.equals(u)) {
+				Node nodeToDelete = n.next;
+				if (!nodeToDelete.equals(tail)) {
+					n.next = nodeToDelete.next;
+				} else {
+					tail = n;
+				}
+				return nodeToDelete.u;
+			}
+			n = n.next;
 		}
 		return null;
 	}
 	
 	private boolean isEmpty() {
 		return head == null;
+	}
+	
+	public String toString() {
+		Node n = head;
+		String s = "";
+		for (int i = 0; i < size; i++) {
+			s += n.u.getUserId() + ", ";
+			n = n.next;
+		}
+		return s;
 	}
 
 	private class Node {
