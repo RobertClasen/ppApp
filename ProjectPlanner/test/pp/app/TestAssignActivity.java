@@ -16,8 +16,8 @@ public class TestAssignActivity extends UsersForTesting {
 	
 	@Before
 	public void setUp() throws RegistrationException {
-		activity1 = new Activity(ppApp);
 		project1 = new Project(ppApp);
+		activity1 = new Activity(ppApp, project1);
 		ppApp.addProject(project1);
 	}
 	
@@ -66,7 +66,7 @@ public class TestAssignActivity extends UsersForTesting {
 	public void oneUnavailableUser() throws Exception {
 		LocalDate startDate = LocalDate.now();
 		for (int i = 0; i<10; i++){
-			Activity a = new Activity(ppApp);
+			Activity a = new Activity(ppApp, project1);
 			a.setStartDate(startDate.plusDays(5));
 			project1.assignUserToActivity(user1, a);
 		}
@@ -81,8 +81,9 @@ public class TestAssignActivity extends UsersForTesting {
 		
 		LocalDate startDate = LocalDate.now();
 		for (int i = 0; i<10; i++){
-			Activity a = new Activity(ppApp);
+			Activity a = new Activity(ppApp, project1);
 			a.setStartDate(startDate.plusDays(5));
+			project1.addActivity(a);
 			for (User user : testUsers) {
 				project1.assignUserToActivity(user, a);
 			} 

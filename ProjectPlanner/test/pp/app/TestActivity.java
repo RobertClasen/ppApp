@@ -34,7 +34,7 @@ public class TestActivity {
 	public void setUp() throws RegistrationException {
 		ppApp = new PpApp();
 		project1 = new Project(ppApp);
-		activity1 = new Activity(ppApp);
+		activity1 = new Activity(ppApp, project1);
 	}
 	
 	@Rule
@@ -138,7 +138,7 @@ public class TestActivity {
 	 * Helper method
 	 */
 	private Activity makeActivity(String title, String description, LocalDate startDate, int estimatedTime) {
-		Activity activity = new Activity(ppApp);
+		Activity activity = new Activity(ppApp, project1);
 		activity.setTitle(title);
 		activity.setDescription(description);
 		activity.setStartDate(startDate);
