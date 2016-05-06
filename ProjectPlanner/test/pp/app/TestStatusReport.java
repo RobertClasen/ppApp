@@ -64,10 +64,10 @@ public class TestStatusReport {
 		when(dateServer.getTime()).thenReturn(startTime);
 		user1.startWork(project1.getActivities().get(0));
 
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(16L));
+		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(15L));
 		user1.endWork();
 
-		assertEquals(16, project1.getActivities().get(0).getClockedTime());
+		assertEquals(15, project1.getActivities().get(0).getClockedTime());
 	}
 
 	@Test

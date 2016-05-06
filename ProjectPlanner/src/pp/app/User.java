@@ -44,7 +44,7 @@ public class User {
 	
 	public void endWork() {
 		long minutesWorked = MINUTES.between(this.startWorkTime, ppApp.getTime());
-		if (minutesWorked > 15L) {
+		if (minutesWorked >= 15L) {
 			this.workingActivity.clockedTime += minutesWorked; 
 		}
 	}
