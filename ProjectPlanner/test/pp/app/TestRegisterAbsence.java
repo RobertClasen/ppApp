@@ -3,6 +3,7 @@ package pp.app;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+import java.awt.List;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -16,8 +17,7 @@ public class TestRegisterAbsence {
 	private User user1;
 	private User user2;
 	
-	
-	//slet måske dateserver setup
+	//slet mï¿½ske dateserver setup
 	@Before
 	public void setup() {
 		ppApp = new PpApp();
@@ -43,13 +43,13 @@ public class TestRegisterAbsence {
 		LocalDate startDate = LocalDate.of(2016, Month.JULY, 22);
 		LocalDate endDate = startDate;
 		
-		user1.registerAbsence(startDate, endDate);
-		List<Absence> absence = user1.getAbsence();
+		Absence a = new Absence(startDate, endDate);
+		user1.registerAbsence(a);
 		
-		assertEquals(1, absence.size());
-		assertEquals(startDate, absence.get(0).startDate);
-		assertEquals(endDate, absence.get(0).endDate);
-		assertEquals(1, absence.get(0).calcWork(startDate.minusDays(1L), startDate.plusDays(1L)));
+		assertEquals(1, user1.absenceTime.size());
+		assertEquals(startDate, user1.absenceTime.get(0).startDate);
+		assertEquals(endDate, user1.absenceTime.get(0).endDate);
+		assertEquals(1, user1.absenceTime.get(0).calcWorkDaysInTimePeriod(startDate, endDate));
 	}
 	
 	@Test
@@ -57,10 +57,11 @@ public class TestRegisterAbsence {
 		LocalDate startDate = LocalDate.of(2016, Month.JULY, 22);
 		LocalDate endDate = startDate.plusDays(6L);
 		
-		user1.registerAbsence(startDate, endDate);
-		List<Absence> absence = user1.getAbsence();
+		Absence a = new Absence(startDate, endDate);
 		
-		assertEquals(7, absence.get(0).calcWork(startDate.minusDays(1L), startDate.plusDays(10L)));
+		user1.registerAbsence(a);
+		
+		assertEquals(5, user1.getAbsence().get(0).calcWorkDaysInTimePeriod(startDate, endDate));
 	}
 	
 	@Test
@@ -68,10 +69,11 @@ public class TestRegisterAbsence {
 		LocalDate startDate = LocalDate.of(2016, Month.JULY, 22);
 		LocalDate endDate = startDate.plusMonths(2L);
 		
-		user1.registerAbsence(startDate, endDate);
-		List<Absence> absence = user1.getAbsence();
+		Absence a = new Absence(startDate, endDate);
 		
-		assertEquals(1, absence.get(0).calcWork(startDate.minusDays(1L), startDate.plusDays(1L)));
+		user1.registerAbsence(a);
+		
+		assertEquals(45, user1.absenceTime.get(0).calcWorkDaysInTimePeriod(startDate, endDate));
 	}
 
 }
