@@ -1,5 +1,8 @@
 package pp.app;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
+
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +11,10 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String userId;
+	private LocalTime startWorkTime;
 	protected List<Activity> activities = new ArrayList<>();
-	protected List<Activity> assistanceActivities = new ArrayList<>(); 
+	protected List<Activity> assistanceActivities = new ArrayList<>();
+	private Activity workingActivity; 
 	
 	private final static int NAME_MAX_LENGTH = 15;
 	private final static int NAME_MIN_LENGTH = 2;
@@ -29,6 +34,18 @@ public class User {
 		if (ppApp.getInputValidation().stringLength(lastName, NAME_MIN_LENGTH, NAME_MAX_LENGTH) &&
 				ppApp.getInputValidation().legalCharacters(lastName)) {
 			this.lastName = lastName;
+		}
+	}
+	
+	public void startWork(Activity a) {
+		this.startWorkTime = ppApp.getTime();
+		this.workingActivity = a;
+	}
+	
+	public void endWork() {
+		long minutesWorked = MINUTES.between(this.startWorkTime, ppApp.getTime());
+		if (minutesWorked > 15L) {
+			this.workingActivity.clockedTime += minutesWorked; 
 		}
 	}
 	

@@ -15,7 +15,7 @@ public class Activity {
 	private String description;
 	private LocalDate startDate;
 	private Long estimatedTime; // hours
-	private int clockedTime; // minutes
+	protected int clockedTime; // minutes
 	private LocalTime startTime;
 	protected List<User> assignedUsers= new ArrayList<>();
 	
@@ -48,16 +48,6 @@ public class Activity {
 		}
 	}
 
-	public void startWork() {
-		startTime = ppApp.getTime();
-	}
-	
-	public void endWork() {
-		long minutesWorked = MINUTES.between(startTime, ppApp.getTime());
-		if (minutesWorked > 15L) {
-			clockedTime += minutesWorked; 
-		}
-	}
 	
 	public String getTitle() {return title;}
 	public String getDescription() { return description; }

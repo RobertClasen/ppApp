@@ -18,6 +18,8 @@ public class TestStatusReport {
 	private DateServer dateServer;
 	private Project project1;
 	private User user1;
+	private User user2;
+	private User user3;
 	private StatusReport statusReport;
 
 	@Before
@@ -31,6 +33,9 @@ public class TestStatusReport {
 		statusReport = new StatusReport(project1);
 		user1 = makeUser("John", "Nielsen");
 		ppApp.registerUser(user1);
+		user2 = makeUser("John", "Olsen");
+		ppApp.registerUser(user2);
+		user3 = makeUser("John","Christiansen");
 
 	}
 	
@@ -43,10 +48,10 @@ public class TestStatusReport {
 		
 		LocalTime startTime = LocalTime.of(10, 0);
 		when(dateServer.getTime()).thenReturn(startTime);
-		project1.getActivities().get(0).startWork();
+		user1.startWork(project1.getActivities().get(0));
 
 		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(14L));
-		project1.getActivities().get(0).endWork();
+		user1.endWork();
 
 		assertEquals(0, project1.getActivities().get(0).getClockedTime());
 	}
@@ -57,14 +62,32 @@ public class TestStatusReport {
 		
 		LocalTime startTime = LocalTime.of(10, 0);
 		when(dateServer.getTime()).thenReturn(startTime);
-		project1.getActivities().get(0).startWork();
+		user1.startWork(project1.getActivities().get(0));
 
 		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(16L));
-		project1.getActivities().get(0).endWork();
+		user1.endWork();
 
 		assertEquals(16, project1.getActivities().get(0).getClockedTime());
 	}
 
+	@Test
+	public void multipleUsersWorkingOnActivity(){
+		project1.addActivity(makeActivity("Design", "Design af rejsekort", LocalDate.of(2017, Month.MARCH, 1), 70L));
+		
+		LocalTime startTime = LocalTime.of(10, 0);
+		when(dateServer.getTime()).thenReturn(startTime);
+		user1.startWork(project1.getActivities().get(0));
+		user2.startWork(project1.getActivities().get(0));
+		user3.startWork(project1.getActivities().get(0));
+		
+		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(20L));
+		user1.endWork();
+		user2.endWork();
+		user3.endWork();
+		
+		assertEquals(60, project1.getActivities().get(0).clockedTime);
+	}
+	
 	@Test
 	public void generateStatusReport_title () {
 			project1.setTitle("Newton");
@@ -81,16 +104,16 @@ public class TestStatusReport {
 
 		LocalTime startTime = LocalTime.of(10, 0);
 		when(dateServer.getTime()).thenReturn(startTime);
-		project1.getActivities().get(0).startWork();
-		project1.getActivities().get(1).startWork();
-		project1.getActivities().get(2).startWork();
+		user1.startWork(project1.getActivities().get(0));
+		user2.startWork(project1.getActivities().get(1));
+		user3.startWork(project1.getActivities().get(2));
 
 		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(479L));
-		project1.getActivities().get(0).endWork();
+		user1.endWork();
 		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(721L));
-		project1.getActivities().get(1).endWork();
+		user2.endWork();
 		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(61L));
-		project1.getActivities().get(2).endWork();
+		user3.endWork();
 		
 		String expected = "List of activities" + "\n" +
 						  "\t" + "Gravity - (7/10)" + "\n" +
