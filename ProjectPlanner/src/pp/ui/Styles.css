@@ -1,0 +1,35 @@
+.vbox {
+	-fx-padding: 60;	
+} 
+
+.label {
+    -fx-font-family: "Monoid";
+	-fx-font-weight: normal;
+    -fx-font-style: normal;
+    -fx-font-size: 26;
+    
+    -fx-alignment: top-left;
+    -fx-pref-height: 300;
+}
+
+#root {
+	-fx-alignment: center-left;
+	-fx-padding: 60;
+	-fx-background-color: transparent;
+	-fx-opacity: 1.0;
+}
+
+.text-field {
+ 	-fx-font-family: "Monoid";
+	-fx-font-weight: normal;
+	-fx-font-style: normal;
+    -fx-font-size: 26;
+
+	-fx-alignment: center-left;
+	-fx-pref-width: 600;
+	-fx-max-width: 600;
+	-fx-padding: 0;
+	-fx-background-color: transparent;
+
+/*	-fx-display-caret: false; */
+}
