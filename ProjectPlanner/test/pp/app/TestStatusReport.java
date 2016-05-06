@@ -39,6 +39,7 @@ public class TestStatusReport {
 		ppApp.registerUser(user3);
 	}
 	
+	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none(); 
 

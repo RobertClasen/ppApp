@@ -49,6 +49,11 @@ public class User {
 		}
 	}
 	
+	public void editClockedTime(Activity a, int minutes) {
+		this.workingActivity = a;
+		this.workingActivity.clockedTime += minutes;
+	}
+	
 	/**
 	 * Getters and setters
 	 */
