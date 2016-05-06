@@ -2,6 +2,7 @@ package pp.app;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,39 @@ public class User {
 
 	public List<Absence> getAbsence() {
 		return this.absenceTime;
+	}
+
+	public boolean isAvailable(LocalDate date) {
+		int count = 0;
+		int absentWorkDays = 0;
+		for (Activity a : this.activities){
+			if (a.getStartDate().isAfter(date.minusMonths(1)) && a.getStartDate().isBefore(date.plusMonths(1))){
+				count++;
+			}
+		}
+		for (Absence ab : absenceTime) {
+			//Hvis absence starter efter eller er sluttet før den pågældene periode, er denne absence ligegyldig.
+			if(!ab.startDate.isAfter(date.plusMonths(1)) && !ab.endDate.isBefore(date.minusMonths(1))){
+				
+				//både start- of slutdato er inden for tidsperioden
+				if(ab.startDate.isAfter(date.minusMonths(1)) && ab.endDate.isBefore(date.plusMonths(1))){
+					absentWorkDays += ab.calcWorkDaysInTimePeriod(ab.startDate, ab.endDate);
+				}
+				//startdato inden for perioden, slutdato udenfor
+				else if(ab.startDate.isAfter(date.minusMonths(1)) && ab.endDate.isAfter(date.plusMonths(1))){
+					absentWorkDays += ab.calcWorkDaysInTimePeriod(ab.startDate, date.plusMonths(1L));
+				}
+				//startdato udenforperioden, slutdato indenfor
+				else if(ab.startDate.isBefore(date.minusMonths(1)) && ab.endDate.isBefore(date.plusMonths(1))){
+					absentWorkDays += ab.calcWorkDaysInTimePeriod(date.minusMonths(1), ab.endDate);					
+				}else {absentWorkDays += ab.calcWorkDaysInTimePeriod(date.minusMonths(1), date.plusMonths(1));}
+			}	
+		}
+		//count inkrimeres med det antal aktiviteter fraværet estimeret svarer til 
+		count += absentWorkDays/4;
+		
+		if (count < 10){return true;} 
+		else {return false;}
 	}
 	
 	

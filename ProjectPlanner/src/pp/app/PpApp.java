@@ -71,13 +71,10 @@ public class PpApp {
 	public List<User> availableUsers(LocalDate date) throws ActivityException {
 		List<User> avUsers = new ArrayList<>();
 		for (User u : users){
-			int count = 0;
-			for (Activity a : u.activities){
-				if (a.getStartDate().isAfter(date.minusMonths(1)) && a.getStartDate().isBefore(date.plusMonths(1))){
-					count++;
-				}
+			if(u.isAvailable(date)){
+				avUsers.add(u);
+				
 			}
-			if (count < 10){avUsers.add(u);}
 		}
 		//System.out.println(avUsers.size());
 		if(avUsers.size() == 0){

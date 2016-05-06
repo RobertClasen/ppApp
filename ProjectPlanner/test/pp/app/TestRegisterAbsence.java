@@ -15,7 +15,6 @@ public class TestRegisterAbsence {
 	private Project project;
 	private Activity activity;
 	private User user1;
-	private User user2;
 	
 	//slet m�ske dateserver setup
 	@Before
@@ -30,12 +29,8 @@ public class TestRegisterAbsence {
 		user1 = new User(ppApp);
 		user1.setFirstName("Johnny");
 		user1.setLastName("Nielsen");
-		user2 = new User(ppApp);
-		user2.setFirstName("Harry");
-		user2.setLastName("Potter");
 		
 		ppApp.registerUser(user1);
-		ppApp.registerUser(user2);
 	}
 	
 	@Test
@@ -72,6 +67,8 @@ public class TestRegisterAbsence {
 		Absence a = new Absence(startDate, endDate);
 		
 		user1.registerAbsence(a);
+		
+		System.out.println(user1.isAvailable(startDate.plusDays(29)));
 		
 		assertEquals(45, user1.absenceTime.get(0).calcWorkDaysInTimePeriod(startDate, endDate));
 	}
