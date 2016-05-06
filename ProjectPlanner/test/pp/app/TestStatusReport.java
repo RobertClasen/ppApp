@@ -36,57 +36,13 @@ public class TestStatusReport {
 		user2 = makeUser("John", "Olsen");
 		ppApp.registerUser(user2);
 		user3 = makeUser("John","Christiansen");
-
+		ppApp.registerUser(user3);
 	}
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none(); 
 
-	@Test
-	public void workOnActivity_LessThan15MinutesOfWorkDoesNotCount() {
-		project1.addActivity(makeActivity("Muffins", "What are they?", LocalDate.of(2017, Month.MARCH, 1), 38L));
-		
-		LocalTime startTime = LocalTime.of(10, 0);
-		when(dateServer.getTime()).thenReturn(startTime);
-		user1.startWork(project1.getActivities().get(0));
-
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(14L));
-		user1.endWork();
-
-		assertEquals(0, project1.getActivities().get(0).getClockedTime());
-	}
 	
-	@Test
-	public void workOnActivity_MoreThan15MinutesOfWorkDoesCount() {
-		project1.addActivity(makeActivity("Muffins", "What are they?", LocalDate.of(2017, Month.MARCH, 1), 38L));
-		
-		LocalTime startTime = LocalTime.of(10, 0);
-		when(dateServer.getTime()).thenReturn(startTime);
-		user1.startWork(project1.getActivities().get(0));
-
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(15L));
-		user1.endWork();
-
-		assertEquals(15, project1.getActivities().get(0).getClockedTime());
-	}
-
-	@Test
-	public void multipleUsersWorkingOnActivity(){
-		project1.addActivity(makeActivity("Design", "Design af rejsekort", LocalDate.of(2017, Month.MARCH, 1), 70L));
-		
-		LocalTime startTime = LocalTime.of(10, 0);
-		when(dateServer.getTime()).thenReturn(startTime);
-		user1.startWork(project1.getActivities().get(0));
-		user2.startWork(project1.getActivities().get(0));
-		user3.startWork(project1.getActivities().get(0));
-		
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(20L));
-		user1.endWork();
-		user2.endWork();
-		user3.endWork();
-		
-		assertEquals(60, project1.getActivities().get(0).clockedTime);
-	}
 	
 	@Test
 	public void generateStatusReport_title () {
