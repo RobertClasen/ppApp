@@ -11,7 +11,7 @@ public class StatusReport {
 	
 	public StatusReport(Project project) {
 		this.project=project;
-		this.activities = activities;
+		this.activities = project.getActivities();
 		generate();
 	}
 	
@@ -27,9 +27,9 @@ public class StatusReport {
 		return title();
 	}
 	
-	public String listOfActivities(List<Activity> activities) {
+	public String listOfActivities() {
 		String s = "List of activities" + NEWLINE;
-		for (Activity a : activities) {
+		for (Activity a : this.activities) {
 			String progress = " - (" + a.getClockedTime()/60 + "/" + a.getEstimatedTime() + ")";
 			s += "\t" + a.getTitle() + progress + NEWLINE;
 		}

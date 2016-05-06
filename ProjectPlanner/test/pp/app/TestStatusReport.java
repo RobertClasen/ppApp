@@ -96,7 +96,7 @@ public class TestStatusReport {
 						  "\t" + "Gravity - (7/10)" + "\n" +
 						  "\t" + "Apples - (12/14)" + "\n" +
 						  "\t" + "Muffins - (1/38)" + "\n";
-		assertEquals(expected, statusReport.listOfActivities(project1.getActivities()));
+		assertEquals(expected, statusReport.listOfActivities());
 	}
 
 	@Test
