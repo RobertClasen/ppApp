@@ -20,7 +20,7 @@ public class Project {
 	}
 	
 	public void setTitle(String title) {
-		if (ppApp.getInputValidation().stringLength(title, 2, 25))
+		if (ppApp.getInputValidation().stringLength(title, 2, 35))
 			this.title = title;
 	}
 

@@ -94,7 +94,7 @@ public class TestProject {
 		thrown.expectMessage("Invalid length.");
 		
 		project1.setTitle(VALID_TITLE);
-		project1.setDescription(INVALID_DESCRIPTION_TOO_LONG);
+		project1.setDescription(INVALID_DESCRIPTION_TOO_SHORT);
 		project1.setStartDate(INVALID_START_DATE);
 	}
 	
@@ -129,95 +129,6 @@ public class TestProject {
 		project1.setTitle(INVALID_TITLE_TOO_SHORT);
 		project1.setDescription(INVALID_DESCRIPTION_TOO_LONG);
 		project1.setStartDate(INVALID_START_DATE);
-	}
-	
-	/**
-	 * Tests for the automatic assigning of project leaders to newly created projects. 
-	 */
-	@Test
-	public void addProject_oneUserOneProject_getProjectLeader() {
-		makeAndRegisterUser("John", "Nielsen");
-		ppApp.addProject(project1);
-		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
-	}
-	
-	@Test
-	public void addProject_threeUsersTwoProjects_getProjectLeaders() {
-		makeAndRegisterUser("John", "Nielsen");
-		makeAndRegisterUser("Andreas", "Hansen");
-		makeAndRegisterUser("Ulla", "Brit");
-		ppApp.addProject(project1);
-		ppApp.addProject(new Project(ppApp));
-		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
-		assertEquals("anha", ppApp.getProjects().get(1).getProjectLeader().getUserId());
-	}
-	
-	@Test
-	public void endProject_projectIsSetInactive() {
-		makeAndRegisterUser("John", "Nielsen");
-		
-		ppApp.addProject(project1);
-		assertEquals(1, ppApp.getProjects().size());
-		
-		ppApp.endProject(project1);
-		assertEquals(0, ppApp.getProjects().size());
-	}
-	
-	@Test
-	public void endProject_projectLeaderIsEnqueuedAgian() {
-		makeAndRegisterUser("John", "Nielsen");
-		ppApp.addProject(project1);
-		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
-		ppApp.endProject(project1);
-		ppApp.addProject(new Project(ppApp));
-		assertEquals("joni", ppApp.getProjects().get(0).getProjectLeader().getUserId());
-		
-	}
-	
-	@Test
-	public void addProject_maxLimitReached() {
-		thrown.expect(ProjectException.class);
-		thrown.expectMessage("Number of projects reached upper limit.");
-		
-		ppApp.setProjects(makeProjects(50));
-		ppApp.addProject(new Project(ppApp));
-	}
-
-	
-	/**
-	 *  Helper method.
-	 *  Creates a new project, and sets the fields "title", "description" and "startDate"
-	 *  as the given arguments, dictated by the tests tables.
-	 */
-	private Project makeProject(String title, String description, LocalDate startDate) {
-		Project project = new Project(ppApp);
-		project.setTitle(title);
-		project.setDescription(description);
-		project.setStartDate(startDate);
-		return project;
-	}
-	
-	/**
-	 *  Helper method.
-	 *  Creates and returns a list of i projects.
-	 */
-	private List<Project> makeProjects(int i) {
-		List<Project> projects = new ArrayList<>();
-		for (int j = 0; j < i; j++) {
-			projects.add(new Project(ppApp));
-		}
-		return projects;
-	}
-	
-	/**
-	 *  Helper method.
-	 *  Creates a new User object. Sets the firstName and lastName and then registers the user.
-	 */
-	private void makeAndRegisterUser(String firstName, String lastName) {
-		User user = new User(ppApp);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		ppApp.registerUser(user);		
 	}
 	
 }
