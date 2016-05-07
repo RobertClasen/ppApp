@@ -26,6 +26,8 @@ public class TestUserRegistration {
 	/**
 	 * Tests for validity of name lengths.
 	 */
+	
+	 
 	@Test
 	public void newUser_tooLongFirstName() {
 		thrown.expect(InputException.class);
@@ -150,56 +152,6 @@ public class TestUserRegistration {
 		
 		ppApp.addProject(new Project(ppApp));
 		assertEquals("ulbr", ppApp.getProjects().get(1).getProjectLeader().getUserId());
-	}
-	
-	
-	/**
-	 * Tests for the generating of user ID's.
-	 */
-	@Test
-	public void registerUser_validNames_getUserId() {
-		ppApp.registerUser(user1);
-		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
-	}
-	
-	@Test
-	public void registerUsers_DuplicateIds() {
-		ppApp.registerUser(user1);
-		User user2 = makeUser("Jones", "Nissen");
-		ppApp.registerUser(user2);
-		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
-		assertEquals("jois", ppApp.getUsers().get(1).getUserId());
-	}
-	
-	@Test
-	public void registerUsers_DuplicateIds_ShortLastname1() {
-		ppApp.registerUser(user1);
-		User user2 = makeUser("Joan", "Ni");
-		ppApp.registerUser(user2);
-		assertEquals("joni",ppApp.getUsers().get(0).getUserId());
-		assertEquals("jani",ppApp.getUsers().get(1).getUserId());
-	}
-	
-	@Test 
-	public void registerUsers_DuplicateIds_ShortLastname2() {
-		User user2 = makeUser("Johnny", "Ni");
-		User user3 = makeUser("Johnny", "Ni");
-		ppApp.registerUser(user1);
-		ppApp.registerUser(user2);
-		ppApp.registerUser(user3);
-		assertEquals("joni",ppApp.getUsers().get(0).getUserId());
-		assertEquals("jhni",ppApp.getUsers().get(1).getUserId());
-		assertEquals("jnni",ppApp.getUsers().get(2).getUserId());
-	}
-	
-	@Test
-	public void registerUsers_DuplicateIds_BothNamesShort() {
-		thrown.expect(RegistrationException.class);
-		thrown.expectMessage("Names are too short to generate a new user ID.");
-		
-		ppApp.registerUser(user1);
-		User user2 = makeUser("Jo", "Ni");
-		ppApp.registerUser(user2);
 	}
 	
 	/**
