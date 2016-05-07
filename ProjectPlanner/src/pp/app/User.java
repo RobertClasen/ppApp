@@ -16,7 +16,7 @@ public class User {
 	protected List<Activity> activities = new ArrayList<>();
 	protected List<Activity> assistanceActivities = new ArrayList<>();
 	protected List<Absence> absenceTime= new ArrayList<>();
-	protected List<WorkSession> workSession = new ArrayList<>();
+	protected List<WorkSession> workSessions = new ArrayList<>();
 	private Activity workingActivity;
 	
 	private final static int NAME_MAX_LENGTH = 15;
@@ -50,14 +50,33 @@ public class User {
 		if (minutesWorked >= 15L) {
 			this.workingActivity.clockedTime += minutesWorked; 
 			WorkSession thisWork = new WorkSession(ppApp.getDate(), this.workingActivity, minutesWorked);
-			this.workSession.add(thisWork);
+			this.workSessions.add(thisWork);
 		}
 	}
 	
 	public void editClockedTime(Activity a, int minutes) {
 		this.workingActivity = a;
 		this.workingActivity.clockedTime += minutes;
+		searchWorkSessions_ByActivity(a).get(0).workTime += minutes;
+			
 	}
+	
+	public List<WorkSession> searchWorkSessions_ByActivity(Activity a){
+		List<WorkSession> relevantWorkSessions = new ArrayList<>();
+		for(WorkSession ws : this.workSessions){
+			if (ws.activity.equals(a) && ws.date.equals(ppApp.getDate())){
+				relevantWorkSessions.add(ws);
+			}
+		}
+		return relevantWorkSessions;
+	}
+	public List<WorkSession> searchWorkSessions_ByDate(LocalDate date){
+		List<WorkSession> relevantWorkSessions = new ArrayList<>();
+		for(WorkSession ws : this.workSessions){
+			if (ws.date.equals(date)){relevantWorkSessions.add(ws);}
+		}
+		return relevantWorkSessions;
+	}	
 	
 	/**
 	 * Getters and setters
