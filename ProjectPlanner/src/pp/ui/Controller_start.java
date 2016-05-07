@@ -6,10 +6,10 @@ public class Controller_start extends Controller {
 
 	public Controller_start(View view) {
 		super(view);
-		String text = "0) Login" + "\n" +
-					  "1) Exit" + "\n" +
-					  "\n";
-		view.getScreen().appendText(text);
+		String output = "0) Login" + "\n" +
+					    "1) Exit";
+		
+		screen.appendText(output);
 	}
 	
 	@Override
@@ -19,7 +19,7 @@ public class Controller_start extends Controller {
 		} else if ("1".equals(input)) {
 			Platform.exit();
 		} else {
-			view.getScreen().appendText("Lorem ipsum dolor sit amet..." + "\n");;
+			screen.invalidInput();
 		}
 	}
 

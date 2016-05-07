@@ -12,8 +12,8 @@ public class PpApp {
 	private List<User> users = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
 	private ProjectLeaderQueue projectLeaderQueue = new ProjectLeaderQueue();
-//	private DateServer dateServer = new DateServer();
-	private DateServer dateServer;
+	private DateServer dateServer = new DateServer();
+//	private DateServer dateServer;
 
 	public boolean logIn(String userId) throws LoginException {
 		userId = userId.toLowerCase();

@@ -9,7 +9,7 @@
     -fx-font-family: "Monoid";
 	-fx-font-weight: normal;
     -fx-font-style: normal;
-    -fx-font-size: 22;
+    -fx-font-size: 18;
     
     -fx-alignment: top-left;
     -fx-opacity: 1.0;
@@ -17,7 +17,7 @@
 
 #root {
 	-fx-alignment: center-left;
-	-fx-padding: 50;
+	-fx-padding: 40;
 	-fx-background-color: transparent;
 	-fx-opacity: 1.0;
 }
@@ -35,7 +35,7 @@
  	-fx-font-family: "Monoid";
 	-fx-font-weight: normal;
 	-fx-font-style: normal;
-    -fx-font-size: 22;
+    -fx-font-size: 18;
 
 	-fx-alignment: center-left;
 	-fx-pref-width: 600;

@@ -13,8 +13,12 @@ public class Screen extends Text {
 	}
 	
 	public void appendText(String s) {
-		text += s;
+		text += "\n" + s + "\n";
 		setText(text);
 	}
 	
+	public void invalidInput() {
+		text += "\n" + "Invalid input." + "\n";
+		setText(text);
+	}
 }

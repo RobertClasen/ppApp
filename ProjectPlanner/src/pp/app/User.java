@@ -103,6 +103,15 @@ public class User {
 	public List<Absence> getAbsence() {
 		return this.absenceTime;
 	}
+	
+	public Project isLeadingProject() {
+		for (Project p : ppApp.getProjects()) {
+			if (p.getProjectLeader().equals(this)) {
+				return p;
+			}
+		}
+		throw new ProjectException("User is not project leader.");
+	}
 
 	public boolean isAvailable(LocalDate date) {
 		int count = 0;

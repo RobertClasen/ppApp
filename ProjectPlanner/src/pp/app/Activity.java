@@ -47,7 +47,6 @@ public class Activity {
 			throw new InputException("Input is not equal to or higher than zero.");
 		}
 	}
-
 	
 	public void assignUserToActivity(User user) {
 		this.assignedUsers.add(user);
@@ -59,7 +58,7 @@ public class Activity {
 				+ "Description:" +"\n\t" + getDescription() + "\n\n" 
 				+ "Start date:" +"\n\t" + getStartDate().toString() + "\n\n" 
 				+ "Clocked time:" +"\n\t" + "Completed hours - " + getClockedTime()/60 + "\n\t" 
-				+ "Estimated hours - " + getEstimatedTime();
+				+ "Estimated hours - " + getEstimatedTime() + "\n";
 		return s;
 	}
 	

@@ -6,16 +6,15 @@ public class Controller_activities extends Controller {
 	
 	public Controller_activities(View view) {
 		super(view);
-		String text = "\n" + 
-					  "Your activities" + "\n";
+		String output = "Your activities";
 
 		int i = 0;
 		for (Activity a : view.getPpApp().getLoggedInUser().getActivities()) {
-			text += "\t" + i + ") " + a.getTitle() + "\n";
+			output += "\n" + "\t" + i + ") " + a.getTitle();
 			i++;
 		}
 		
-		view.getScreen().appendText(text);
+		screen.appendText(output);
 	}
 	
 	@Override
@@ -24,10 +23,11 @@ public class Controller_activities extends Controller {
 			int selection = Integer.parseInt(input);
 			Activity activity = view.getPpApp().getLoggedInUser().getActivities().get(selection);
 			view.setController(new Controller_work(view, activity));
-		} catch (RuntimeException e) {
-			view.getScreen().appendText("\n" + "Not a valid selection." + "\n");
+		} catch (NumberFormatException e) {
+			screen.appendText("Must be an integer.");
+		} catch (IndexOutOfBoundsException e) {
+			screen.appendText("You don't have that many activities.");			
 		}
-		
 		
 	}
 

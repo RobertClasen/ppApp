@@ -9,19 +9,20 @@ public class Controller_work extends Controller {
 		super(view);
 		this.activity = activity;
 		
-		String text = activity.toString() + "\n" + "Type Q to end work.";
-		view.getScreen().appendText("\n" + text + "\n");
+		String output = this.activity.toString() + "\n" + "Type Q to end work.";
+		view.getScreen().appendText(output);
 
-//		view.getPpApp().getLoggedInUser().startWork(this.activity);
+		view.getPpApp().getLoggedInUser().startWork(this.activity);
 	}
 
 	@Override
 	public void processInput(String input) {
 		if ("q".equals(input.toLowerCase())) {
-//			Long workedMinutes = view.getPpApp().getLoggedInUser().endWork();
-//			view.getScreen().appendText("\n" + "Worked " + workedMinutes + " on activity." + "\n");
+			Long workedMinutes = view.getPpApp().getLoggedInUser().endWork();
+			screen.appendText("Worked " + workedMinutes + " minutes " + "on activity.");
+			view.setController(new Controller_main(view));
 		} else {
-//			view.getScreen().appendText("\n" + "invalid input." + "\n");
+			screen.invalidInput();
 		}
 		
 	}
