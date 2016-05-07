@@ -28,14 +28,14 @@ public class TestAvailableUsers extends UsersForTesting {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none(); 
 	
-	//Data set A
+	//Input data set A
 	@Test
 	public void allUsersAvailable() {
 		List<User> availableUsers = ppApp.availableUsers(DATE);
 		assertEquals(50, availableUsers.size());
 	}
 	
-	//Data set B
+	//Input data set B
 	@Test
 	public void noAvailableUsers_DueToActivities()throws Exception{
 		thrown.expect(AvailabilityException.class);
@@ -52,6 +52,7 @@ public class TestAvailableUsers extends UsersForTesting {
 		ppApp.availableUsers(DATE);
 	}
 	
+	//Input data set C
 	@Test
 	public void noAvailableUsers_DueToAbsence()throws Exception{
 		thrown.expect(AvailabilityException.class);
@@ -65,6 +66,7 @@ public class TestAvailableUsers extends UsersForTesting {
 		ppApp.availableUsers(DATE);
 	}
 	
+	//Input data set D
 	@Test
 	public void someAvailableUsers_TypicalScenario(){
 		List<User> unAvailable = new ArrayList<>();
