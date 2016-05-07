@@ -23,7 +23,8 @@ public class TestAssignActivity extends UsersForTesting {
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none(); 
-
+	
+	//Extra test to show that UsersForTesting works properly 
 	@Test
 	public void correctName() {
 		ppApp.registerUser(user26);
