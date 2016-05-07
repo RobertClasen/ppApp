@@ -16,6 +16,7 @@ public class User {
 	protected List<Activity> activities = new ArrayList<>();
 	protected List<Activity> assistanceActivities = new ArrayList<>();
 	protected List<Absence> absenceTime= new ArrayList<>();
+	protected List<WorkSession> workSession = new ArrayList<>();
 	private Activity workingActivity;
 	
 	private final static int NAME_MAX_LENGTH = 15;
@@ -48,6 +49,8 @@ public class User {
 		long minutesWorked = MINUTES.between(this.startWorkTime, ppApp.getTime());
 		if (minutesWorked >= 15L) {
 			this.workingActivity.clockedTime += minutesWorked; 
+			WorkSession thisWork = new WorkSession(ppApp.getDate(), this.workingActivity, minutesWorked);
+			this.workSession.add(thisWork);
 		}
 	}
 	
