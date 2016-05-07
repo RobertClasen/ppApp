@@ -57,19 +57,19 @@ public class User {
 	public void editClockedTime(Activity a, int minutes) {
 		this.workingActivity = a;
 		this.workingActivity.clockedTime += minutes;
-		searchWorkSessions_ByActivity(a).get(0).workTime += minutes;
+		List<WorkSession> workSessionsToDate = searchWorkSessions_ByDate(ppApp.getDate());
+		searchWorkSessions_ByActivity(a, workSessionsToDate).get(0).workTime += minutes;
 			
 	}
 	
-	public List<WorkSession> searchWorkSessions_ByActivity(Activity a){
+	public List<WorkSession> searchWorkSessions_ByActivity(Activity a, List<WorkSession> workSessions){
 		List<WorkSession> relevantWorkSessions = new ArrayList<>();
-		for(WorkSession ws : this.workSessions){
-			if (ws.activity.equals(a) && ws.date.equals(ppApp.getDate())){
-				relevantWorkSessions.add(ws);
-			}
+		for(WorkSession ws : workSessions){
+			if (ws.activity.equals(a)){relevantWorkSessions.add(ws);}
 		}
 		return relevantWorkSessions;
 	}
+	
 	public List<WorkSession> searchWorkSessions_ByDate(LocalDate date){
 		List<WorkSession> relevantWorkSessions = new ArrayList<>();
 		for(WorkSession ws : this.workSessions){

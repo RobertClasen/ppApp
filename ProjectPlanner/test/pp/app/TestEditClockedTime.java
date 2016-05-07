@@ -55,7 +55,9 @@ public class TestEditClockedTime {
 	}
 	
 	
-	
+	/*
+	 * helper methods
+	 */
 	private User makeUser(String firstName, String lastName) {
 		User user = new User(ppApp);
 		user.setFirstName(firstName);
