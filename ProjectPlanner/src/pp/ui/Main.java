@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import pp.app.Activity;
 import pp.app.PpApp;
 import pp.app.Project;
 import pp.app.User;
@@ -55,7 +56,21 @@ public class Main extends Application {
 		project1.setStartDate(LocalDate.of(2017, Month.JANUARY, 1));
 		ppApp.addProject(project1);
 
-		Activity.
+		Activity activity1 = new Activity(ppApp, project1);
+		activity1.setTitle("Design");
+		activity1.setDescription("Design af brugergænseflade");
+		activity1.setStartDate(LocalDate.of(2017, Month.FEBRUARY, 1));
+		activity1.setEstimatedTime(100L);
+		project1.addActivity(activity1);
+		activity1.assignUserToActivity(user1);
+		
+		Activity activity2 = new Activity(ppApp, project1);
+		activity2.setTitle("Implementering");
+		activity2.setDescription("Implementering af brugergænseflade");
+		activity2.setStartDate(LocalDate.of(2017, Month.MARCH, 1));
+		activity2.setEstimatedTime(80L);
+		project1.addActivity(activity2);
+		activity2.assignUserToActivity(user1);
 	}
 	
 	public static void main(String[] args) {

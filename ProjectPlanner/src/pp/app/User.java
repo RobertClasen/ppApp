@@ -45,13 +45,15 @@ public class User {
 		this.workingActivity = a;
 	}
 	
-	public void endWork() {
+	public Long endWork() {
 		long minutesWorked = MINUTES.between(this.startWorkTime, ppApp.getTime());
 		if (minutesWorked >= 15L) {
 			this.workingActivity.clockedTime += minutesWorked; 
 			WorkSession thisWork = new WorkSession(ppApp.getDate(), this.workingActivity, minutesWorked);
 			this.workSessions.add(thisWork);
+			return minutesWorked;
 		}
+		return 0L;
 	}
 	
 	public void editClockedTime(Activity a, int minutes) {

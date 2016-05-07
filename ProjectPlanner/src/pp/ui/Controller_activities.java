@@ -20,16 +20,15 @@ public class Controller_activities extends Controller {
 	
 	@Override
 	public void processInput(String input) {
-		if ("0".equals(input)) {
-//			view.setController(new Controller_???(view));
-		} else if ("1".equals(input)) {
-//			view.setController(new Controller_???(view));
-		} else if ("2".equals(input)) {
-//			view.setController(new Controller_???(view));
-		} else if ("3".equals(input)) {
-			//TODO ppApp.logout
-//			view.setController(new Controller_???(view));
+		try {
+			int selection = Integer.parseInt(input);
+			Activity activity = view.getPpApp().getLoggedInUser().getActivities().get(selection);
+			view.setController(new Controller_work(view, activity));
+		} catch (RuntimeException e) {
+			view.getScreen().appendText("\n" + "Not a valid selection." + "\n");
 		}
+		
+		
 	}
 
 }
