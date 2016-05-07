@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
@@ -11,7 +12,8 @@ public class Main extends Application {
 	public void start(Stage window) throws Exception {
 		Scene scene = new Scene(new View(), 800, 550, Color.TRANSPARENT);
 		scene.getStylesheets().add(getClass().getResource("Styles.css").toExternalForm());
-		
+
+		window.initStyle(StageStyle.UNDECORATED);
         window.setTitle("Project Planner");
 		window.setScene(scene);
         window.show();

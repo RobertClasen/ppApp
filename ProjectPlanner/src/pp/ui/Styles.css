@@ -2,19 +2,31 @@
 	-fx-padding: 60;	
 } 
 
-.label {
+#screen {
+	-fx-background-color: white;
+	-fx-background-fills: white;
+	
     -fx-font-family: "Monoid";
 	-fx-font-weight: normal;
     -fx-font-style: normal;
-    -fx-font-size: 26;
+    -fx-font-size: 22;
     
     -fx-alignment: top-left;
-    -fx-pref-height: 300;
+    -fx-opacity: 1.0;
 }
 
 #root {
 	-fx-alignment: center-left;
-	-fx-padding: 60;
+	-fx-padding: 50;
+	-fx-background-color: transparent;
+	-fx-opacity: 1.0;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
 	-fx-background-color: transparent;
 	-fx-opacity: 1.0;
 }
@@ -23,7 +35,7 @@
  	-fx-font-family: "Monoid";
 	-fx-font-weight: normal;
 	-fx-font-style: normal;
-    -fx-font-size: 26;
+    -fx-font-size: 22;
 
 	-fx-alignment: center-left;
 	-fx-pref-width: 600;

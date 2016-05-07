@@ -1,11 +1,14 @@
 package pp.ui;
 
 public class MainScreen extends Screen {
+	private String text;
 
-	public MainScreen() {
-		setText("0) foo" + "\n" +
-				"1) bar" + "\n" +
-				"2) moo");
+	public MainScreen(View view) {
+		super(view);
+		text = "0) foo" + "\n" +
+		       "1) bar" + "\n" +
+			   "2) moo";
+		setText(text);
 	}
 	
 	@Override
@@ -14,7 +17,9 @@ public class MainScreen extends Screen {
 			// Do stuff
 			System.out.println("Did stuff...");
 		} else if ("1".equals(input)) {
-			// Do other stuff
+			text += "\n" + "Lorem ipsum dolor sit amet...";
+			setText(text);
+			view.getScrollPane().setVvalue(1.0);
 		} else {
 			// Do nothing...
 		}

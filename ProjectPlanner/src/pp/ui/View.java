@@ -1,30 +1,38 @@
 package pp.ui;
 
-import javafx.scene.control.TextField;
+import javafx.scene.Group;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class View extends BorderPane {
-	private VBox vBox;
-	private Screen screen;
-	private TextField textField;
+	private ScrollPane scrollPane;
+	private Screen text;
+	private InputField textField;
 
 	public View() {
 		setId("root");
-		vBox = new VBox();
-		screen = new MainScreen();
-		textField = new InputField(this);
-		attachNodes();
+		
+		createNodes();
+		arrangeNodes();
 	}
 	
-	private void attachNodes() {
-		setCenter(vBox);
+	private void createNodes() {
+		scrollPane = new ScrollPane();
+		text = new MainScreen(this);
+		textField = new InputField(this);
+	}
+	
+	private void arrangeNodes() {
+		setCenter(scrollPane);
 		setBottom(textField);
-		
-		vBox.getChildren().add(screen);
+		scrollPane.setContent(text);
 	}
 
-	public void setScreen(Screen newScreen)	{ this.screen = newScreen; }
-	public Screen getScreen() { return this.screen; }
-	
+	public void setScreen(Screen newScreen) { this.text = newScreen; }
+	public Screen getScreen() { return this.text; }
+
+	public ScrollPane getScrollPane() {
+		return scrollPane;
+	}
 }

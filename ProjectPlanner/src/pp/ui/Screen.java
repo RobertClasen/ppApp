@@ -1,11 +1,13 @@
 package pp.ui;
 
-import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
-public abstract class Screen extends Label {
+public abstract class Screen extends Text {
+	protected View view;
 	
-	public Screen() {
-		
+	public Screen(View view) {
+		setId("screen");
+		this.view = view;
 	}
 	
 	public abstract void processInput(String input);
