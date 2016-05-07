@@ -1,12 +1,12 @@
 package pp.app;
 
 @SuppressWarnings("serial")
-public class AvailabilityException extends RuntimeException {
-
-	private String operation;
+public class LoginException extends Exception {
 	
-	public AvailabilityException(String operation) {
-		super("Availability operation not allowed. " + operation);
+private String operation;
+	
+	public LoginException(String operation){
+		super("Login operation not allowed. " + operation);
 		this.operation = operation;
 	}
 
@@ -17,5 +17,4 @@ public class AvailabilityException extends RuntimeException {
 	public String getOperation(){
 		return operation;
 	}
-	
 }

@@ -14,12 +14,14 @@ public class PpApp {
 //	private DateServer dateServer = new DateServer();
 	private DateServer dateServer;
 
-	public boolean logIn(String userId) {
+	public boolean logIn(String userId) throws LoginException {
 		userId = userId.toLowerCase();
-		if ("joni".equals(userId)) {
-			isLoggedIn = true;
+		for (User u : users) {
+			if(u.getUserId().equals(userId)){
+				return isLoggedIn = true;
+			} 
 		}
-		return isLoggedIn;
+		throw new LoginException("User ID does not exist");
 	}
 
 	public void registerUser(User u) {
