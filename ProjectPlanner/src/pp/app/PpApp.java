@@ -8,6 +8,7 @@ import java.util.List;
 public class PpApp {
 	private InputValidation inputValidation = new InputValidation();
 	private boolean isLoggedIn;
+	private User loggedInUser;
 	private List<User> users = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
 	private ProjectLeaderQueue projectLeaderQueue = new ProjectLeaderQueue();
@@ -18,6 +19,7 @@ public class PpApp {
 		userId = userId.toLowerCase();
 		for (User u : users) {
 			if(u.getUserId().equals(userId)){
+				loggedInUser = u;
 				return isLoggedIn = true;
 			} 
 		}
@@ -75,11 +77,11 @@ public class PpApp {
 	public ProjectLeaderQueue getProjectLeaderQueue() { return projectLeaderQueue; }
 	public void setProjects(List<Project> projects) { this.projects = projects; }
 	public InputValidation getInputValidation() { return inputValidation; }
+	public User getLoggedInUser() {	return loggedInUser; }
+	
 
 	public void setDateServer(DateServer dateServer) { this.dateServer = dateServer; }
-	public DateServer getDateServer() {
-		return this.dateServer;
-	}
+	public DateServer getDateServer() {	return this.dateServer;	}
 	public LocalDate getDate() { return dateServer.getDate(); }
 	public LocalTime getTime() { return this.dateServer.getTime(); }
 

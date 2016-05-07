@@ -7,12 +7,13 @@ public class InputField extends TextField {
 	
 	public InputField(View view) {
 		this.view = view;
+		
 		setOnAction(e -> { handleInput(); });
 	}
 	
 	private void handleInput() {
 		String input = getText();
-		view.getScreen().processInput(input);
+		view.getController().processInput(input);
 	}
 
 }

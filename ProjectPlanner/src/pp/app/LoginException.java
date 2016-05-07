@@ -1,7 +1,7 @@
 package pp.app;
 
 @SuppressWarnings("serial")
-public class LoginException extends Exception {
+public class LoginException extends RuntimeException {
 	
 private String operation;
 	

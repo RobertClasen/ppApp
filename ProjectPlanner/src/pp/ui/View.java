@@ -1,38 +1,52 @@
 package pp.ui;
 
-import javafx.scene.Group;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
+import pp.app.PpApp;
 
 public class View extends BorderPane {
+	private PpApp ppApp;
+	private Controller controller;
+	
 	private ScrollPane scrollPane;
 	private Screen text;
-	private InputField textField;
+	private InputField inputField;
 
-	public View() {
+	public View(PpApp ppApp) {
+		this.ppApp = ppApp;
 		setId("root");
 		
 		createNodes();
+		setupNodes();
 		arrangeNodes();
+		
+		controller = new Controller_start(this);
 	}
 	
 	private void createNodes() {
 		scrollPane = new ScrollPane();
-		text = new MainScreen(this);
-		textField = new InputField(this);
+		text = new Screen(this);
+		inputField = new InputField(this);
+	}
+	
+	private void setupNodes() {
+		text.textProperty().addListener((observable) -> {
+			scrollPane.setVvalue(1.0);
+			inputField.clear();
+		});
 	}
 	
 	private void arrangeNodes() {
 		setCenter(scrollPane);
-		setBottom(textField);
+		setBottom(inputField);
 		scrollPane.setContent(text);
 	}
 
-	public void setScreen(Screen newScreen) { this.text = newScreen; }
-	public Screen getScreen() { return this.text; }
-
-	public ScrollPane getScrollPane() {
-		return scrollPane;
-	}
+	public void setController(Controller newController) { controller = newController; }
+	
+	public Screen getScreen() { return text; }
+	public ScrollPane getScrollPane() {	return scrollPane; }
+	public PpApp getPpApp() { return ppApp; }
+	public Controller getController(){ return controller; }
+	
 }
