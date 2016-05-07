@@ -10,8 +10,8 @@ public class StartUp {
 
 	private PpApp ppApp;
 	
-	
-	private StartUp (PpApp ppApp) {
+
+	public StartUp (PpApp ppApp) {
 		this.ppApp = ppApp;
 	}
 	

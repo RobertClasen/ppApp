@@ -1,10 +1,13 @@
 package pp.app;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
-
+import pp.ui.StartUp;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,8 +15,11 @@ import org.junit.rules.ExpectedException;
 
 public class TestActivity {
 	private PpApp ppApp;
+	private DateServer dateServer;
+	private StatusReport statusReport;
 	private Project project1;
 	private Activity activity1;
+	private StartUp startUp;
 	
 	private static final String VALID_TITLE = "Design";
 	private static final String VALID_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
@@ -33,8 +39,11 @@ public class TestActivity {
 	@Before
 	public void setUp() throws RegistrationException {
 		ppApp = new PpApp();
+		dateServer = mock(DateServer.class);
+		ppApp.setDateServer(dateServer);
 		project1 = new Project(ppApp);
 		activity1 = new Activity(ppApp, project1);
+		startUp = new StartUp(ppApp);
 	}
 	
 	@Rule
@@ -105,6 +114,26 @@ public class TestActivity {
 		activity1.setEstimatedTime(INVALID_EST_TIME);
 	}
 	
+	@Test
+	public void activity_toString() {
+		makeAndAddActivity("Design", "Design af brugergrænseflade", LocalDate.of(2017, Month.JUNE, 12), 100L, project1);
+		LocalTime startTime = LocalTime.of(10, 0);
+		when(dateServer.getTime()).thenReturn(startTime);
+		User user1 = makeAndRegisterUser("John", "Nielsen");
+		user1.startWork(project1.getActivities().get(0));
+
+		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(479L)); // 7 hours
+		
+		user1.endWork();
+		
+		String expected =
+				"Title:"+"\n\t" + "Design" + "\n\n" + 
+				"Description:" + "\n\t" + "Design af brugergrænseflade" + "\n\n" +
+				"Start date:" + "\n\t" + "2017-06-12" + "\n\n" + 
+				"Clocked time:" + "\n\t" + "Completed hours - 7"
+				+ "\n\t" + "Estimated hours - 100";
+		assertEquals(expected, project1.getActivities().get(0).toString());
+	}
 	
 	/**
 	 * Following tests are the functional test as documented in the tables in the report
@@ -113,8 +142,8 @@ public class TestActivity {
 	//Input data set: A
 	@Test
 	public void activityCreation_validInputs() throws Exception {
-		Activity activity1 = makeActivity(VALID_TITLE, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME);
-		project1.addActivity(activity1);
+		Activity activity1 = makeAndAddActivity(VALID_TITLE, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME,project1);
+//		project1.addActivity(activity1);
 		assertEquals(1,project1.getActivities().size());
 	}
 	
@@ -123,7 +152,7 @@ public class TestActivity {
 	public void activityCreation_onlyInvalidInputs() throws Exception {
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Invalid length.");
-		Activity activity1 = makeActivity(INVALID_TITLE_TOO_SHORT, INVALID_DESCRIPTION_TOO_LONG, INVALID_START_DATE, INVALID_EST_TIME);
+		Activity activity1 = makeAndAddActivity(INVALID_TITLE_TOO_SHORT, INVALID_DESCRIPTION_TOO_LONG, INVALID_START_DATE, INVALID_EST_TIME,project1);
 	}
 	
 	//Input data set: C
@@ -131,20 +160,28 @@ public class TestActivity {
 	public void activityCreation_invalidInput() throws Exception {
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Invalid length.");
-		Activity activity1 = makeActivity(INVALID_TITLE_TOO_SHORT, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME);
+		Activity activity1 = makeAndAddActivity(INVALID_TITLE_TOO_SHORT, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME,project1);
 	}
 	
 	/**
 	 * Helper method
 	 */
-	private Activity makeActivity(String title, String description, LocalDate startDate, Long estimatedTime) {
-		Activity activity = new Activity(ppApp, project1);
+	private Activity makeAndAddActivity(String title, String description, LocalDate startDate, Long estimatedTime, Project p) {
+		Activity activity = new Activity(ppApp, p);
 		activity.setTitle(title);
 		activity.setDescription(description);
 		activity.setStartDate(startDate);
 		activity.setEstimatedTime(estimatedTime);
+		p.addActivity(activity);
 		return activity;
 	}
 	
-
+	private User makeAndRegisterUser(String firstName, String lastName) {
+		User user = new User(ppApp);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		ppApp.registerUser(user);
+		return user;
+	}
+	
 }

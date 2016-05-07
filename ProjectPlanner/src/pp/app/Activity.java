@@ -54,6 +54,15 @@ public class Activity {
 		user.activities.add(this);
 	}
 	
+	public String toString() {
+		String s = "Title:" + "\n\t" + getTitle() + "\n\n" 
+				+ "Description:" +"\n\t" + getDescription() + "\n\n" 
+				+ "Start date:" +"\n\t" + getStartDate().toString() + "\n\n" 
+				+ "Clocked time:" +"\n\t" + "Completed hours - " + getClockedTime()/60 + "\n\t" 
+				+ "Estimated hours - " + getEstimatedTime();
+		return s;
+	}
+	
 	public String getTitle() {return title;}
 	public String getDescription() { return description; }
 	public LocalDate getStartDate() { return startDate; }
