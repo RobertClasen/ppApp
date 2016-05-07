@@ -26,12 +26,15 @@ public class TestCreateUserId {
 	/**
 	 * Tests for the generating of user ID's.
 	 */
+	
+	//Input data sæt A
 	@Test
 	public void registerUser_validNames_getUserId() {
 		ppApp.registerUser(user1);
 		assertEquals("joni", ppApp.getUsers().get(0).getUserId());
 	}
 	
+	//Input data sæt B
 	@Test
 	public void registerUsers_DuplicateIds() {
 		ppApp.registerUser(user1);
@@ -41,6 +44,7 @@ public class TestCreateUserId {
 		assertEquals("jois", ppApp.getUsers().get(1).getUserId());
 	}
 	
+	//Input data sæt C
 	@Test
 	public void registerUsers_DuplicateIds_ShortLastname1() {
 		ppApp.registerUser(user1);
@@ -50,6 +54,7 @@ public class TestCreateUserId {
 		assertEquals("jani",ppApp.getUsers().get(1).getUserId());
 	}
 	
+	//Input data sæt D
 	@Test 
 	public void registerUsers_DuplicateIds_ShortLastname2() {
 		User user2 = makeUser("Johnny", "Ni");
@@ -62,6 +67,7 @@ public class TestCreateUserId {
 		assertEquals("jnni",ppApp.getUsers().get(2).getUserId());
 	}
 	
+	//Input data sæt E
 	@Test
 	public void registerUsers_DuplicateIds_BothNamesShort() {
 		thrown.expect(RegistrationException.class);

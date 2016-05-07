@@ -27,7 +27,7 @@ public class TestUserRegistration {
 	 * Tests for validity of name lengths.
 	 */
 	
-	 
+	//Input data set A 
 	@Test
 	public void newUser_tooLongFirstName() {
 		thrown.expect(InputException.class);
@@ -37,6 +37,7 @@ public class TestUserRegistration {
 		user2.setFirstName("Jooooooooooooohn");
 	}
 	
+	//Input data set B
 	@Test
 	public void newUser_tooLongLastName() {
 		thrown.expect(InputException.class);
@@ -46,6 +47,7 @@ public class TestUserRegistration {
 		user2.setLastName("Niiiiiiiiiielsen");
 	}
 	
+	//Input data set C
 	@Test
 	public void newUser_tooShortFirstName() {
 		thrown.expect(InputException.class);
@@ -67,6 +69,7 @@ public class TestUserRegistration {
 	/**
 	 * Tests for illegal characters.
 	 */
+	//Input data set D
 	@Test
 	public void newUser_firstNameIsNotLettersOnly() {
 		thrown.expect(InputException.class);
@@ -76,6 +79,7 @@ public class TestUserRegistration {
 		user2.setFirstName("John9");
 	}
 	
+	//Input data set E
 	@Test
 	public void newUser_lastNameIsNotLettersOnly() {
 		thrown.expect(InputException.class);
@@ -85,6 +89,7 @@ public class TestUserRegistration {
 		user2.setLastName("9elsen");
 	}
 	
+	//Input data set F
 	@Test
 	public void newUser_firstNameConsistsOfTwoNames() {
 		thrown.expect(InputException.class);
@@ -94,6 +99,7 @@ public class TestUserRegistration {
 		user2.setFirstName("Ulla Brit");
 	}
 	
+	//Input data set G
 	@Test
 	public void newUser_lastNameConsistsOfTwoNames() {
 		thrown.expect(InputException.class);
@@ -107,12 +113,15 @@ public class TestUserRegistration {
 	/**
 	 * Tests for the (de)registration of users. 
 	 */
+	
+	//Input data set H
 	@Test
 	public void registerUser_validNames() {
 		ppApp.registerUser(user1);
 		assertEquals(1, ppApp.getUsers().size());
 	}
 	
+	//Input data set I
 	@Test
 	public void registerUser_validNames_getNames() {
 		ppApp.registerUser(user1);
@@ -132,14 +141,14 @@ public class TestUserRegistration {
 		thrown.expect(RegistrationException.class);
 		thrown.expectMessage("User is not registered.");
 		
-		User user2 = makeUser("Andreas", "Ustrup");
+		User user2 = makeUser("Andreas", "Hansen");
 		ppApp.deregisterUser(user2);
 	}
 	
 	@Test
 	public void deregisterUser_userIsDeleted() throws Exception {
 		User user1 = makeUser("John", "Nielsen");		
-		User user2 = makeUser("Andreas", "Ustrup");
+		User user2 = makeUser("Andreas", "Hansen");
 		User user3 = makeUser("Ulla", "Brit");
 		ppApp.registerUser(user1);
 		ppApp.registerUser(user2);
