@@ -15,17 +15,41 @@ public class StatusReport {
 		generate();
 	}
 	
+	public String generate() {
+		String s = "---- Project Status Report ----" + "\n\n" + 
+				"Title - " + title() + "\n" + 
+				"Start Date - " + startDate() + "\n" + 
+				"Leader - " + projectLeader() + "\n" +
+				"Total progress - " + totalProgress() + "\n\n" + 
+				assignedWorkers() + "\n" + 
+				listOfActivities() + "\n" + 
+				"-------------------------------";
+		return s;
+	}
+	
 	public String title() {
 		return project.getTitle();
 	}
 	
-	public StatusReport getStatusReport() {
-		return this;
+	public String startDate() {
+		return project.getStartDate().toString();
 	}
 	
-	public String generate() {
-		return title();
+	public String projectLeader() {
+		return project.getProjectLeader().getFirstname() + " " +  project.getProjectLeader().getLastname();
 	}
+	
+	public String totalProgress() {
+		int estimate = 0;
+		int completedTime = 0;
+		for (Activity a : this.activities) {
+			estimate += a.getEstimatedTime();
+			completedTime += a.getClockedTime()/60;
+		}
+		return "(" + completedTime + "/" + estimate + ")";
+	}
+	
+
 	
 	public String listOfActivities() {
 		String s = "List of activities" + NEWLINE;
@@ -38,9 +62,7 @@ public class StatusReport {
 	
 	public String assignedWorkers() {
 		String s = "Assigned workers" + NEWLINE;
-		System.out.println("Activities: " + this.activities.size());
 		for (Activity a : this.activities) {
-			System.out.println("Users: " + a.assignedUsers.size());
 			for (User u : a.assignedUsers) {
 				s += "\t" + u.getFirstname() + " " + u.getLastname() + " - " + u.getUserId() + NEWLINE;
 			}	
@@ -48,6 +70,7 @@ public class StatusReport {
 		return s;
 	}
 	
+	public StatusReport getStatusReport() { return this; }
 	
 	
 }
