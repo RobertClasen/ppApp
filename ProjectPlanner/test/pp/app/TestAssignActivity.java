@@ -52,45 +52,7 @@ public class TestAssignActivity extends UsersForTesting {
 		assertEquals(50, activity1.getUsers().size());
 	}
 	
-	@Test
-	public void allUsersAvailable() throws Exception {
-		LocalDate now = LocalDate.now();
-		assertEquals(50, ppApp.availableUsers(now).size());
-	}
 	
-	
-	/*
-	 * Det giver mindre mening at vi tilføjer brugeren til aktiviteten inde i projekterne - genovervej.
-	 */
-	@Test
-	public void oneUnavailableUser() throws Exception {
-		LocalDate startDate = LocalDate.now();
-		for (int i = 0; i<10; i++){
-			Activity a = new Activity(ppApp, project1);
-			a.setStartDate(startDate.plusDays(5));
-			project1.assignUserToActivity(user1, a);
-		}
-		assertEquals(49, ppApp.availableUsers(LocalDate.now()).size());
-		
-	}
-	
-	@Test
-	public void noAvailableUsers() throws Exception {
-		thrown.expect(ActivityException.class);
-		thrown.expectMessage("No available users at this date.");
-		
-		LocalDate startDate = LocalDate.now();
-		for (int i = 0; i<10; i++){
-			Activity a = new Activity(ppApp, project1);
-			a.setStartDate(startDate.plusDays(5));
-			project1.addActivity(a);
-			for (User user : testUsers) {
-				project1.assignUserToActivity(user, a);
-			} 
-		}
-		ppApp.availableUsers(startDate);
-	}
-		
 	/**
 	 *  Helper method.
 	 *  Assigns a requested number of users ('fictional' users from the class UsersForTesting) to an activity

@@ -51,6 +51,19 @@ public class PpApp {
 		projects.remove(p);
 	}
 	
+	public List<User> availableUsers(LocalDate date) throws AvailabilityException {
+		List<User> avUsers = new ArrayList<>();
+		for (User u : users){
+			if(u.isAvailable(date)){
+				avUsers.add(u);
+			}
+		}
+		if(avUsers.size() == 0){
+			throw new AvailabilityException("No available users at this date.");
+		}else{
+			return avUsers;
+		}
+	}
 	
 	/**
 	 * Getters and setters. 
@@ -68,19 +81,4 @@ public class PpApp {
 	public LocalDate getDate() { return dateServer.getDate(); }
 	public LocalTime getTime() { return this.dateServer.getTime(); }
 
-	public List<User> availableUsers(LocalDate date) throws ActivityException {
-		List<User> avUsers = new ArrayList<>();
-		for (User u : users){
-			if(u.isAvailable(date)){
-				avUsers.add(u);
-				
-			}
-		}
-		//System.out.println(avUsers.size());
-		if(avUsers.size() == 0){
-			throw new ActivityException("No available users at this date.");
-		}else{
-		return avUsers;
-		}
-	}
 }

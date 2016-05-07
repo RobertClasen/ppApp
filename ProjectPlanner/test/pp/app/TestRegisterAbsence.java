@@ -68,8 +68,6 @@ public class TestRegisterAbsence {
 		
 		user1.registerAbsence(a);
 		
-		System.out.println(user1.isAvailable(startDate.plusDays(29)));
-		
 		assertEquals(45, user1.absenceTime.get(0).calcWorkDaysInTimePeriod(startDate, endDate));
 	}
 

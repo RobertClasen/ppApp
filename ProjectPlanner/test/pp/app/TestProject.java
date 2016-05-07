@@ -27,7 +27,7 @@ public class TestProject {
 			+ "dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, "
 			+ "pellentesque eu, pretium quis, s"; // 257 chars
 	
-	private final static LocalDate VALID_START_DATE = LocalDate.of(2016, Month.DECEMBER, 24);
+	private final static LocalDate VALID_START_DATE = LocalDate.of(2016, Month.JUNE, 1);
 	private final static LocalDate INVALID_START_DATE = LocalDate.of(2015, Month.DECEMBER, 24);
 	
 	@Before
