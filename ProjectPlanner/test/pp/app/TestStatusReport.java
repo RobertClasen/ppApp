@@ -33,9 +33,9 @@ public class TestStatusReport {
 		statusReport = new StatusReport(project1);
 		user1 = makeUser("John", "Nielsen");
 		ppApp.registerUser(user1);
-		user2 = makeUser("John", "Olsen");
+		user2 = makeUser("Harry", "Potter");
 		ppApp.registerUser(user2);
-		user3 = makeUser("John","Christiansen");
+		user3 = makeUser("Ulla","Britt");
 		ppApp.registerUser(user3);
 	}
 	
@@ -47,9 +47,7 @@ public class TestStatusReport {
 	
 	@Test
 	public void generateStatusReport_title () {
-			project1.setTitle("Newton");
-			ppApp.addProject(project1);
-			
+			project1.setTitle("Newton");			
 			assertEquals("Newton", statusReport.title());		
 	}
 	
@@ -89,6 +87,32 @@ public class TestStatusReport {
 		ppApp.registerUser(user2);
 		project1.generateStatusReport(user2);
 	}
+	
+	@Test
+	public void generateStatusReport_AssignedWorkers() {
+		Activity activity1 = makeActivity("Gravity", "Is it real?", LocalDate.of(2017, Month.JANUARY, 1), 10L);
+		Activity activity2 = makeActivity("Apples", "Do they fall?", LocalDate.of(2017, Month.FEBRUARY, 1), 14L);
+		Activity activity3 = makeActivity("Muffins", "What are they?", LocalDate.of(2017, Month.MARCH, 1), 38L);
+		project1.addActivity(activity1);
+		project1.addActivity(activity2);
+		project1.addActivity(activity3);
+		
+		activity1.assignUserToActivity(user1);
+		activity2.assignUserToActivity(user2);
+		activity3.assignUserToActivity(user3);
+		
+		
+		String expected = "Assigned workers" + "\n" +
+				  "\t" + "John Nielsen - joni" + "\n" +
+				  "\t" + "Harry Potter - hapo" + "\n" +
+				  "\t" + "Ulla Britt - ulbr" + "\n";
+		assertEquals(expected, statusReport.assignedWorkers());	
+	}
+	
+//	@Test
+//	public void generateStatusReport_fullReport() {
+//		
+//	}
 	
 	/**
 	 * Helper methods. 

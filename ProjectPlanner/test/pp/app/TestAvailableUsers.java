@@ -46,7 +46,7 @@ public class TestAvailableUsers extends UsersForTesting {
 			a.setStartDate(DATE.plusDays(5));
 			project1.addActivity(a);
 			for (User u : testUsers) {
-				project1.assignUserToActivity(u, a);
+				a.assignUserToActivity(u);
 			} 
 		}
 		ppApp.availableUsers(DATE);
@@ -81,7 +81,7 @@ public class TestAvailableUsers extends UsersForTesting {
 			a.setStartDate(DATE.plusDays(5));
 			project1.addActivity(a);
 			for (User u : unAvailable) {
-				project1.assignUserToActivity(u, a);
+				a.assignUserToActivity(u);
 			} 
 		}
 

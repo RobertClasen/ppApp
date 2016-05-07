@@ -68,10 +68,10 @@ public class Project {
 		this.activities.add(a);
 	}
 
-	public void assignUserToActivity(User user, Activity activity) {
-		activity.assignedUsers.add(user);
-		user.activities.add(activity);
-	}
+//	public void assignUserToActivity(User user, Activity activity) {
+//		activity.assignedUsers.add(user);
+//		user.activities.add(activity);
+//	}
 	
 	public void generateStatusReport(User u) {
 		if (!u.equals(projectLeader))

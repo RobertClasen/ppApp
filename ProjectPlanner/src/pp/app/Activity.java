@@ -17,7 +17,7 @@ public class Activity {
 	private Long estimatedTime; // hours
 	protected int clockedTime; // minutes
 	private LocalTime startTime;
-	protected List<User> assignedUsers= new ArrayList<>();
+	protected List<User> assignedUsers = new ArrayList<>();
 	
 	public Activity(PpApp ppApp, Project project) {
 		this.ppApp = ppApp;
@@ -49,6 +49,11 @@ public class Activity {
 	}
 
 	
+	public void assignUserToActivity(User user) {
+		this.assignedUsers.add(user);
+		user.activities.add(this);
+	}
+	
 	public String getTitle() {return title;}
 	public String getDescription() { return description; }
 	public LocalDate getStartDate() { return startDate; }
@@ -56,10 +61,7 @@ public class Activity {
 	public int getClockedTime(){ return this.clockedTime; }
 	public LocalTime getStartTime() { return this.startTime; }
 	public Project getProject() { return this.project; }
-
-	public List<User> getUsers() {
-		return assignedUsers;
-	}
+	public List<User> getUsers() { return assignedUsers; }
 
 	public User searchUser(String UserId) throws ActivityException {
 		

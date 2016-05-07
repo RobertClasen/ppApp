@@ -36,6 +36,18 @@ public class StatusReport {
 		return s;
 	}
 	
+	public String assignedWorkers() {
+		String s = "Assigned workers" + NEWLINE;
+		System.out.println("Activities: " + this.activities.size());
+		for (Activity a : this.activities) {
+			System.out.println("Users: " + a.assignedUsers.size());
+			for (User u : a.assignedUsers) {
+				s += "\t" + u.getFirstname() + " " + u.getLastname() + " - " + u.getUserId() + NEWLINE;
+			}	
+		}
+		return s;
+	}
+	
 	
 	
 }

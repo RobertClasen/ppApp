@@ -30,7 +30,7 @@ public class TestSeekAssistance {
 		ppApp.registerUser(user1);
 		ppApp.registerUser(user2);
 		
-		project.assignUserToActivity(user1, activity);
+		activity.assignUserToActivity(user1);
 	}
 	
 	@Test
