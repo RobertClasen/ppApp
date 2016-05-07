@@ -190,7 +190,6 @@ public class TestStatusReport {
 				"-------------------------------";
 		assertEquals(expected, statusReport.generate());
 		
-		System.out.println(statusReport.generate());
 	}
 	
 	/**
