@@ -31,7 +31,7 @@ public class TestStatusReport {
 		ppApp.setDateServer(dateServer);
 		
 		project1 = new Project(ppApp);
-		project1.setTitle("Newton");
+		project1.setTitle("Rejsekortet");
 		project1.setStartDate(LocalDate.of(2017, Month.MAY, 11));
 		user1 = makeUser("John", "Nielsen");
 		ppApp.registerUser(user1);
@@ -42,9 +42,9 @@ public class TestStatusReport {
 		ppApp.addProject(project1);
 		statusReport = new StatusReport(project1); 
 
-		project1.addActivity(makeActivity("Gravity", "Is it real?", LocalDate.of(2017, Month.JANUARY, 1), 10L));
-		project1.addActivity(makeActivity("Apples", "Do they fall?", LocalDate.of(2017, Month.FEBRUARY, 1), 14L));
-		project1.addActivity(makeActivity("Muffins", "What are they?", LocalDate.of(2017, Month.MARCH, 1), 38L));
+		project1.addActivity(makeActivity("Brainstorm", "The apple doesn't fall far from the tree.", LocalDate.of(2017, Month.JANUARY, 1), 10L));
+		project1.addActivity(makeActivity("Design", "The apple doesn't fall far from the tree.", LocalDate.of(2017, Month.FEBRUARY, 1), 14L));
+		project1.addActivity(makeActivity("Implementation", "The apple doesn't fall far from the tree.", LocalDate.of(2017, Month.MARCH, 1), 38L));
 		
 		LocalTime startTime = LocalTime.of(10, 0);
 		LocalDate startDate = LocalDate.of(2017, Month.JANUARY, 1);
@@ -55,23 +55,38 @@ public class TestStatusReport {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none(); 
 	
+	/*
+	 * Unit tests
+	 */
+	
 	@Test
 	public void generateStatusReport_title () {
-			project1.setTitle("Newton");			
-			assertEquals("Newton", statusReport.title());		
+			project1.setTitle("Rejsekortet");			
+			assertEquals("Rejsekortet", statusReport.title());		
 	}
 	
+	@Test
+	public void generateStatusReport_StartDate() {
+		assertEquals("2017-05-11", statusReport.startDate());
+	}
+	
+	@Test
+	public void generateStatusReport_ProjectLeader() throws Exception {
+		assertEquals("John Nielsen", statusReport.projectLeader());
+	}
+	
+	//Input data set A
 	@Test
 	public void generateStatusReport_totalProgress() {
 		user1.startWork(project1.getActivities().get(0));
 		user2.startWork(project1.getActivities().get(1));
 		user3.startWork(project1.getActivities().get(2));
 
-		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(479L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(479L)); // ≈ 7 hours
 		user1.endWork();
-		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(721L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(721L)); // ≈ 12 hours
 		user2.endWork();
-		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(61L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(61L)); // ≈ 1 hours
 		user3.endWork();
 
 		assertEquals("(20/62)", statusReport.totalProgress());
@@ -91,23 +106,12 @@ public class TestStatusReport {
 		user3.endWork();
 		
 		String expected = "List of activities" + "\n" +
-						  "\t" + "Gravity - (7/10)" + "\n" +
-						  "\t" + "Apples - (12/14)" + "\n" +
-						  "\t" + "Muffins - (1/38)" + "\n";
+						  "\t" + "Brainstorm - (7/10)" + "\n" +
+						  "\t" + "Design - (12/14)" + "\n" +
+						  "\t" + "Implementation - (1/38)" + "\n";
 		assertEquals(expected, statusReport.listOfActivities());
 	}
 
-	@Test
-	public void generateStatusReport_userIsNotProjectLeader () {
-		thrown.expect(ProjectException.class);
-		thrown.expectMessage("User is not project leader.");
-		
-		ppApp.addProject(project1);
-		User user2 = makeUser("Andreas", "Ustrup");
-		ppApp.registerUser(user2);
-		project1.generateStatusReport(user2);
-	}
-	
 	@Test
 	public void generateStatusReport_AssignedWorkers() {
 		project1.getActivities().get(0).assignUserToActivity(user1);
@@ -115,20 +119,10 @@ public class TestStatusReport {
 		project1.getActivities().get(2).assignUserToActivity(user3);
 		
 		String expected = "Assigned workers" + "\n" +
-				  "\t" + "John Nielsen - joni" + "\n" +
-				  "\t" + "Harry Potter - hapo" + "\n" +
-				  "\t" + "Ulla Brit - ulbr" + "\n";
+				"\t" + "John Nielsen - joni" + "\n" +
+				"\t" + "Harry Potter - hapo" + "\n" +
+				"\t" + "Ulla Brit - ulbr" + "\n";
 		assertEquals(expected, statusReport.assignedWorkers());
-	}
-	
-	@Test
-	public void generateStatusReport_StartDate() {
-		assertEquals("2017-05-11", statusReport.startDate());
-	}
-	
-	@Test
-	public void generateStatusReport_ProjectLeader() throws Exception {
-		assertEquals("John Nielsen", statusReport.projectLeader());
 	}
 	
 	@Test
@@ -137,12 +131,12 @@ public class TestStatusReport {
 		project1.getActivities().get(0).assignUserToActivity(user1);
 		project1.getActivities().get(1).assignUserToActivity(user2);
 		project1.getActivities().get(2).assignUserToActivity(user3);
-	
+		
 		when(dateServer.getDateTime()).thenReturn(startDateTime);
 		user1.startWork(project1.getActivities().get(0));
 		user2.startWork(project1.getActivities().get(1));
 		user3.startWork(project1.getActivities().get(2));
-
+		
 		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(479L));
 		user1.endWork();
 		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(721L));
@@ -151,21 +145,48 @@ public class TestStatusReport {
 		user3.endWork();
 		
 		String expected = "---- Project Status Report ----" + "\n\n" +
-				"Title - Newton" + "\n" + 
+				"Title - Rejsekortet" + "\n" + 
 				"Running number - 00012016" + "\n" +
 				"Start Date - 2017-05-11" + "\n" +
 				"Leader - John Nielsen" + "\n" + 
 				"Total progress - (20/62)" + "\n\n" +
-		 		"Assigned workers" + "\n" +
-		 		"\t" + "John Nielsen - joni" + "\n" +
-		 		"\t" + "Harry Potter - hapo" + "\n" +
-		 		"\t" + "Ulla Brit - ulbr" + "\n\n" +
+				"Assigned workers" + "\n" +
+				"\t" + "John Nielsen - joni" + "\n" +
+				"\t" + "Harry Potter - hapo" + "\n" +
+				"\t" + "Ulla Brit - ulbr" + "\n\n" +
 				"List of activities" + "\n" +
-				"\t" + "Gravity - (7/10)" + "\n" +
-				"\t" + "Apples - (12/14)" + "\n" +
-				"\t" + "Muffins - (1/38)" + "\n\n" +
+				"\t" + "Brainstorm - (7/10)" + "\n" +
+				"\t" + "Design - (12/14)" + "\n" +
+				"\t" + "Implementation - (1/38)" + "\n\n" +
 				"-------------------------------";
 		assertEquals(expected, statusReport.generate());
+		System.out.println("---- Project Status Report ----" + "\n\n" +
+				"Title - Rejsekortet" + "\n" + 
+				"Running number - 00012016" + "\n" +
+				"Start Date - 2017-05-11" + "\n" +
+				"Leader - John Nielsen" + "\n" + 
+				"Total progress - (20/62)" + "\n\n" +
+				"Assigned workers" + "\n" +
+				"\t" + "John Nielsen - joni" + "\n" +
+				"\t" + "Harry Potter - hapo" + "\n" +
+				"\t" + "Ulla Brit - ulbr" + "\n\n" +
+				"List of activities" + "\n" +
+				"\t" + "Brainstorm - (7/10)" + "\n" +
+				"\t" + "Design - (12/14)" + "\n" +
+				"\t" + "Implementation - (1/38)" + "\n\n" +
+				"-------------------------------");
+	}
+	
+	//Input data set B
+	@Test
+	public void generateStatusReport_userIsNotProjectLeader () {
+		thrown.expect(ProjectException.class);
+		thrown.expectMessage("User is not project leader.");
+		
+		ppApp.addProject(project1);
+		User user2 = makeUser("Andreas", "Hansen");
+		ppApp.registerUser(user2);
+		project1.generateStatusReport(user2);
 	}
 	
 	/**
