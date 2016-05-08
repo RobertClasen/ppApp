@@ -3,6 +3,7 @@ package pp.ui;
 import pp.app.Activity;
 
 public class Controller_activities extends Controller {
+	private int breakPoint;
 	
 	public Controller_activities(View view) {
 		super(view);
@@ -10,6 +11,14 @@ public class Controller_activities extends Controller {
 
 		int i = 0;
 		for (Activity a : view.getPpApp().getLoggedInUser().getActivities()) {
+			output += "\n" + "\t" + i + ") " + a.getTitle();
+			i++;
+		}
+		breakPoint = i;
+		
+		output += "\n\n" + "Assistance activities";
+
+		for (Activity a : view.getPpApp().getLoggedInUser().getAssistanceActivities()) {
 			output += "\n" + "\t" + i + ") " + a.getTitle();
 			i++;
 		}
@@ -21,8 +30,13 @@ public class Controller_activities extends Controller {
 	public void processInput(String input) {
 		try {
 			int selection = Integer.parseInt(input);
-			Activity activity = view.getPpApp().getLoggedInUser().getActivities().get(selection);
-			view.setController(new Controller_activityOptions(view, activity));
+			if (selection < breakPoint && selection != breakPoint) {
+				Activity activity = view.getPpApp().getLoggedInUser().getActivities().get(selection);
+				view.setController(new Controller_activityOptions(view, activity));
+			} else {
+				Activity activity = view.getPpApp().getLoggedInUser().getAssistanceActivities().get(selection-breakPoint);
+				view.setController(new Controller_assistanceActivityOptions(view, activity));
+			}
 		} catch (NumberFormatException e) {
 			screen.appendText("Must be an integer.");
 		} catch (IndexOutOfBoundsException e) {

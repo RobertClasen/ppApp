@@ -9,7 +9,7 @@ public class Controller_work extends Controller {
 		super(view);
 		this.activity = activity;
 		
-		String output = this.activity.toString() + "\n" + "Type Q to end work.";
+		String output = this.activity.toString() + "\n\n" + "Type Q to end work.";
 		view.getScreen().appendText(output);
 
 		view.getPpApp().getLoggedInUser().startWork(this.activity);

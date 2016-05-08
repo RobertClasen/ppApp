@@ -96,9 +96,13 @@ public class User {
 	public List<Activity> getActivities() {
 		return this.activities;
 	}
+	
+	public List<Activity> getAssistanceActivities() {
+		return this.assistanceActivities;
+	}
 
 	public void seekAssistance(User u, Activity a) {
-		u.assistanceActivities .add(a);
+		u.assistanceActivities.add(a);
 	}
 
 	public void registerAbsence(Absence a) {
@@ -162,6 +166,10 @@ public class User {
 	public void addWorkSession(WorkSession workSes) {
 		this.workSessions.add(workSes);
 		workSes.activity.clockedTime += workSes.workTime;
+	}
+
+	public List<Project> getProjects() {
+		return this.projects;
 	}
 	
 	

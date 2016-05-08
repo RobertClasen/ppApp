@@ -47,6 +47,7 @@ public class Main extends Application {
 
 	private void setUp() {
 		User user1 = startUp.makeAndRegisterUser("John", "Nielsen");
+		User user2 = startUp.makeAndRegisterUser("Andreas", "Hansen");
 		Project project1 = startUp.makeAndAddProject("Rejsekortet", "Det skal fixes", startUp.date1);
 		Activity activity1 = startUp.makeAndAddActivity("Design", "Design af brugergænseflade", startUp.date2, 100L, project1);
 		Activity activity2 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
