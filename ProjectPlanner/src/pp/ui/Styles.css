@@ -12,7 +12,6 @@
     -fx-font-size: 18;
     
     -fx-alignment: top-left;
-    -fx-opacity: 1.0;
 }
 
 #root {
@@ -26,9 +25,14 @@
    -fx-background-color: transparent;
 }
 
+.scroll-pane > .scroll-bar {
+   -fx-background-color: transparent;	
+}
+
 .scroll-pane {
 	-fx-background-color: transparent;
 	-fx-opacity: 1.0;
+	-fx-padding: 20;
 }
 
 .text-field {
@@ -38,10 +42,6 @@
     -fx-font-size: 18;
 
 	-fx-alignment: center-left;
-	-fx-pref-width: 600;
-	-fx-max-width: 600;
-	-fx-padding: 0;
+	-fx-padding: 20;
 	-fx-background-color: transparent;
-
-/*	-fx-display-caret: false; */
 }
