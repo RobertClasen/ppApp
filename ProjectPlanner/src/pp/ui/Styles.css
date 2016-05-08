@@ -1,3 +1,9 @@
+.image-view {
+    -fx-alignment: center;
+    -fx-scale-x: 0.7;
+    -fx-scale-y: 0.7;		
+}
+
 .vbox {
 	-fx-padding: 60;	
 } 
@@ -6,10 +12,10 @@
 	-fx-background-color: white;
 	-fx-background-fills: white;
 	
-    -fx-font-family: "Monoid";
+    -fx-font-family: "DejaVu Sans Mono";
 	-fx-font-weight: normal;
     -fx-font-style: normal;
-    -fx-font-size: 14;
+    -fx-font-size: 15;
     
     -fx-alignment: top-left;
 }
@@ -36,10 +42,10 @@
 }
 
 .text-field {
- 	-fx-font-family: "Monoid";
+ 	-fx-font-family: "DejaVu Sans Mono";
 	-fx-font-weight: normal;
 	-fx-font-style: normal;
-    -fx-font-size: 14;
+    -fx-font-size: 15;
 
 	-fx-alignment: center-left;
 	-fx-padding: 10;
