@@ -13,6 +13,7 @@ public class User {
 	private String lastName;
 	private String userId;
 	private LocalTime startWorkTime;
+	protected List<Project> projects = new ArrayList<>();
 	protected List<Activity> activities = new ArrayList<>();
 	protected List<Activity> assistanceActivities = new ArrayList<>();
 	protected List<Absence> absenceTime= new ArrayList<>();
@@ -147,6 +148,15 @@ public class User {
 		
 		if (count < 10){return true;} 
 		else {return false;}
+	}
+
+	public void addProject(Project project) {
+		if (!projects.contains(project)){
+			projects.add(project);
+			project.users.add(this);
+		}
+		
+		
 	}
 	
 	

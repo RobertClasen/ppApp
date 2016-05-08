@@ -13,6 +13,7 @@ public class Project {
 	private String runningNumber;
 	private User projectLeader;
 	private List<Activity> activities = new ArrayList<>();
+	protected List<User> users = new ArrayList<>();
 	private StatusReport statusReport;
 
 	public Project(PpApp ppApp) {

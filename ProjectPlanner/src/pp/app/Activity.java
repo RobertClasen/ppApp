@@ -52,6 +52,7 @@ public class Activity {
 	public void assignUserToActivity(User user) {
 		this.assignedUsers.add(user);
 		user.activities.add(this);
+		user.addProject(this.project);
 	}
 	
 	
