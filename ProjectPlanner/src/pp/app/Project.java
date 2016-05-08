@@ -36,7 +36,7 @@ public class Project {
 	
 	public void setRunningNumber() {
 		String numberOfProjects = "" + (ppApp.getProjects().size() + 1);
-		String year = "" + LocalDate.now().getYear();
+		String year = "" + startDate.getYear();
 
 		String projectNumber = "";
 		for (int i = 0; i < 4 - numberOfProjects.length(); i++) {
@@ -78,6 +78,16 @@ public class Project {
 			throw new ProjectException("User is not project leader.");
 			
 		statusReport = new StatusReport(this);
+	}
+	
+	@Override
+	public String toString() {
+		String s = "Title:" + "\n\t" + getTitle() + "\n\n"
+				+ "Running number:" + "\n\t" + getRunningNumber() + "\n\n"
+				+ "Description:" +"\n\t" + getDescription() + "\n\n" 
+				+ "Project leader:" + "\n\t" + getProjectLeader().getFirstname() + " "  + getProjectLeader().getLastname() + "\n\n"
+				+ "Start date:" +"\n\t" + getStartDate().toString();
+		return s;
 	}
 
 }

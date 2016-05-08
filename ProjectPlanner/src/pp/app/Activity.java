@@ -47,20 +47,14 @@ public class Activity {
 			throw new InputException("Input is not equal to or higher than zero.");
 		}
 	}
+
 	
 	public void assignUserToActivity(User user) {
 		this.assignedUsers.add(user);
 		user.activities.add(this);
 	}
 	
-	public String toString() {
-		String s = "Title:" + "\n\t" + getTitle() + "\n\n" 
-				+ "Description:" +"\n\t" + getDescription() + "\n\n" 
-				+ "Start date:" +"\n\t" + getStartDate().toString() + "\n\n" 
-				+ "Clocked time:" +"\n\t" + "Completed hours - " + getClockedTime()/60 + "\n\t" 
-				+ "Estimated hours - " + getEstimatedTime() + "\n";
-		return s;
-	}
+	
 	
 	public String getTitle() {return title;}
 	public String getDescription() { return description; }
@@ -79,5 +73,15 @@ public class Activity {
 			} 
 		}
 		throw new ActivityException("Activity operation not allowed." + "User not assigned to activity"); 
+	}
+	
+	@Override
+	public String toString() {
+		String s = "Title:" + "\n\t" + getTitle() + "\n\n" 
+				+ "Description:" +"\n\t" + getDescription() + "\n\n" 
+				+ "Start date:" +"\n\t" + getStartDate().toString() + "\n\n" 
+				+ "Clocked time:" +"\n\t" + "Completed hours - " + getClockedTime()/60 + "\n\t" 
+				+ "Estimated hours - " + getEstimatedTime();
+		return s;
 	}
 }

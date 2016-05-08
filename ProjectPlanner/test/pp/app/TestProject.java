@@ -1,6 +1,7 @@
 package pp.app;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -131,4 +132,43 @@ public class TestProject {
 		project1.setStartDate(INVALID_START_DATE);
 	}
 	
+	@Test
+	public void project_test_toString() {
+		makeAndRegisterUser("John", "Nielsen");
+		project1.setTitle(VALID_TITLE);
+		project1.setDescription("The easiest way to get around in Copenhagen");
+		project1.setStartDate(LocalDate.of(2017, Month.JANUARY, 5));
+		ppApp.addProject(project1);
+		
+		String expected = "Title:" +"\n\t" 
+				+ "Rejsekortet" + "\n\n" 
+				+ "Running number:" + "\n\t"
+				+ "00012017" + "\n\n"
+				+ "Description:" +"\n\t"
+				+ "The easiest way to get around in Copenhagen" + "\n\n" 
+				+ "Project leader:" + "\n\t"  
+				+ "John Nielsen" + "\n\n" 
+				+ "Start date:" + "\n\t" 
+				+ "2017-01-05";
+		
+		assertEquals(expected,project1.toString());
+		
+	}
+	private Activity makeAndAddActivity(String title, String description, LocalDate startDate, Long estimatedTime, Project p) {
+		Activity activity = new Activity(ppApp, p);
+		activity.setTitle(title);
+		activity.setDescription(description);
+		activity.setStartDate(startDate);
+		activity.setEstimatedTime(estimatedTime);
+		p.addActivity(activity);
+		return activity;
+	}
+	
+	private User makeAndRegisterUser(String firstName, String lastName) {
+		User user = new User(ppApp);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		ppApp.registerUser(user);
+		return user;
+	}
 }
