@@ -160,21 +160,6 @@ public class TestStatusReport {
 				"\t" + "Implementation - (1/38)" + "\n\n" +
 				"-------------------------------";
 		assertEquals(expected, statusReport.generate());
-		System.out.println("---- Project Status Report ----" + "\n\n" +
-				"Title - Rejsekortet" + "\n" + 
-				"Running number - 00012016" + "\n" +
-				"Start Date - 2017-05-11" + "\n" +
-				"Leader - John Nielsen" + "\n" + 
-				"Total progress - (20/62)" + "\n\n" +
-				"Assigned workers" + "\n" +
-				"\t" + "John Nielsen - joni" + "\n" +
-				"\t" + "Harry Potter - hapo" + "\n" +
-				"\t" + "Ulla Brit - ulbr" + "\n\n" +
-				"List of activities" + "\n" +
-				"\t" + "Brainstorm - (7/10)" + "\n" +
-				"\t" + "Design - (12/14)" + "\n" +
-				"\t" + "Implementation - (1/38)" + "\n\n" +
-				"-------------------------------");
 	}
 	
 	//Input data set B
