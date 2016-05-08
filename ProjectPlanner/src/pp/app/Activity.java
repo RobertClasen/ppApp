@@ -25,7 +25,12 @@ public class Activity {
 		this.clockedTime = 0;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(String title) throws InputException {
+		for (Activity a : project.getActivities()) {
+			if(a.title.equals(title)) {
+				throw new InputException("Invalid input.");
+			}
+		}
 		if (ppApp.getInputValidation().stringLength(title, 2, 25))
 			this.title = title;
 	}

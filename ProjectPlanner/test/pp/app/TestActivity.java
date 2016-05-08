@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import pp.ui.StartUp;
@@ -19,6 +20,7 @@ public class TestActivity {
 	private StatusReport statusReport;
 	private Project project1;
 	private Activity activity1;
+	private Activity activity2;
 	private StartUp startUp;
 	
 	private static final String VALID_TITLE = "Design";
@@ -42,6 +44,7 @@ public class TestActivity {
 		ppApp.setDateServer(dateServer);
 		project1 = new Project(ppApp);
 		activity1 = new Activity(ppApp, project1);
+		activity2 = new Activity(ppApp, project1);
 		startUp = new StartUp(ppApp);
 	}
 	
@@ -121,12 +124,16 @@ public class TestActivity {
 	@Test
 	public void activity_toString() {
 		makeAndAddActivity("Design", "Design af brugergrænseflade", LocalDate.of(2017, Month.JUNE, 12), 100L, project1);
+		
+		LocalDate startDate = LocalDate.of(2017, 6, 12);
 		LocalTime startTime = LocalTime.of(10, 0);
-		when(dateServer.getTime()).thenReturn(startTime);
+				
+		LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
+		when(dateServer.getDateTime()).thenReturn(startDateTime);
 		User user1 = makeAndRegisterUser("John", "Nielsen");
 		user1.startWork(project1.getActivities().get(0));
 
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(479L)); // 7 hours
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(479L)); // 7 hours
 		
 		user1.endWork();
 		
@@ -164,6 +171,14 @@ public class TestActivity {
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Invalid length.");
 		Activity activity1 = makeAndAddActivity(INVALID_TITLE_TOO_SHORT, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME, project1);
+	}
+	//Input data set: D
+	@Test
+	public void activityCreation_invalidInput_DuplicateTitle() throws Exception {
+		thrown.expect(InputException.class);
+		thrown.expectMessage("Invalid input.");
+		Activity activity1 = makeAndAddActivity(VALID_TITLE, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME, project1);
+		Activity activity2 = makeAndAddActivity(VALID_TITLE, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME, project1);
 	}
 	
 	/**
