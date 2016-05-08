@@ -18,6 +18,7 @@ public class StatusReport {
 	public String generate() {
 		String s = "---- Project Status Report ----" + "\n\n" + 
 				"Title - " + title() + "\n" + 
+				"Running number - " + project.getRunningNumber() + "\n" +
 				"Start Date - " + startDate() + "\n" + 
 				"Leader - " + projectLeader() + "\n" +
 				"Total progress - " + totalProgress() + "\n\n" + 

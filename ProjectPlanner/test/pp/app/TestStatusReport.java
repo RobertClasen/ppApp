@@ -176,6 +176,7 @@ public class TestStatusReport {
 		
 		String expected = "---- Project Status Report ----" + "\n\n" +
 				"Title - Newton" + "\n" + 
+				"Running number - 00012016" + "\n" +
 				"Start Date - 2017-05-11" + "\n" +
 				"Leader - John Nielsen" + "\n" + 
 				"Total progress - (20/62)" + "\n\n" +
