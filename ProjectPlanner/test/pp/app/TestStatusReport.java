@@ -40,7 +40,7 @@ public class TestStatusReport {
 		user3 = makeUser("Ulla","Brit");
 		ppApp.registerUser(user3);
 		ppApp.addProject(project1);
-		statusReport = new StatusReport(project1);
+		statusReport = new StatusReport(project1); 
 
 		project1.addActivity(makeActivity("Gravity", "Is it real?", LocalDate.of(2017, Month.JANUARY, 1), 10L));
 		project1.addActivity(makeActivity("Apples", "Do they fall?", LocalDate.of(2017, Month.FEBRUARY, 1), 14L));
