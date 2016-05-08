@@ -33,6 +33,7 @@ public class TestSeekAssistance {
 		activity.assignUserToActivity(user1);
 	}
 	
+	//Input data set A
 	@Test
 	public void seekAssistance() {
 		user1.seekAssistance(user2, activity);
