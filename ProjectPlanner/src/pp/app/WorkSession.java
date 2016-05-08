@@ -12,4 +12,6 @@ public class WorkSession {
 		this.activity = activity;
 		this.workTime = workTime;
 	}
+	
+	public LocalDate getDate() { return date; }
 }

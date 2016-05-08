@@ -90,6 +90,7 @@ public class User {
 	public String getFirstname() { return firstName; }
 	public String getLastname() { return lastName; }
 	public String getUserId() { return userId; }
+	public List<WorkSession> getWorkSessions() { return workSessions; }
 	public void setUserId(String userId) { this.userId = userId; }
 
 	public List<Activity> getActivities() {

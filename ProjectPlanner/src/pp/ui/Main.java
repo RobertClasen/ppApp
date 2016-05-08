@@ -55,8 +55,8 @@ public class Main extends Application {
 //		Activity activity8 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
 //		Activity activity9 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
 //		Activity activity10 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-//		activity1.assignUserToActivity(user1);
-//		activity2.assignUserToActivity(user1);
+		activity1.assignUserToActivity(user1);
+		activity2.assignUserToActivity(user1);
 }
 
 	public static void main(String[] args) {
