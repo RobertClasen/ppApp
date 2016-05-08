@@ -41,11 +41,8 @@ public class TestStatusReport {
 		statusReport = new StatusReport(project1);
 	}
 	
-	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none(); 
-
-	
 	
 	@Test
 	public void generateStatusReport_title () {
@@ -73,7 +70,6 @@ public class TestStatusReport {
 		user3.endWork();
 
 		assertEquals("(20/62)", statusReport.totalProgress());
-		
 	}
 	
 	@Test
@@ -100,8 +96,6 @@ public class TestStatusReport {
 						  "\t" + "Apples - (12/14)" + "\n" +
 						  "\t" + "Muffins - (1/38)" + "\n";
 		assertEquals(expected, statusReport.listOfActivities());
-		
-		
 	}
 
 	@Test
@@ -128,13 +122,11 @@ public class TestStatusReport {
 		activity2.assignUserToActivity(user2);
 		activity3.assignUserToActivity(user3);
 		
-		
 		String expected = "Assigned workers" + "\n" +
 				  "\t" + "John Nielsen - joni" + "\n" +
 				  "\t" + "Harry Potter - hapo" + "\n" +
 				  "\t" + "Ulla Brit - ulbr" + "\n";
 		assertEquals(expected, statusReport.assignedWorkers());
-		
 	}
 	
 	@Test
@@ -144,7 +136,6 @@ public class TestStatusReport {
 	
 	@Test
 	public void generateStatusReport_ProjectLeader() throws Exception {
-		
 		assertEquals("John Nielsen", statusReport.projectLeader());
 	}
 	
@@ -190,7 +181,6 @@ public class TestStatusReport {
 				"\t" + "Muffins - (1/38)" + "\n\n" +
 				"-------------------------------";
 		assertEquals(expected, statusReport.generate());
-		
 	}
 	
 	/**
