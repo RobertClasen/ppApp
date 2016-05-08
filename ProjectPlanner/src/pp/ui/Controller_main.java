@@ -33,7 +33,9 @@ public class Controller_main extends Controller {
 				Project project = view.getPpApp().getLoggedInUser().isLeadingProject();
 				view.setController(new Controller_leadingProject(view, project));
 			} catch (ProjectException e) {
-				screen.appendText("You are currently not leading any projects.");				
+				screen.appendText("You are currently not leading any projects." + "\n" +
+						"Would you like start a new one?");
+				view.setController(new Controller_newProject(view));
 			}
 			
 		} else if ("3".equals(input)) {

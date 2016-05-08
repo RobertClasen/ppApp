@@ -21,7 +21,7 @@ public class Main extends Application {
 		startUp = new StartUp(ppApp);
 		setUp();
 		
-		Scene scene = new Scene(new View(ppApp), 900, 600, Color.TRANSPARENT);
+		Scene scene = new Scene(new View(ppApp), 900, 650, Color.TRANSPARENT);
 		scene.getStylesheets().add(getClass().getResource("Styles.css").toExternalForm());
 		makeWindowDragable(scene, window);
 
@@ -47,8 +47,16 @@ public class Main extends Application {
 		Project project1 = startUp.makeAndAddProject("Rejsekortet", "Det skal fixes", startUp.date1);
 		Activity activity1 = startUp.makeAndAddActivity("Design", "Design af brugergænseflade", startUp.date2, 100L, project1);
 		Activity activity2 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-		activity1.assignUserToActivity(user1);
-		activity2.assignUserToActivity(user1);
+//		Activity activity3 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
+//		Activity activity4 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
+//		Activity activity5 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
+//		Activity activity6 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
+//		Activity activity7 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
+//		Activity activity8 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
+//		Activity activity9 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
+//		Activity activity10 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
+//		activity1.assignUserToActivity(user1);
+//		activity2.assignUserToActivity(user1);
 }
 
 	public static void main(String[] args) {

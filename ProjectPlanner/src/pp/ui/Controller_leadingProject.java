@@ -10,7 +10,7 @@ public class Controller_leadingProject extends Controller {
 		super(view);
 		this.project = project;
 		
-		String output = "You are managing this project" + "\n" + project.toString() + "\n" +
+		String output = "You are managing this project" + "\n\n" + project.toString() + "\n\n" +
 						"0) Create activity" + "\n" +
 						"1) Assign user to activity" + "\n" +
 						"2) Query status report";
@@ -21,14 +21,11 @@ public class Controller_leadingProject extends Controller {
 	@Override
 	public void processInput(String input) {
 		if ("0".equals(input)) {
-			// TODO view.setController(new Controller_???(view));
+			 view.setController(new Controller_activityTitle(view, project));
 		} else if ("1".equals(input)) {
-			// TODO view.setController(new Controller_???(view));
+			 view.setController(new Controller_selectActivity(view, project));
 		} else if ("2".equals(input)) {
-			// TODO view.setController(new Controller_???(view));
 			screen.appendText(new StatusReport(project).generate());
-		} else if ("3".equals(input)) {
-			// TODO view.setController(new Controller_???(view));
 		} else {
 			screen.invalidInput();			
 		}

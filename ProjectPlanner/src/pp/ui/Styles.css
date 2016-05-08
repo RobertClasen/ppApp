@@ -9,14 +9,14 @@
     -fx-font-family: "Monoid";
 	-fx-font-weight: normal;
     -fx-font-style: normal;
-    -fx-font-size: 18;
+    -fx-font-size: 14;
     
     -fx-alignment: top-left;
 }
 
 #root {
 	-fx-alignment: center-left;
-	-fx-padding: 40;
+	-fx-padding: 30;
 	-fx-background-color: transparent;
 	-fx-opacity: 1.0;
 }
@@ -32,16 +32,16 @@
 .scroll-pane {
 	-fx-background-color: transparent;
 	-fx-opacity: 1.0;
-	-fx-padding: 20;
+	-fx-padding: 10;
 }
 
 .text-field {
  	-fx-font-family: "Monoid";
 	-fx-font-weight: normal;
 	-fx-font-style: normal;
-    -fx-font-size: 18;
+    -fx-font-size: 14;
 
 	-fx-alignment: center-left;
-	-fx-padding: 20;
+	-fx-padding: 10;
 	-fx-background-color: transparent;
 }
