@@ -56,11 +56,14 @@ public class User {
 		return 0L;
 	}
 	
-	public void editClockedTime(Activity a, int minutes) {
+	public void editClockedTime(Activity a, int minutes, LocalDate date) {
 		this.workingActivity = a;
 		this.workingActivity.clockedTime += minutes;
-		List<WorkSession> workSessionsToDate = searchWorkSessions_ByDate(ppApp.getDate());
-		searchWorkSessions_ByActivity(a, workSessionsToDate).get(0).workTime += minutes;
+		List<WorkSession> workSessionsToDate = searchWorkSessions_ByDate(date);
+		List<WorkSession> workSessionsToDateForActivity = searchWorkSessions_ByActivity(a, workSessionsToDate);
+		if (workSessionsToDateForActivity.size() > 0){
+			workSessionsToDateForActivity.get(0).workTime += minutes;
+		}else{throw new InputException("no workSession for activity to date");}
 			
 	}
 	

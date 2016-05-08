@@ -44,16 +44,35 @@ public class TestEditClockedTime {
 		project1.addActivity(activity1);
 		
 		LocalTime startTime = LocalTime.of(10, 0);
+		LocalDate startDate = LocalDate.now();
 		when(dateServer.getTime()).thenReturn(startTime);
+		when(dateServer.getDate()).thenReturn(startDate);
 		user1.startWork(project1.getActivities().get(0));
 
 		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(78L));
 		user1.endWork();
-		user1.editClockedTime(activity1,-8);
+		user1.editClockedTime(activity1,-8, ppApp.getDate());
 
 		assertEquals(70, project1.getActivities().get(0).getClockedTime());
 	}
 	
+	@Test
+	public void editClocketTime_addTime() {
+		activity1 = makeActivity("Design", "Design af rejsekort", LocalDate.of(2017, Month.MARCH, 1), 70L);
+		project1.addActivity(activity1);
+		
+		LocalTime startTime = LocalTime.of(10, 0);
+		LocalDate startDate = LocalDate.now();
+		when(dateServer.getTime()).thenReturn(startTime);
+		when(dateServer.getDate()).thenReturn(startDate);
+		user1.startWork(project1.getActivities().get(0));
+
+		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(78L));
+		user1.endWork();
+		user1.editClockedTime(activity1, 2, ppApp.getDate());
+
+		assertEquals(80, project1.getActivities().get(0).getClockedTime());
+	}
 	
 	/*
 	 * helper methods
