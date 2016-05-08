@@ -20,9 +20,9 @@ public class DateServer {
 		return LocalTime.now();
 	}
 
-//	public LocalDateTime getDateTime() {
-//		return LocalDateTime.now();
-//	}
+	public LocalDateTime getDateTime() {
+		return LocalDateTime.now();
+	}
 
 //	public void setDate(LocalDate date) {
 //		this.date = date;
