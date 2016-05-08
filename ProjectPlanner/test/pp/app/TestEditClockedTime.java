@@ -37,7 +37,7 @@ public class TestEditClockedTime {
 //		ppApp.registerUser(user3);
 	}
 
-	
+	//Input data sæt A
 	@Test
 	public void editClockedTime_removeTime() {
 		activity1 = makeActivity("Design", "Design af rejsekort", LocalDate.of(2017, Month.MARCH, 1), 70L);
@@ -56,6 +56,7 @@ public class TestEditClockedTime {
 		assertEquals(70, project1.getActivities().get(0).getClockedTime());
 	}
 	
+	//Input data sæt B
 	@Test
 	public void editClocketTime_addTime() {
 		activity1 = makeActivity("Design", "Design af rejsekort", LocalDate.of(2017, Month.MARCH, 1), 70L);
