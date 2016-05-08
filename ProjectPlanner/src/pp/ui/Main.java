@@ -1,5 +1,7 @@
 package pp.ui;
 
+import java.time.LocalDate;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -9,6 +11,7 @@ import pp.app.Activity;
 import pp.app.PpApp;
 import pp.app.Project;
 import pp.app.User;
+import pp.app.WorkSession;
 
 public class Main extends Application {
 	private PpApp ppApp;
@@ -57,6 +60,8 @@ public class Main extends Application {
 //		Activity activity10 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
 		activity1.assignUserToActivity(user1);
 		activity2.assignUserToActivity(user1);
+
+		user1.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity1, 60L));
 }
 
 	public static void main(String[] args) {

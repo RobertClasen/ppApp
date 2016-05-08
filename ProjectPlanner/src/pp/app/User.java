@@ -64,8 +64,8 @@ public class User {
 		List<WorkSession> workSessionsToDateForActivity = searchWorkSessions_ByActivity(a, workSessionsToDate);
 		if (workSessionsToDateForActivity.size() > 0){
 			workSessionsToDateForActivity.get(0).workTime += minutes;
-		}else{throw new InputException("no workSession for activity to date");}
-			
+		} else {
+			throw new InputException("no workSession for activity to date"); }
 	}
 	
 	public List<WorkSession> searchWorkSessions_ByActivity(Activity a, List<WorkSession> workSessions){
@@ -76,7 +76,7 @@ public class User {
 		return relevantWorkSessions;
 	}
 	
-	public List<WorkSession> searchWorkSessions_ByDate(LocalDate date){
+	public List<WorkSession> searchWorkSessions_ByDate(LocalDate date) {
 		List<WorkSession> relevantWorkSessions = new ArrayList<>();
 		for(WorkSession ws : this.workSessions){
 			if (ws.date.equals(date)){relevantWorkSessions.add(ws);}
@@ -157,11 +157,11 @@ public class User {
 			project.users.add(this);
 		}
 		
-		
 	}
 
 	public void addWorkSession(WorkSession workSes) {
 		this.workSessions.add(workSes);
+		workSes.activity.clockedTime += workSes.workTime;
 	}
 	
 	

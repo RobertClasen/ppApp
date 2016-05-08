@@ -10,7 +10,7 @@ import pp.app.User;
 
 public class StartUp {
 	private PpApp ppApp;
-	final LocalDate date1 = LocalDate.of(2017, Month.JANUARY, 1);
+	final LocalDate date1 = LocalDate.of(2016, Month.MAY, 11);
 	final LocalDate date2 = LocalDate.of(2017, Month.FEBRUARY, 1);
 	final LocalDate date3 = LocalDate.of(2017, Month.MARCH, 1);
 

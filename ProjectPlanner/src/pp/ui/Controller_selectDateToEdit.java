@@ -14,13 +14,13 @@ public class Controller_selectDateToEdit extends Controller{
 		super(view);
 		this.activity = activity;
 		
-		String output = "Choose date" + "\n";
+		String output = "Choose date";
 		
 		long i;
 		for(i = 0; i < 7; i++) {
 			String weekday = LocalDate.now().minusDays(i).getDayOfWeek().toString();
 			String date = LocalDate.now().minusDays(i).toString();
-			output += "\t" + i + ") " + weekday + " " + date  + "\n";
+			output += "\n" + "\t" + i + ") " + weekday + " " + date;
 		}
 		
 		screen.appendText(output);
@@ -35,7 +35,12 @@ public class Controller_selectDateToEdit extends Controller{
 			LocalDate date = LocalDate.now().minusDays(selection);
 			workSessions = view.getPpApp().getLoggedInUser().searchWorkSessions_ByDate(date);
 			workSessions = view.getPpApp().getLoggedInUser().searchWorkSessions_ByActivity(activity, workSessions);
-			view.setController(new Controller_editTime(view, activity, date));
+			if (workSessions.size() > 0) {
+				view.setController(new Controller_editTime(view, activity, date));
+			} else {
+				screen.appendText("No worksession for activity on that day.");
+				view.setController(new Controller_main(view));
+			}
 		} catch (NumberFormatException e) {
 			screen.appendText("Must be an integer.");
 		} catch (IndexOutOfBoundsException e) {

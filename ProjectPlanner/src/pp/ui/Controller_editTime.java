@@ -19,7 +19,6 @@ public class Controller_editTime extends Controller {
 		String output = "Input minutes";
 		
 		screen.appendText(output);
-
 	}
 
 	@Override
@@ -33,8 +32,6 @@ public class Controller_editTime extends Controller {
 			screen.appendText("Must be an integer.");
 		} catch (IndexOutOfBoundsException e) {
 			screen.invalidInput();			
-		} catch (InputException e) {
-			screen.appendText("No worksession for activity on that day.");
 		}
 		
 	}
