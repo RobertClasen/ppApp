@@ -20,7 +20,7 @@ import pp.app.User;
 			try {
 				user.setLastName(input);
 				view.getPpApp().registerUser(user);
-				screen.appendText("User succussfully registered.");
+				screen.appendText("User succussfully registered. Assigned user ID: " + user.getUserId() + ".");
 				view.setController(new Controller_main(view));
 			} catch (InputException e) {
 				screen.appendText("Invalid last name. Try again.");			
