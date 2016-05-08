@@ -36,7 +36,7 @@ public class Project {
 	
 	public void setRunningNumber() {
 		String numberOfProjects = "" + (ppApp.getProjects().size() + 1);
-		String year = "" + startDate.getYear();
+		String year = "" + LocalDate.now().getYear();
 
 		String projectNumber = "";
 		for (int i = 0; i < 4 - numberOfProjects.length(); i++) {

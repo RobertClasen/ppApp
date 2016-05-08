@@ -135,7 +135,7 @@ public class TestActivity {
 				"Description:" + "\n\t" + "Design af brugergrænseflade" + "\n\n" +
 				"Start date:" + "\n\t" + "2017-06-12" + "\n\n" + 
 				"Clocked time:" + "\n\t" + "Completed hours - 7"
-				+ "\n\t" + "Estimated hours - 100" +"\n";
+				+ "\n\t" + "Estimated hours - 100";
 		assertEquals(expected, project1.getActivities().get(0).toString());
 	}
 	

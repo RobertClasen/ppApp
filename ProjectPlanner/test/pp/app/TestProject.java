@@ -143,7 +143,7 @@ public class TestProject {
 		String expected = "Title:" +"\n\t" 
 				+ "Rejsekortet" + "\n\n" 
 				+ "Running number:" + "\n\t"
-				+ "00012017" + "\n\n"
+				+ "00012016" + "\n\n"
 				+ "Description:" +"\n\t"
 				+ "The easiest way to get around in Copenhagen" + "\n\n" 
 				+ "Project leader:" + "\n\t"  
