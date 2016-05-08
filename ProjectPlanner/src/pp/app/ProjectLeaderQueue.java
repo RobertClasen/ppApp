@@ -5,6 +5,10 @@ public class ProjectLeaderQueue {
 	Node tail;
 	int size;
 	
+	/*
+	 * Singly linked list for the queue of project leaders
+	 */
+	
 	public void enqueue(User u) {
 		Node oldTail = tail;
 		tail = new Node(u);
@@ -32,7 +36,6 @@ public class ProjectLeaderQueue {
 		if (head.u.equals(u)) {
 			Node nodeToDelete = head;
 			head = head.next;
-//			head.next = head;
 			size--;
 			return nodeToDelete.u;
 		}

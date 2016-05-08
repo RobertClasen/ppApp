@@ -10,6 +10,9 @@ public class ProjectException extends RuntimeException {
 		this.operation = operation;
 	}
 
+	/*
+	 * Getters and setter
+	 */
 	public void setOperation(String operation) {
 		this.operation = operation;
 	}

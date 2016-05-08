@@ -70,8 +70,4 @@ public class StatusReport {
 		}
 		return s;
 	}
-	
-	public StatusReport getStatusReport() { return this; }
-	
-	
 }

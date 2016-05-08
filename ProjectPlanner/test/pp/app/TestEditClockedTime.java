@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 
@@ -31,10 +32,6 @@ public class TestEditClockedTime {
 		ppApp.addProject(project1);
 		user1 = makeUser("John", "Nielsen");
 		ppApp.registerUser(user1);
-//		user2 = makeUser("John", "Olsen");
-//		ppApp.registerUser(user2);
-//		user3 = makeUser("John","Christiansen");
-//		ppApp.registerUser(user3);
 	}
 
 	//Input data sæt A
@@ -42,14 +39,18 @@ public class TestEditClockedTime {
 	public void editClockedTime_removeTime() {
 		activity1 = makeActivity("Design", "Design af rejsekort", LocalDate.of(2017, Month.MARCH, 1), 70L);
 		project1.addActivity(activity1);
+		activity1.assignUserToActivity(user1);
 		
 		LocalTime startTime = LocalTime.of(10, 0);
 		LocalDate startDate = LocalDate.now();
+		LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
+		
 		when(dateServer.getTime()).thenReturn(startTime);
 		when(dateServer.getDate()).thenReturn(startDate);
+		when(dateServer.getDateTime()).thenReturn(startDateTime);
 		user1.startWork(project1.getActivities().get(0));
 
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(78L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(78L));
 		user1.endWork();
 		user1.editClockedTime(activity1,-8, ppApp.getDate());
 
@@ -64,11 +65,12 @@ public class TestEditClockedTime {
 		
 		LocalTime startTime = LocalTime.of(10, 0);
 		LocalDate startDate = LocalDate.now();
-		when(dateServer.getTime()).thenReturn(startTime);
+		LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
+		when(dateServer.getDateTime()).thenReturn(startDateTime);
 		when(dateServer.getDate()).thenReturn(startDate);
 		user1.startWork(project1.getActivities().get(0));
 
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(78L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(78L));
 		user1.endWork();
 		user1.editClockedTime(activity1, 2, ppApp.getDate());
 

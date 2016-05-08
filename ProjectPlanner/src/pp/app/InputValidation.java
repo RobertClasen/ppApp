@@ -20,8 +20,8 @@ public class InputValidation {
 		return true;
 	}
 
-	public boolean dateIsNotInPast(LocalDate startDate) {
-		if (!startDate.isAfter(LocalDate.now())) {
+	public boolean dateIsNotInPast(LocalDate date) {
+		if (!date.isAfter(LocalDate.now())) {
 			throw new InputException("Date is in the past.");
 		}
 		return true;

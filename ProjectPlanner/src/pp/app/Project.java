@@ -20,25 +20,14 @@ public class Project {
 		this.ppApp = ppApp;
 	}
 	
-	public void setTitle(String title) {
-		if (ppApp.getInputValidation().stringLength(title, 2, 35))
-			this.title = title;
-	}
-
-	public void setDescription(String description) {
-		if (ppApp.getInputValidation().stringLength(description, 2, 256))
-			this.description = description;
-	}
-	
-	public void setStartDate(LocalDate startDate) {
-		if (ppApp.getInputValidation().dateIsNotInPast(startDate))
-			this.startDate = startDate;
+	public void addActivity(Activity a) {
+		this.activities.add(a);
 	}
 	
 	public void setRunningNumber() {
 		String numberOfProjects = "" + (ppApp.getProjects().size() + 1);
 		String year = "" + LocalDate.now().getYear();
-
+		
 		String projectNumber = "";
 		for (int i = 0; i < 4 - numberOfProjects.length(); i++) {
 			projectNumber += "0";
@@ -47,37 +36,11 @@ public class Project {
 		
 		this.runningNumber = projectNumber + year;
 	}
-
-	public void setProjectLeader() {
-		projectLeader = ppApp.getProjectLeaderQueue().dequeue();
-	}
-	
-	public void setActivities(List<Activity> activities) {
-		this.activities = activities;
-	}
-
-	public String getTitle() {	return title; }
-	public String getDescription() { return description; }
-	public LocalDate getStartDate() { return startDate; }
-	public String getRunningNumber() { return runningNumber; }
-	public User getProjectLeader() { return projectLeader; } 
-	
-	public List<Activity> getActivities() {return this.activities;}
-	
-
-	public void addActivity(Activity a) {
-		this.activities.add(a);
-	}
-
-//	public void assignUserToActivity(User user, Activity activity) {
-//		activity.assignedUsers.add(user);
-//		user.activities.add(activity);
-//	}
 	
 	public void generateStatusReport(User u) {
 		if (!u.equals(projectLeader))
 			throw new ProjectException("User is not project leader.");
-			
+		
 		statusReport = new StatusReport(this);
 	}
 	
@@ -90,5 +53,34 @@ public class Project {
 				+ "Start date:" +"\n\t" + getStartDate().toString();
 		return s;
 	}
+	
+	/*
+	 * Getters and setters
+	 */
+	public void setTitle(String title) {
+		if (ppApp.getInputValidation().stringLength(title, 2, 35))
+			this.title = title;
+	}
+	public void setDescription(String description) {
+		if (ppApp.getInputValidation().stringLength(description, 2, 256))
+			this.description = description;
+	}
+	public void setStartDate(LocalDate startDate) {
+		if (ppApp.getInputValidation().dateIsNotInPast(startDate))
+			this.startDate = startDate;
+	}
+	public void setProjectLeader() {
+		projectLeader = ppApp.getProjectLeaderQueue().dequeue();
+	}
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
+	}
+
+	public String getTitle() {	return title; }
+	public String getDescription() { return description; }
+	public LocalDate getStartDate() { return startDate; }
+	public String getRunningNumber() { return runningNumber; }
+	public User getProjectLeader() { return projectLeader; } 
+	public List<Activity> getActivities() {return this.activities;}
 
 }

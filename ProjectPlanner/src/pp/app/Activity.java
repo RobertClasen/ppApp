@@ -26,6 +26,7 @@ public class Activity {
 	}
 
 	public void setTitle(String title) throws InputException {
+		//Checks for duplicated activity titles
 		for (Activity a : project.getActivities()) {
 			if(a.title.equals(title)) {
 				throw new InputException("Invalid input.");
@@ -60,17 +61,6 @@ public class Activity {
 		user.addProject(this.project);
 	}
 	
-	
-	
-	public String getTitle() {return title;}
-	public String getDescription() { return description; }
-	public LocalDate getStartDate() { return startDate; }
-	public Long getEstimatedTime(){ return this.estimatedTime; }
-	public int getClockedTime(){ return this.clockedTime; }
-	public LocalTime getStartTime() { return this.startTime; }
-	public Project getProject() { return this.project; }
-	public List<User> getUsers() { return assignedUsers; }
-
 	public User searchUser(String UserId) throws ActivityException {
 		
 		for (User user : assignedUsers) {
@@ -90,4 +80,17 @@ public class Activity {
 				+ "Estimated hours - " + getEstimatedTime();
 		return s;
 	}
+	
+	/*
+	 * Getters and setters
+	 */
+	public String getTitle() {return title;}
+	public String getDescription() { return description; }
+	public LocalDate getStartDate() { return startDate; }
+	public Long getEstimatedTime(){ return this.estimatedTime; }
+	public int getClockedTime(){ return this.clockedTime; }
+	public LocalTime getStartTime() { return this.startTime; }
+	public Project getProject() { return this.project; }
+	public List<User> getUsers() { return assignedUsers; }
+
 }

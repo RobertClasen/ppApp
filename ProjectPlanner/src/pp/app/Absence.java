@@ -29,6 +29,9 @@ public class Absence {
 		return workDays;
 	}
 	
+	/*
+	 * Getters and setters
+	 */
 	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}

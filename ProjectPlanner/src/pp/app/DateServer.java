@@ -6,12 +6,10 @@ import java.time.LocalTime;
 import java.time.Month;
 
 public class DateServer {
-//	private LocalDate date;
-	
-//	public DateServer(){
-//		date = LocalDate.now();
-//	}
 
+	/*
+	 * Getters
+	 */
 	public LocalDate getDate() {
 		return LocalDate.now();
 	}
@@ -22,12 +20,5 @@ public class DateServer {
 
 	public LocalDateTime getDateTime() {
 		return LocalDateTime.now();
-	}
-
-//	public void setDate(LocalDate date) {
-//		this.date = date;
-//	}
-	
-
-	
+	}	
 }

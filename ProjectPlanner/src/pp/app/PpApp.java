@@ -14,7 +14,6 @@ public class PpApp {
 	private List<Project> projects = new ArrayList<>();
 	private ProjectLeaderQueue projectLeaderQueue = new ProjectLeaderQueue();
 	private DateServer dateServer = new DateServer();
-//	private DateServer dateServer;
 
 	public boolean logIn(String userId) throws LoginException {
 		userId = userId.toLowerCase();
@@ -57,6 +56,7 @@ public class PpApp {
 	}
 	
 	public List<User> availableUsers(LocalDate date) throws AvailabilityException {
+		//List of available users
 		List<User> avUsers = new ArrayList<>();
 		for (User u : users){
 			if(u.isAvailable(date)){
@@ -70,7 +70,7 @@ public class PpApp {
 		}
 	}
 	
-	/**
+	/*
 	 * Getters and setters. 
 	 */
 	public List<User> getUsers() { return users; }
@@ -86,7 +86,6 @@ public class PpApp {
 	public DateServer getDateServer() {	return this.dateServer;	}
 	public LocalDate getDate() { return dateServer.getDate(); }
 	public LocalTime getTime() { return this.dateServer.getTime(); }
-
 	public LocalDateTime getDateTime() {
 		return dateServer.getDateTime();
 	}
