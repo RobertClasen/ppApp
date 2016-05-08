@@ -158,6 +158,10 @@ public class User {
 		
 		
 	}
+
+	public void addWorkSession(WorkSession workSes) {
+		this.workSessions.add(workSes);
+	}
 	
 	
 }
