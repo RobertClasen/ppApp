@@ -22,8 +22,7 @@ public class TestActivity {
 	private StartUp startUp;
 	
 	private static final String VALID_TITLE = "Design";
-	private static final String VALID_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
-			+ "Aenean commodo ligula eget dolor. Aenean m";
+	private static final String VALID_DESCRIPTION = "The apple doesn't fall far from the tree.";
 	private static final LocalDate VALID_START_DATE = LocalDate.of(2020, Month.JANUARY, 1);
 	private static final Long VALID_EST_TIME = 20L;
 	
@@ -32,7 +31,7 @@ public class TestActivity {
 	private static final String INVALID_DESCRIPTION_TOO_LONG = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
 			+ "Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient "
 			+ "montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. "
-			+ "Nulla consequat massa quis enim. Donec.";
+			+ "Nulla consequat massa quis enim. Donec."; //300 char
 	private static final LocalDate INVALID_START_DATE = LocalDate.of(2006, Month.JANUARY, 1);
 	private static final Long INVALID_EST_TIME = 0L;
 	
@@ -48,6 +47,11 @@ public class TestActivity {
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none(); 
+	
+	/*
+	 * Unit tests. Testing smaller parts of the functionality of activity. Leads up to the larger 
+	 * functional test combining several functionalities. 
+	 */
 	
 	@Test
 	public void addActivityToProject() throws Exception {
@@ -131,7 +135,7 @@ public class TestActivity {
 				"Description:" + "\n\t" + "Design af brugergrænseflade" + "\n\n" +
 				"Start date:" + "\n\t" + "2017-06-12" + "\n\n" + 
 				"Clocked time:" + "\n\t" + "Completed hours - 7"
-				+ "\n\t" + "Estimated hours - 100";
+				+ "\n\t" + "Estimated hours - 100" +"\n";
 		assertEquals(expected, project1.getActivities().get(0).toString());
 	}
 	
@@ -142,8 +146,7 @@ public class TestActivity {
 	//Input data set: A
 	@Test
 	public void activityCreation_validInputs() throws Exception {
-		Activity activity1 = makeAndAddActivity(VALID_TITLE, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME,project1);
-//		project1.addActivity(activity1);
+		Activity activity1 = makeAndAddActivity(VALID_TITLE, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME, project1);
 		assertEquals(1,project1.getActivities().size());
 	}
 	
@@ -152,7 +155,7 @@ public class TestActivity {
 	public void activityCreation_onlyInvalidInputs() throws Exception {
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Invalid length.");
-		Activity activity1 = makeAndAddActivity(INVALID_TITLE_TOO_SHORT, INVALID_DESCRIPTION_TOO_LONG, INVALID_START_DATE, INVALID_EST_TIME,project1);
+		Activity activity1 = makeAndAddActivity(INVALID_TITLE_TOO_SHORT, INVALID_DESCRIPTION_TOO_LONG, INVALID_START_DATE, INVALID_EST_TIME, project1);
 	}
 	
 	//Input data set: C
@@ -160,11 +163,11 @@ public class TestActivity {
 	public void activityCreation_invalidInput() throws Exception {
 		thrown.expect(InputException.class);
 		thrown.expectMessage("Invalid length.");
-		Activity activity1 = makeAndAddActivity(INVALID_TITLE_TOO_SHORT, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME,project1);
+		Activity activity1 = makeAndAddActivity(INVALID_TITLE_TOO_SHORT, VALID_DESCRIPTION, VALID_START_DATE, VALID_EST_TIME, project1);
 	}
 	
 	/**
-	 * Helper method
+	 * Helper methods
 	 */
 	private Activity makeAndAddActivity(String title, String description, LocalDate startDate, Long estimatedTime, Project p) {
 		Activity activity = new Activity(ppApp, p);
@@ -183,5 +186,4 @@ public class TestActivity {
 		ppApp.registerUser(user);
 		return user;
 	}
-	
 }

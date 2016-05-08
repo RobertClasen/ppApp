@@ -6,22 +6,18 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.rules.ExpectedException;
 
 public class TestAvailableUsers extends UsersForTesting {
-	private Activity activity1;
 	private Project project1;
 	private final static LocalDate DATE = LocalDate.of(2016, Month.JUNE, 1);
 	
 	@Before
 	public void setUp() throws RegistrationException {
 		project1 = new Project(ppApp);
-		activity1 = new Activity(ppApp, project1);
 		ppApp.addProject(project1);
 	}
 	
