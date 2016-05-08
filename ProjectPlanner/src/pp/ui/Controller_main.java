@@ -11,7 +11,8 @@ public class Controller_main extends Controller {
 		String output = "0) Your projects" + "\n" +
 				  	    "1) Your activities" + "\n" +
 				  	    "2) Manage project" + "\n" +
-				  	    "3) Logout";
+				  	    "3) Register new user" + "\n" +
+				  	    "4) Logout";
 		
 		screen.appendText(output);
 	}
@@ -39,10 +40,12 @@ public class Controller_main extends Controller {
 			}
 			
 		} else if ("3".equals(input)) {
+			view.setController(new Controller_userFirstName(view));
+			
+		} else if ("4".equals(input)) {
 			view.getPpApp().setLoggedIn(false);
 			screen.appendText("Logged out.");
-			view.setController(new Controller_start(view));
-			
+			view.setController(new Controller_start(view));	
 		} else {
 			screen.invalidInput();			
 		}

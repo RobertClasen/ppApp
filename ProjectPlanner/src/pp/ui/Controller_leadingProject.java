@@ -26,6 +26,7 @@ public class Controller_leadingProject extends Controller {
 			 view.setController(new Controller_selectActivity(view, project));
 		} else if ("2".equals(input)) {
 			screen.appendText(new StatusReport(project).generate());
+			view.setController(new Controller_main(view));
 		} else {
 			screen.invalidInput();			
 		}
