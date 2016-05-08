@@ -78,8 +78,9 @@ public class PpApp {
 	public void setProjects(List<Project> projects) { this.projects = projects; }
 	public InputValidation getInputValidation() { return inputValidation; }
 	public User getLoggedInUser() {	return loggedInUser; }
+	public boolean isLoggedIn() { return this.isLoggedIn; }
 	
-
+	public void setLoggedIn(boolean b) { this.isLoggedIn = b; }
 	public void setDateServer(DateServer dateServer) { this.dateServer = dateServer; }
 	public DateServer getDateServer() {	return this.dateServer;	}
 	public LocalDate getDate() { return dateServer.getDate(); }

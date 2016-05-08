@@ -37,7 +37,7 @@ public class Controller_main extends Controller {
 			}
 			
 		} else if ("3".equals(input)) {
-			//TODO ppApp.logout mangler?
+			view.getPpApp().setLoggedIn(false);
 			screen.appendText("Logged out.");
 			view.setController(new Controller_start(view));
 			

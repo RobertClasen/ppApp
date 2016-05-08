@@ -34,6 +34,11 @@ public class View extends BorderPane {
 			scrollPane.setVvalue(1.0);
 			inputField.clear();
 		});
+		
+//		inputField.addListener((observable) -> {
+//			scrollPane.setVvalue(1.0);
+//			inputField.clear();
+//		});
 	}
 	
 	private void arrangeNodes() {
