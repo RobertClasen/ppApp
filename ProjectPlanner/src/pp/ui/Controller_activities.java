@@ -22,7 +22,7 @@ public class Controller_activities extends Controller {
 		try {
 			int selection = Integer.parseInt(input);
 			Activity activity = view.getPpApp().getLoggedInUser().getActivities().get(selection);
-			view.setController(new Controller_work(view, activity));
+			view.setController(new Controller_activityOptions(view, activity));
 		} catch (NumberFormatException e) {
 			screen.appendText("Must be an integer.");
 		} catch (IndexOutOfBoundsException e) {
