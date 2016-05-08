@@ -3,6 +3,7 @@ package pp.app;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 
@@ -21,6 +22,7 @@ public class TestStatusReport {
 	private User user2;
 	private User user3;
 	private StatusReport statusReport;
+	private LocalDateTime startDateTime;
 
 	@Before
 	public void setUp() throws RegistrationException {
@@ -39,6 +41,15 @@ public class TestStatusReport {
 		ppApp.registerUser(user3);
 		ppApp.addProject(project1);
 		statusReport = new StatusReport(project1);
+
+		project1.addActivity(makeActivity("Gravity", "Is it real?", LocalDate.of(2017, Month.JANUARY, 1), 10L));
+		project1.addActivity(makeActivity("Apples", "Do they fall?", LocalDate.of(2017, Month.FEBRUARY, 1), 14L));
+		project1.addActivity(makeActivity("Muffins", "What are they?", LocalDate.of(2017, Month.MARCH, 1), 38L));
+		
+		LocalTime startTime = LocalTime.of(10, 0);
+		LocalDate startDate = LocalDate.of(2017, Month.JANUARY, 1);
+		startDateTime = LocalDateTime.of(startDate, startTime);
+		when(dateServer.getDateTime()).thenReturn(startDateTime);
 	}
 	
 	@Rule
@@ -52,21 +63,15 @@ public class TestStatusReport {
 	
 	@Test
 	public void generateStatusReport_totalProgress() {
-		project1.addActivity(makeActivity("Gravity", "Is it real?", LocalDate.of(2017, Month.JANUARY, 1), 10L));
-		project1.addActivity(makeActivity("Apples", "Do they fall?", LocalDate.of(2017, Month.FEBRUARY, 1), 14L));
-		project1.addActivity(makeActivity("Muffins", "What are they?", LocalDate.of(2017, Month.MARCH, 1), 38L));
-
-		LocalTime startTime = LocalTime.of(10, 0);
-		when(dateServer.getTime()).thenReturn(startTime);
 		user1.startWork(project1.getActivities().get(0));
 		user2.startWork(project1.getActivities().get(1));
 		user3.startWork(project1.getActivities().get(2));
 
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(479L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(479L));
 		user1.endWork();
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(721L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(721L));
 		user2.endWork();
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(61L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(61L));
 		user3.endWork();
 
 		assertEquals("(20/62)", statusReport.totalProgress());
@@ -74,21 +79,15 @@ public class TestStatusReport {
 	
 	@Test
 	public void generateStatusReport_workProgress() throws Exception {
-		project1.addActivity(makeActivity("Gravity", "Is it real?", LocalDate.of(2017, Month.JANUARY, 1), 10L));
-		project1.addActivity(makeActivity("Apples", "Do they fall?", LocalDate.of(2017, Month.FEBRUARY, 1), 14L));
-		project1.addActivity(makeActivity("Muffins", "What are they?", LocalDate.of(2017, Month.MARCH, 1), 38L));
-
-		LocalTime startTime = LocalTime.of(10, 0);
-		when(dateServer.getTime()).thenReturn(startTime);
 		user1.startWork(project1.getActivities().get(0));
 		user2.startWork(project1.getActivities().get(1));
 		user3.startWork(project1.getActivities().get(2));
 
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(479L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(479L));
 		user1.endWork();
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(721L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(721L));
 		user2.endWork();
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(61L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(61L));
 		user3.endWork();
 		
 		String expected = "List of activities" + "\n" +
@@ -111,16 +110,9 @@ public class TestStatusReport {
 	
 	@Test
 	public void generateStatusReport_AssignedWorkers() {
-		Activity activity1 = makeActivity("Gravity", "Is it real?", LocalDate.of(2017, Month.JANUARY, 1), 10L);
-		Activity activity2 = makeActivity("Apples", "Do they fall?", LocalDate.of(2017, Month.FEBRUARY, 1), 14L);
-		Activity activity3 = makeActivity("Muffins", "What are they?", LocalDate.of(2017, Month.MARCH, 1), 38L);
-		project1.addActivity(activity1);
-		project1.addActivity(activity2);
-		project1.addActivity(activity3);
-		
-		activity1.assignUserToActivity(user1);
-		activity2.assignUserToActivity(user2);
-		activity3.assignUserToActivity(user3);
+		project1.getActivities().get(0).assignUserToActivity(user1);
+		project1.getActivities().get(1).assignUserToActivity(user2);
+		project1.getActivities().get(2).assignUserToActivity(user3);
 		
 		String expected = "Assigned workers" + "\n" +
 				  "\t" + "John Nielsen - joni" + "\n" +
@@ -141,28 +133,21 @@ public class TestStatusReport {
 	
 	@Test
 	public void generateStatusReport_fullReport() {
-		Activity activity1 = makeActivity("Gravity", "Is it real?", LocalDate.of(2017, Month.JANUARY, 1), 10L);
-		Activity activity2 = makeActivity("Apples", "Do they fall?", LocalDate.of(2017, Month.FEBRUARY, 1), 14L);
-		Activity activity3 = makeActivity("Muffins", "What are they?", LocalDate.of(2017, Month.MARCH, 1), 38L);
-		project1.addActivity(activity1);
-		project1.addActivity(activity2);
-		project1.addActivity(activity3);
 		
-		activity1.assignUserToActivity(user1);
-		activity2.assignUserToActivity(user2);
-		activity3.assignUserToActivity(user3);
+		project1.getActivities().get(0).assignUserToActivity(user1);
+		project1.getActivities().get(1).assignUserToActivity(user2);
+		project1.getActivities().get(2).assignUserToActivity(user3);
 	
-		LocalTime startTime = LocalTime.of(10, 0);
-		when(dateServer.getTime()).thenReturn(startTime);
+		when(dateServer.getDateTime()).thenReturn(startDateTime);
 		user1.startWork(project1.getActivities().get(0));
 		user2.startWork(project1.getActivities().get(1));
 		user3.startWork(project1.getActivities().get(2));
 
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(479L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(479L));
 		user1.endWork();
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(721L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(721L));
 		user2.endWork();
-		when(dateServer.getTime()).thenReturn(startTime.plusMinutes(61L));
+		when(dateServer.getDateTime()).thenReturn(startDateTime.plusMinutes(61L));
 		user3.endWork();
 		
 		String expected = "---- Project Status Report ----" + "\n\n" +
