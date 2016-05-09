@@ -55,11 +55,9 @@ public class ProjectLeaderQueue {
 					tail = n;
 				}
 				size--;
-//				return nodeToDelete.u;
 			}
 			n = n.next;
 		}
-//		return null;
 	}
 	
 	private boolean isEmpty() {

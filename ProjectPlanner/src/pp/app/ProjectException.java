@@ -12,16 +12,4 @@ public class ProjectException extends RuntimeException {
 		super("Project operation not allowed. " + operation);
 		this.operation = operation;
 	}
-
-//	/*
-//	 * Getters and setter
-//	 */
-//	public void setOperation(String operation) {
-//		this.operation = operation;
-//	}
-//	
-//	public String getOperation(){
-//		return operation;
-//	}
-	
 }

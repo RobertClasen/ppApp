@@ -17,5 +17,4 @@ public class WorkSession {
 		this.workTime = workTime;
 	}
 	
-//	public LocalDate getDate() { return date; }
 }

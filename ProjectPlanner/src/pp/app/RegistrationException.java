@@ -12,16 +12,4 @@ public class RegistrationException extends RuntimeException {
 		super("Registration operation not allowed. " + operation);
 		this.operation = operation;
 	}
-
-//	/*
-//	 * Getter and setter
-//	 */
-//	public void setOperation(String operation) {
-//		this.operation = operation;
-//	}
-//	
-//	public String getOperation(){
-//		return operation;
-//	}
-	
 }

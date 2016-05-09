@@ -89,4 +89,24 @@ public class TestAvailableUsers extends UsersForTesting {
 		List<User> availableUsers = ppApp.availableUsers(DATE);
 		assertEquals(20, availableUsers.size());
 	}
+	
+	@Test
+	public void abscenseInPeriod_StartDateInPeriod(){
+		Activity a = new Activity(ppApp, project1);
+		a.setStartDate(DATE);
+		
+		Absence ab = new Absence(DATE.plusWeeks(3), DATE.plusMonths(2));
+		user1.registerAbsence(ab);
+		assertTrue(user1.isAvailable(DATE));
+	}
+	
+	@Test
+	public void abscenseInPeriod_EndDateInPeriod(){
+		Activity a = new Activity(ppApp, project1);
+		a.setStartDate(DATE);
+		
+		Absence ab = new Absence(DATE.minusWeeks(5), DATE);
+		user1.registerAbsence(ab);
+		assertTrue(user1.isAvailable(DATE));
+	} 
 }
