@@ -7,6 +7,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * @author Kristian
+ */
+
 public class TestUserRegistration {
 	private PpApp ppApp;
 	private User user1; 

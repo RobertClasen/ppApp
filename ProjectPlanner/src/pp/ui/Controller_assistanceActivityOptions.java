@@ -2,6 +2,9 @@ package pp.ui;
 
 import pp.app.Activity;
 
+/**
+ * @author Robert
+ */
 public class Controller_assistanceActivityOptions extends Controller {
 	private Activity activity;
 

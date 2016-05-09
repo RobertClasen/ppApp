@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import pp.app.Absence;
 import pp.app.InputException;
 
+/**
+ * @author Kristian
+ */
 public class Controller_absenceEndDate extends Controller {
 	private LocalDate startDate;
 	

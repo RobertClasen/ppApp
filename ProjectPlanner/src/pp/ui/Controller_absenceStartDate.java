@@ -6,6 +6,9 @@ import pp.app.Absence;
 import pp.app.InputException;
 import pp.app.User;
 
+/**
+ * @author Pelle
+ */
 public class Controller_absenceStartDate extends Controller {
 	
 	public Controller_absenceStartDate(View view) {

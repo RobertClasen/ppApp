@@ -3,6 +3,10 @@ package pp.ui;
 import pp.app.Activity;
 import pp.app.Project;
 
+/**
+ * @author Pelle
+ */
+
 public class Controller_selectActivity extends Controller {
 	Project project;
 	
