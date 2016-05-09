@@ -50,8 +50,6 @@ public class StatusReport {
 		return "(" + completedTime + "/" + estimate + ")";
 	}
 	
-
-	
 	public String listOfActivities() {
 		String s = "List of activities" + NEWLINE;
 		for (Activity a : this.activities) {
