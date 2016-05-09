@@ -34,7 +34,7 @@ public class Controller_absenceEndDate extends Controller {
 			screen.appendText("Absence registered" + "\n"
 					+ "\t" + startDate + " - " + endDate + "\n"
 					+ "\t" + "For a total of " + absence.calcWorkDaysInTimePeriod(startDate, endDate)
-					+ " workdays.");			
+					+ " work days.");			
 			view.setController(new Controller_main(view));
 		} catch (StringIndexOutOfBoundsException e) {
 			screen.appendText("Invalid format. Try again.");			
