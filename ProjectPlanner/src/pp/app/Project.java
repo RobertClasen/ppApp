@@ -73,7 +73,7 @@ public class Project {
 			this.startDate = startDate;
 	}
 	public void setProjectLeader() {
-		projectLeader = ppApp.getProjectLeaderQueue().dequeue();
+		this.projectLeader = ppApp.getProjectLeaderQueue().dequeue();
 	}
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;

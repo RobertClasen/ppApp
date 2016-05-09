@@ -61,6 +61,10 @@ public class User {
 		return 0L;
 	}
 	
+	/*
+	 * Edits the activty's clockedTime.
+	 * Finds the relevant workSession and edits the registered worktime.
+	 */
 	public void editClockedTime(Activity a, int minutes, LocalDate date) {
 		this.workingActivity = a;
 		this.workingActivity.clockedTime += minutes;
@@ -72,6 +76,9 @@ public class User {
 			throw new InputException("no workSession for activity to date"); }
 	}
 	
+	/*
+	 * Given an activity and a list of worksessions, it finds the worksessions for the given activity
+	 */
 	public List<WorkSession> searchWorkSessions_ByActivity(Activity a, List<WorkSession> workSessions){
 		List<WorkSession> relevantWorkSessions = new ArrayList<>();
 		for(WorkSession ws : workSessions){
@@ -94,29 +101,29 @@ public class User {
 	public String getFirstname() { return firstName; }
 	public String getLastname() { return lastName; }
 	public String getUserId() { return userId; }
-//	public List<WorkSession> getWorkSessions() { return workSessions; }
 	public void setUserId(String userId) { this.userId = userId; }
 
 	public List<Activity> getActivities() {
 		return this.activities;
 	}
-	
 	public List<Activity> getAssistanceActivities() {
 		return this.assistanceActivities;
 	}
-
 	public void seekAssistance(User u, Activity a) {
 		u.assistanceActivities.add(a);
 	}
-
 	public void registerAbsence(Absence a) {
 		this.absenceTime.add(a);
 	}
-
 	public List<Absence> getAbsence() {
 		return this.absenceTime;
 	}
 	
+	
+	/*
+	 * Checks in a 2 month period if the user is assigned to 10 or more activities. 
+	 * furthermore 4 absent workdays counts as being assigned to an activity.
+	 */
 	public boolean isAvailable(LocalDate date) {
 		int count = 0;
 		int absentWorkDays = 0;
@@ -126,24 +133,25 @@ public class User {
 			}
 		}
 		for (Absence ab : absenceTime) {
-			//Hvis absence starter efter eller er sluttet før den pågældene periode, er denne absence ligegyldig.
+			//If absence is starting after or has ended before the period, this absence is not relevant.
 			if(!ab.startDate.isAfter(date.plusMonths(1)) && !ab.endDate.isBefore(date.minusMonths(1))){
 				
-				//både start- of slutdato er inden for tidsperioden
+				//Both startDate and endDate is in the period
 				if(ab.startDate.isAfter(date.minusMonths(1)) && ab.endDate.isBefore(date.plusMonths(1))){
 					absentWorkDays += ab.calcWorkDaysInTimePeriod(ab.startDate, ab.endDate);
 				}
-				//startdato inden for perioden, slutdato udenfor
+				//The startDate is within the period, the endDate is after
 				else if(ab.startDate.isAfter(date.minusMonths(1)) && ab.endDate.isAfter(date.plusMonths(1))){
 					absentWorkDays += ab.calcWorkDaysInTimePeriod(ab.startDate, date.plusMonths(1L));
 				}
-				//startdato udenforperioden, slutdato indenfor
+				//The startDate is before the period, the endDate is within.
 				else if(ab.startDate.isBefore(date.minusMonths(1)) && ab.endDate.isBefore(date.plusMonths(1))){
 					absentWorkDays += ab.calcWorkDaysInTimePeriod(date.minusMonths(1), ab.endDate);					
-				}else {absentWorkDays += ab.calcWorkDaysInTimePeriod(date.minusMonths(1), date.plusMonths(1));}
+				}
+				//The startDate is before the period and the endDate is after the period.
+				else {absentWorkDays += ab.calcWorkDaysInTimePeriod(date.minusMonths(1), date.plusMonths(1));}
 			}	
 		}
-		//count inkrimeres med det antal aktiviteter fraværet estimeret svarer til 
 		count += absentWorkDays/4;
 		
 		if (count < 10){return true;} 
@@ -166,6 +174,5 @@ public class User {
 	public List<Project> getProjects() {
 		return this.projects;
 	}
-	
 	
 }
