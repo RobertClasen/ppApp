@@ -12,6 +12,10 @@ import java.time.Month;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author Kristian
+ */
+
 public class TestEditClockedTime {
 	
 	private PpApp ppApp;
