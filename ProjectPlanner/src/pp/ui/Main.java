@@ -52,21 +52,36 @@ public class Main extends Application {
 	private void setUp() {
 		User user1 = startUp.makeAndRegisterUser("John", "Nielsen");
 		User user2 = startUp.makeAndRegisterUser("Andreas", "Hansen");
+		User user3 = startUp.makeAndRegisterUser("Ulla", "Brit");
 		Project project1 = startUp.makeAndAddProject("Rejsekortet", "Det skal fixes", startUp.date1);
-		Activity activity1 = startUp.makeAndAddActivity("Design", "Design af brugergænseflade", startUp.date2, 100L, project1);
-		Activity activity2 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-//		Activity activity3 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-//		Activity activity4 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-//		Activity activity5 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-//		Activity activity6 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-//		Activity activity7 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-//		Activity activity8 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-//		Activity activity9 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
-//		Activity activity10 = startUp.makeAndAddActivity("Implementering", "Implementering af NFC", startUp.date2, 100L, project1);
+		Project project2 = startUp.makeAndAddProject("Elektronisk patientjournal", "Det skal sammenkobles", startUp.date1);
+		Activity activity1 = startUp.makeAndAddActivity("Design", "Design af brugergænseflade", startUp.date2, 120L, project1);
+		Activity activity2 = startUp.makeAndAddActivity("Check-in", "Implementering af Check-in på stationerne", startUp.date2, 100L, project1);
+		Activity activity3 = startUp.makeAndAddActivity("Check-ud", "Implementering af Check-ud på stationerne", startUp.date2, 100L, project1);
+		Activity activity4 = startUp.makeAndAddActivity("Rejsehistorik", "Implementering af brugerens rejseoversigt", startUp.date2, 75L, project1);
+		Activity activity5 = startUp.makeAndAddActivity("Brugergrænseflade", "Design af brugergænseflade", startUp.date2, 130L, project2);
+		Activity activity6 = startUp.makeAndAddActivity("Patientjournaler", "Deling af patientjournaler", startUp.date2, 200L, project2);
+		Activity activity7 = startUp.makeAndAddActivity("Patientflytning", "Implementering af struktur af flytning af patienter", startUp.date2, 60L, project2);
+		Activity activity8 = startUp.makeAndAddActivity("Kravsspecifikation", "Kravsspecifikation for softwaren", startUp.date2, 75L, project2);
 		activity1.assignUserToActivity(user1);
 		activity2.assignUserToActivity(user1);
+		activity3.assignUserToActivity(user2);
+		activity4.assignUserToActivity(user3);
+		activity5.assignUserToActivity(user2);
+		activity6.assignUserToActivity(user3);
+		activity7.assignUserToActivity(user3);
+		activity8.assignUserToActivity(user1);
+		
 
-		user1.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity1, 60L));
+		user1.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity1, 320L));
+		user1.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity6, 440L));
+		user1.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity4, 90L));
+		user2.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity3, 145L));
+		user2.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity2, 520L));
+		user2.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity5, 500L));
+		user3.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity8, 230L));
+		user3.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity1, 100L));
+		user3.addWorkSession(new WorkSession(LocalDate.now().minusDays(1L), activity7, 300L));
 }
 
 	public static void main(String[] args) {
