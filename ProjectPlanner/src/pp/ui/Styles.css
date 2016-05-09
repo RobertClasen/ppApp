@@ -1,12 +1,7 @@
 .image-view {
     -fx-alignment: center;
-    -fx-scale-x: 0.7;
-    -fx-scale-y: 0.7;		
+    -fx-translate-y: 2;
 }
-
-.vbox {
-	-fx-padding: 60;	
-} 
 
 #screen {
 	-fx-background-color: white;
@@ -24,7 +19,6 @@
 	-fx-alignment: center-left;
 	-fx-padding: 30;
 	-fx-background-color: transparent;
-	-fx-opacity: 1.0;
 }
 
 .scroll-pane > .viewport {
@@ -37,8 +31,9 @@
 
 .scroll-pane {
 	-fx-background-color: transparent;
-	-fx-opacity: 1.0;
 	-fx-padding: 10;
+
+	-fx-border-color: gray;
 }
 
 .text-field {

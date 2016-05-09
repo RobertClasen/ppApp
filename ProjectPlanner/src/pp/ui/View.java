@@ -1,14 +1,18 @@
 package pp.ui;
 
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import pp.app.PpApp;
 
 public class View extends BorderPane {
 	private PpApp ppApp;
 	private Controller controller;
+	private Effect effect;
 
 	private ImageView imageView;
 	private Image logo;
@@ -18,7 +22,8 @@ public class View extends BorderPane {
 
 	public View(PpApp ppApp) {
 		this.ppApp = ppApp;
-		logo = new Image("pp/ui/ppLogo.png");
+		logo = new Image("pp/ui/Logo.png");
+		effect = new DropShadow(10, 2, 2, Color.BLACK);
 		imageView = new ImageView(logo);
 		setId("root");
 		
