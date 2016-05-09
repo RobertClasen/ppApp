@@ -34,7 +34,7 @@ public class Controller_activities extends Controller {
 	public void processInput(String input) {
 		try {
 			int selection = Integer.parseInt(input);
-			if (selection < breakPoint && selection != breakPoint) {
+			if (!(selection>=breakPoint)){
 				Activity activity = view.getPpApp().getLoggedInUser().getActivities().get(selection);
 				view.setController(new Controller_activityOptions(view, activity));
 			} else {
