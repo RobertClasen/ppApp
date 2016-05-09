@@ -82,5 +82,6 @@ public class TestRegisterAbsence {
 		
 		assertEquals(0, user1.absenceTime.get(0).calcWorkDaysInTimePeriod(startDate, endDate));
 	}
-
+	
+	
 }
