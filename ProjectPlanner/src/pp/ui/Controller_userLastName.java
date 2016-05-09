@@ -1,6 +1,7 @@
 package pp.ui;
 
 import pp.app.InputException;
+import pp.app.RegistrationException;
 import pp.app.User;
 
 /**
@@ -28,6 +29,8 @@ import pp.app.User;
 				view.setController(new Controller_main(view));
 			} catch (InputException e) {
 				screen.appendText("Invalid last name. Try again.");			
+			} catch (RegistrationException e) {
+				screen.appendText("Unable to assign user ID. Try another name.");				
 			}
 		}
 }
