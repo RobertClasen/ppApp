@@ -7,6 +7,10 @@ import java.time.Month;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author Kristian
+ */
+
 public class TestRegisterAbsence {
 	private PpApp ppApp;
 	private Project project;

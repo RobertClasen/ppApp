@@ -5,6 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author Marco
+ */
+
 public class TestSeekAssistance {
 	private PpApp ppApp;
 	private Project project;
