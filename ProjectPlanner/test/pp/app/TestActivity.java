@@ -33,7 +33,7 @@ public class TestActivity {
 	private static final Long VALID_EST_TIME = 20L;
 	
 	private static final String INVALID_TITLE_TOO_SHORT = "D";
-	private static final String INVALID_TITLE_TOO_LONG = "Desiiiiiiiiiiiiiiiiiiiiign";
+	private static final String INVALID_TITLE_TOO_LONG = "Desiiiiiiiiiiiiiiiiiiiiign"; // 26 chars
 	private static final String INVALID_DESCRIPTION_TOO_LONG = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
 			+ "Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient "
 			+ "montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. "
