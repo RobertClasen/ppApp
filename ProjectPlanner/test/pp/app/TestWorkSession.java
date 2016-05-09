@@ -8,6 +8,10 @@ import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author Rasmus
+ */
+
 public class TestWorkSession {
 	PpApp ppApp;
 	DateServer dateServer;

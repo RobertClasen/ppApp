@@ -14,6 +14,11 @@ import org.junit.rules.ExpectedException;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+
+/**
+ * @author Robert
+ */
+
 public class TestStatusReport {
 	private PpApp ppApp;
 	private DateServer dateServer;

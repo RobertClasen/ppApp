@@ -3,6 +3,10 @@ package pp.ui;
 import pp.app.Activity;
 import pp.app.InputException;
 
+/**
+ * @author Rasmus
+ */
+
 public class Controller_activityEstHours extends Controller {
 	private Activity activity;
 	

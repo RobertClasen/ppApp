@@ -2,6 +2,10 @@ package pp.ui;
 
 import pp.app.LoginException;
 
+/**
+ * @author Rasmus
+ */
+
 public class Controller_login extends Controller {
 
 	public Controller_login(View view) {

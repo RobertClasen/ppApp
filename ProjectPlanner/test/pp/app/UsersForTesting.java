@@ -3,6 +3,10 @@ package pp.app;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Rasmus
+ */
+
 public class UsersForTesting {
 	
 	protected PpApp ppApp = new PpApp();

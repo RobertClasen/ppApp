@@ -8,6 +8,10 @@ import pp.app.PpApp;
 import pp.app.Project;
 import pp.app.User;
 
+/**
+ * @author Robert
+ */
+
 public class StartUp {
 	private PpApp ppApp;
 	final LocalDate date1 = LocalDate.of(2016, Month.MAY, 11);

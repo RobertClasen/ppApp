@@ -4,6 +4,10 @@ import pp.app.Activity;
 import pp.app.InputException;
 import pp.app.Project;
 
+/**
+ * @author Rasmus
+ */
+
 public class Controller_activityTitle extends Controller {
 	private Project project;
 	private Activity activity; 
