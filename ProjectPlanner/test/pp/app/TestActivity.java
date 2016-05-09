@@ -14,6 +14,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * @author Marco
+ */
+
 public class TestActivity {
 	private PpApp ppApp;
 	private DateServer dateServer;

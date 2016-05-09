@@ -13,6 +13,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * @author Rasmus
+ */
 public class TestProject {
 	private PpApp ppApp;
 	private Project project1;

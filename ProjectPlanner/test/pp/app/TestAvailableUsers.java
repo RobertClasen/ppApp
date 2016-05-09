@@ -11,6 +11,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * @author Rasmus
+ */
 public class TestAvailableUsers extends UsersForTesting {
 	private Project project1;
 	private final static LocalDate DATE = LocalDate.of(2016, Month.JUNE, 1);

@@ -7,6 +7,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * @author Robert
+ */
 public class TestLogin {
 	private static final String VALID_ID = "joni";
 	private static final String INVALID_ID_UNKNOWN = "jona";
