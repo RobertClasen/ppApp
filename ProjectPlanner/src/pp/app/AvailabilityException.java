@@ -1,5 +1,8 @@
 package pp.app;
 
+/**
+ * @author Kristian
+ */
 @SuppressWarnings("serial")
 public class AvailabilityException extends RuntimeException {
 

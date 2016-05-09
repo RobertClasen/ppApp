@@ -13,6 +13,11 @@ import java.util.List;
  * then the second part of the new user id is altered such that instead of letters 0 and 1,
  * letters 1 and 2 is used. This procedure goes on recursively until the new user id is unique. 
  * 
+*/
+
+/**
+ * @author Kristian
+ * 
  */
 public class UserId {
 	private User user;

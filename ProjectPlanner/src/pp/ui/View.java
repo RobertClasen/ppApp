@@ -9,6 +9,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import pp.app.PpApp;
 
+/**
+ * @author Kristian
+ */
+
 public class View extends BorderPane {
 	private PpApp ppApp;
 	private Controller controller;

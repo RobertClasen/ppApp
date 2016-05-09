@@ -2,6 +2,10 @@ package pp.ui;
 
 import javafx.scene.text.Text;
 
+/**
+ * @author Marco
+ */
+
 public class Screen extends Text {
 	protected View view;
 	protected String text;

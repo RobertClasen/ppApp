@@ -3,6 +3,9 @@ package pp.app;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+/**
+ * @author Rasmus
+ */
 public class Absence {
 	protected LocalDate startDate;
 	protected LocalDate endDate;

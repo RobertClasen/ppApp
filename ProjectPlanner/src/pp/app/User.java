@@ -7,6 +7,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Pelle
+ */
+
 public class User {
 	private PpApp ppApp;
 	private String firstName;

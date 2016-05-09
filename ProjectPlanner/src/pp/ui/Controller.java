@@ -2,6 +2,10 @@ package pp.ui;
 
 import pp.app.User;
 
+/**
+ * @author Marco
+ */
+
 public abstract class Controller {
 	protected View view;
 	protected Screen screen;

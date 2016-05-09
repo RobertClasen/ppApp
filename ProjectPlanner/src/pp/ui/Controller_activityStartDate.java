@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import pp.app.Activity;
 import pp.app.InputException;
 
+/**
+ * @author Pelle
+ */
+
 public class Controller_activityStartDate extends Controller {
 	private Activity activity;
 	

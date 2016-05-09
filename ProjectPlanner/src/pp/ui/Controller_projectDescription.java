@@ -3,6 +3,10 @@ package pp.ui;
 import pp.app.InputException;
 import pp.app.Project;
 
+/**
+ * @author Robert
+ */
+
 public class Controller_projectDescription extends Controller {
 	private Project project;
 	

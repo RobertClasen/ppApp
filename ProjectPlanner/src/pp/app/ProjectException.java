@@ -1,5 +1,8 @@
 package pp.app;
 
+/**
+ * @author Robert
+ */
 @SuppressWarnings("serial")
 public class ProjectException extends RuntimeException {
 

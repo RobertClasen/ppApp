@@ -2,6 +2,10 @@ package pp.app;
 
 import java.time.LocalDate;
 
+/**
+ * @author Pelle
+ */
+
 public class WorkSession {
 	protected LocalDate date;
 	protected Activity activity;

@@ -1,5 +1,9 @@
 package pp.ui;
 
+/**
+ * @author Kristian
+ */
+
 public class Controller_newProject extends Controller {
 
 	public Controller_newProject(View view) {

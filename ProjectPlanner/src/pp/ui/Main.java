@@ -13,6 +13,10 @@ import pp.app.Project;
 import pp.app.User;
 import pp.app.WorkSession;
 
+/**
+ * @author Rasmus
+ */
+
 public class Main extends Application {
 	private PpApp ppApp;
 	private StartUp startUp;

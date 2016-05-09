@@ -3,6 +3,10 @@ package pp.ui;
 import pp.app.Project;
 import pp.app.ProjectException;
 
+/**
+ * @author Robert
+ */
+
 public class Controller_main extends Controller {
 	
 	public Controller_main(View view) {

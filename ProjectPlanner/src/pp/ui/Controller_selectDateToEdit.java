@@ -6,6 +6,10 @@ import java.util.List;
 import pp.app.Activity;
 import pp.app.WorkSession;
 
+/**
+ * @author Kristian
+ */
+
 public class Controller_selectDateToEdit extends Controller{
 	Activity activity;
 	List <WorkSession> workSessions;

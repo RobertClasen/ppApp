@@ -7,6 +7,10 @@ import pp.app.Activity;
 import pp.app.InputException;
 import pp.app.WorkSession;
 
+/**
+ * @author Marco
+ */
+
 public class Controller_editTime extends Controller {
 	private Activity activity;
 	private LocalDate date;

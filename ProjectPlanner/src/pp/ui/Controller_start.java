@@ -2,6 +2,10 @@ package pp.ui;
 
 import javafx.application.Platform;
 
+/**
+ * @author Kristian
+ */
+
 public class Controller_start extends Controller {
 
 	public Controller_start(View view) {

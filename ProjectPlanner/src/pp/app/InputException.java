@@ -1,5 +1,8 @@
 package pp.app;
 
+/**
+ * @author Rasmus
+ */
 @SuppressWarnings("serial")
 public class InputException extends RuntimeException {
 

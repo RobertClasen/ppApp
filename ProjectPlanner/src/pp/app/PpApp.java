@@ -6,6 +6,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Marco
+ */
+
 public class PpApp {
 	private InputValidation inputValidation = new InputValidation();
 	private boolean isLoggedIn;

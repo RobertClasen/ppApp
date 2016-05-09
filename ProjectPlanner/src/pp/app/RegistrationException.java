@@ -1,5 +1,8 @@
 package pp.app;
 
+/**
+ * @author Pelle
+ */
 @SuppressWarnings("serial")
 public class RegistrationException extends RuntimeException {
 

@@ -5,6 +5,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * @author Kristian
+ */
+
 public class InputField extends TextField {
 	private View view;
 	

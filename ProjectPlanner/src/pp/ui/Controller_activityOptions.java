@@ -4,6 +4,10 @@ import java.time.LocalDate;
 
 import pp.app.Activity;
 
+/**
+ * @author Robert
+ */
+
 public class Controller_activityOptions extends Controller {
 	private Activity activity;
 

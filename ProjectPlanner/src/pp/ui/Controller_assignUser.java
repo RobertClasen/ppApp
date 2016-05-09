@@ -5,6 +5,10 @@ import java.util.List;
 import pp.app.Activity;
 import pp.app.User;
 
+/**
+ * @author Pelle
+ */
+
 public class Controller_assignUser extends Controller {
 	private Activity activity;
 	private List<User> availabelUsers;

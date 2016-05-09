@@ -8,6 +8,10 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Robert
+ */
+
 public class Activity {
 	private PpApp ppApp;
 	private Project project;

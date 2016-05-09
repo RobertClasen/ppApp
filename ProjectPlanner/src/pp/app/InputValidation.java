@@ -2,6 +2,9 @@ package pp.app;
 
 import java.time.LocalDate;
 
+/**
+ * @author Robert
+ */
 public class InputValidation {
 	
 	public boolean stringLength(String s, int min, int max) {

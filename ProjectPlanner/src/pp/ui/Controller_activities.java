@@ -2,6 +2,10 @@ package pp.ui;
 
 import pp.app.Activity;
 
+/**
+ * @author Kristian
+ */
+
 public class Controller_activities extends Controller {
 	private int breakPoint;
 	

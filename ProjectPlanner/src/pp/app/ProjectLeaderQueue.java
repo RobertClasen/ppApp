@@ -1,5 +1,9 @@
 package pp.app;
 
+/**
+ * @author Marco
+ */
+
 public class ProjectLeaderQueue {
 	Node head;
 	Node tail;

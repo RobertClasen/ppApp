@@ -7,6 +7,10 @@ import pp.app.Activity;
 import pp.app.AvailabilityException;
 import pp.app.User;
 
+/**
+ * @author Pelle
+ */
+
 public class Controller_seekAssistance extends Controller {
 	private Activity activity;
 	private List<User> availableUsers;

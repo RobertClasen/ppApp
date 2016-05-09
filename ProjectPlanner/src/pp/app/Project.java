@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Kristian
+ */
 public class Project {
 
 	private PpApp ppApp;

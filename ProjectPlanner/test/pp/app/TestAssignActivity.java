@@ -10,6 +10,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * @author Robert
+ */
+
 public class TestAssignActivity extends UsersForTesting {
 	private Activity activity1;
 	private Project project1;
