@@ -90,7 +90,7 @@ public class User {
 	public String getFirstname() { return firstName; }
 	public String getLastname() { return lastName; }
 	public String getUserId() { return userId; }
-	public List<WorkSession> getWorkSessions() { return workSessions; }
+//	public List<WorkSession> getWorkSessions() { return workSessions; }
 	public void setUserId(String userId) { this.userId = userId; }
 
 	public List<Activity> getActivities() {
@@ -113,15 +113,6 @@ public class User {
 		return this.absenceTime;
 	}
 	
-	public Project isLeadingProject() {
-		for (Project p : ppApp.getProjects()) {
-			if (p.getProjectLeader().equals(this)) {
-				return p;
-			}
-		}
-		throw new ProjectException("User is not project leader.");
-	}
-
 	public boolean isAvailable(LocalDate date) {
 		int count = 0;
 		int absentWorkDays = 0;

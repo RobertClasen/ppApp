@@ -53,22 +53,11 @@ public class Activity {
 			throw new InputException("Input is not equal to or higher than zero.");
 		}
 	}
-
 	
 	public void assignUserToActivity(User user) {
 		this.assignedUsers.add(user);
 		user.activities.add(this);
 		user.addProject(this.project);
-	}
-	
-	public User searchUser(String UserId) throws ActivityException {
-		
-		for (User user : assignedUsers) {
-			if (user.getUserId().equals(UserId)) {
-				return user;
-			} 
-		}
-		throw new ActivityException("Activity operation not allowed." + "User not assigned to activity"); 
 	}
 	
 	@Override

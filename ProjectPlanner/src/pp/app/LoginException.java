@@ -10,14 +10,14 @@ private String operation;
 		this.operation = operation;
 	}
 
-	/*
-	 * Getter and setter
-	 */
-	public void setOperation(String operation) {
-		this.operation = operation;
-	}
-	
-	public String getOperation(){
-		return operation;
-	}
+//	/*
+//	 * Getter and setter
+//	 */
+//	public void setOperation(String operation) {
+//		this.operation = operation;
+//	}
+//	
+//	public String getOperation(){
+//		return operation;
+//	}
 }

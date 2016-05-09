@@ -32,12 +32,12 @@ public class ProjectLeaderQueue {
 		return null;
 	}
 	
-	public User delete(User u) {
+	public void delete(User u) {
 		if (head.u.equals(u)) {
 			Node nodeToDelete = head;
 			head = head.next;
 			size--;
-			return nodeToDelete.u;
+//			return nodeToDelete.u;
 		}
 		
 		
@@ -51,11 +51,11 @@ public class ProjectLeaderQueue {
 					tail = n;
 				}
 				size--;
-				return nodeToDelete.u;
+//				return nodeToDelete.u;
 			}
 			n = n.next;
 		}
-		return null;
+//		return null;
 	}
 	
 	private boolean isEmpty() {

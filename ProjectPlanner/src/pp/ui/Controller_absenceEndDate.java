@@ -6,12 +6,11 @@ import pp.app.Absence;
 import pp.app.InputException;
 
 public class Controller_absenceEndDate extends Controller {
-	private Absence absence;
+	private LocalDate startDate;
 	
-	public Controller_absenceEndDate(View view, Absence absence) {
+	public Controller_absenceEndDate(View view, LocalDate startDate) {
 		super(view);
-
-		this.absence = absence;
+		this.startDate = startDate;
 		
 		String output = "Last day of absence? (YYYY-MM-DD)";
 		
@@ -25,15 +24,13 @@ public class Controller_absenceEndDate extends Controller {
 			year = Integer.parseInt(input.substring(0, 4));
 			month = Integer.parseInt(input.substring(5, 7));
 			day = Integer.parseInt(input.substring(8, 10));
-			absence.setEndDate(LocalDate.of(year, month, day));
+			LocalDate endDate = LocalDate.of(year, month, day);
+			Absence absence = new Absence(startDate, endDate);
 			view.getPpApp().getLoggedInUser().registerAbsence(absence);
 			
-			LocalDate start = absence.getStartDate();
-			LocalDate end = absence.getEndDate();
-			
 			screen.appendText("Absence registered" + "\n"
-					+ "\t" + start + " - " + end + "\n"
-					+ "\t" + "For a total of " + absence.calcWorkDaysInTimePeriod(start, end)
+					+ "\t" + startDate + " - " + endDate + "\n"
+					+ "\t" + "For a total of " + absence.calcWorkDaysInTimePeriod(startDate, endDate)
 					+ " workdays.");			
 			view.setController(new Controller_main(view));
 		} catch (StringIndexOutOfBoundsException e) {

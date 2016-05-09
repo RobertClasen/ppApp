@@ -7,13 +7,10 @@ import pp.app.InputException;
 import pp.app.User;
 
 public class Controller_absenceStartDate extends Controller {
-	private Absence absence;
 	
 	public Controller_absenceStartDate(View view) {
 		super(view);
 
-		absence = new Absence();
-		
 		String output = "First day of absence? (YYYY-MM-DD)";
 		
 		screen.appendText(output);
@@ -26,8 +23,8 @@ public class Controller_absenceStartDate extends Controller {
 			year = Integer.parseInt(input.substring(0, 4));
 			month = Integer.parseInt(input.substring(5, 7));
 			day = Integer.parseInt(input.substring(8, 10));
-			absence.setStartDate(LocalDate.of(year, month, day));
-			view.setController(new Controller_absenceEndDate(view, absence));
+			LocalDate startDate = LocalDate.of(year, month, day);
+			view.setController(new Controller_absenceEndDate(view, startDate));
 		} catch (StringIndexOutOfBoundsException e) {
 			screen.appendText("Invalid format. Try again.");			
 		} catch (InputException e) {

@@ -36,12 +36,17 @@ public class Controller_main extends Controller {
 			}
 			
 		} else if ("2".equals(input)) {
-			try {
-				Project project = view.getPpApp().getLoggedInUser().isLeadingProject();
-				view.setController(new Controller_leadingProject(view, project));
-			} catch (ProjectException e) {
-				screen.appendText("You are currently not leading any projects." + "\n");
+			boolean projectLeader = false;
+			for (Project p : view.getPpApp().getProjects()) {
+				if (p.getProjectLeader().equals(view.getPpApp().getLoggedInUser())) {
+					view.setController(new Controller_leadingProject(view, p));
+					projectLeader = true;
+				}
 			}
+			if (!projectLeader) {
+				screen.appendText("You are currently not leading any projects." + "\n");			
+			}
+			
 		} else if ("3".equals(input)) {
 			view.setController(new Controller_projectTitle(view));
 		} else if ("4".equals(input)) {

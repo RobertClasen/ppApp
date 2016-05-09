@@ -83,9 +83,7 @@ public class PpApp {
 	
 	public void setLoggedIn(boolean b) { this.isLoggedIn = b; }
 	public void setDateServer(DateServer dateServer) { this.dateServer = dateServer; }
-	public DateServer getDateServer() {	return this.dateServer;	}
 	public LocalDate getDate() { return dateServer.getDate(); }
-	public LocalTime getTime() { return this.dateServer.getTime(); }
 	public LocalDateTime getDateTime() {
 		return dateServer.getDateTime();
 	}

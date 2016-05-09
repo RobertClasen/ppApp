@@ -33,9 +33,9 @@ public class TestAssignActivity extends UsersForTesting {
 	
 	//Input data set: A
 	@Test
-	public void assignOneUserToActivity() throws Exception {
+	public void assignOneUserToActivity() {
 		activity1.assignUserToActivity(user1);
-		assertEquals("joni", activity1.searchUser("joni").getUserId());
+		assertTrue(activity1.getUsers().contains(user1));
 		assertEquals(1, user1.getActivities().size());
 	}
 	
